@@ -126,7 +126,9 @@
 
 <ul>
 <li><strong>HPE BIOS/UEFI (including secure boot)</strong></li>
-<li><strong>HPE iLO 4</strong></li>
+<li><strong>HPE iLO 4/iLO 5</strong></li>
+<li><strong>HPE iLO Repository</strong></li>
+<li><strong>Smart Array support</strong></li>
 </ul>
 
           <h1 id="installation">Installation</h1>
@@ -148,7 +150,7 @@
 <p>Windows Directory</p>
 </blockquote>
 <pre class="highlight plaintext"><code>
-\Program Files\Hewlett Packard Enterprise\HP RESTful Interface Tool\
+C:\Program Files\Hewlett Packard Enterprise\HP RESTful Interface Tool\
 
 </code></pre>
 
@@ -456,174 +458,18 @@ ilorest.exe load -f %2
 <blockquote>
 <p>Help example commands:</p>
 
-<p>Entering the help to list the global iLOrest options and help options for all available commands</p>
+<p>Entering the help to list the global iLOrest options and help options for all available commands.</p>
+
+<p><img title="Help example 1" alt="Help Example 1" src="images/examples/help_ex1.png" /></p>
+
+<p>Providing a specific command will list help regarding that specific command.</p>
+
+<p><img title="Help example 2" alt="Help Example 2" src="images/examples/help_ex2.png" /></p>
+
+<p>The alternate syntax to list details regarding a command.</p>
+
+<p><img title="Help example 3" alt="Help Example 3" src="images/examples/help_ex3.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; help
-Usage: ilorest [GLOBAL OPTIONS] [COMMAND] [ARGUMENTS] [COMMAND OPTIONS]
-
-Options:
-  -h, --help            Show this help message and exit.
-  -c FILE, --config=FILE
-                        Use the provided configuration file instead of the
-                        default one.
-  --cache-dir=PATH      Use the provided directory as the location to cache
-                        data (default location:
-                        C:\Users\garcjack\AppData\Roaming\.iLOrest)
-
-  GLOBAL OPTIONS:
-    -v, --verbose       Display verbose information.
-    -d, --debug         Display debug information.
-    --nocache           During execution the application will temporarily
-                        store data only in memory.
-    --nologo            Include to block copyright and logo.
-    --redfish           Use this flag if you wish to to enable Redfish only
-                        compliance. It is enabled by default in systems with
-                        iLO5 and above.
-    --latestschema      Optionally use the latest schema instead of the one
-                        requested by the file. Note: May cause errors in some
-                        data retreval due to difference in schema versions.
-
-COMMANDS
-  help                         - Displays command line syntax and help menus
-                                  for individual commands. Example: help login
-  login                        - Connects to a server, establishes a secure
-                                  session, and discovers data from iLO.
-  types                        - Displays all selectable types within the
-                                  currently logged in server.
-  select                       - Selects the object type to be used.
-  get                          - Displays the current value(s) of a
-                                  property(ies) within a selected type.
-  list                         - Displays the current value(s) of a
-                                  property(ies) within a selected type
-                                  including reserved properties.
-  info                         - Displays detailed information about a
-                                  property within a selected type.
-  set                          - Changes the value of a property within the
-                                  currently selected type.
-  status                       - Displays all pending changes within a
-                                  selected type that need to be committed.
-  commit                       - Applies all the changes made during the
-                                  current session.
-  save                         - Saves the selected type's settings to a file.
-  load                         - Loads server configuration settings from a
-                                  file.
-  logout                       - Ends the current session and disconnects from
-                                  the server.
-  exit                         - Exits from the interactive shell.
-
-BIOS COMMANDS
-  bootorder                    - Displays and sets the current boot order.
-  biosdefaults                 - Set the currently logged in server to default
-                                  BIOS settings.
-  iscsiconfig                  - Displays and configures the current iscsi
-                                  settings.
-  results                      - Show the results of a BIOS change after a
-                                  server reboot.
-  setpassword                  - Sets the admin password and poweron password                                
-
-iLO COMMANDS
-  certificate                  - Command for importing both iLO and login
-                                  authorization certificates as well as
-                                  generating iLO certificate signing requests
-  clearrestapistate            - Clears the persistent state of the REST API.
-                                  Some portions of the API may not be available
-                                  until after the server reboots.
-  disableilofunctionality      - disables iLO's accessibility via the network
-                                  and resets iLO. WARINING: This should be used
-                                  with caution as it will render iLO unable to
-                                  respond to further network operations
-                                  (including REST operations) until iLO is
-                                  re-enabled using the RBSU menu.
-  eskm                         - Command for all ESKM available actions.
-  factorydefaults              - Resets iLO to factory defaults. WARNING: user
-                                  data will be removed use with caution.
-  iloreset                     - Reset iLO on the current logged in server.
-  firmwareupdate               - Perform a firmware update on the currently
-                                  logged in server.
-  iloaccounts                  - Adds / deletes an iLO account on the
-                                  currently logged in server.
-  ilofederation                - Adds / deletes an iLO federaion group on the
-                                  currently logged in server.
-  ilolicense                   - Adds an iLO license key to the currently
-                                  logged in server.
-  iloreset                     - Reset iLO on the current logged in server.
-  reboot                       - Reboot operations for the current logged in
-                                  server.
-  sendtest                     - Command for sending various tests to iLO.
-  serverlogs                   - Download and perform log operations.
-  serverstate                  - Returns the current state of the server.
-  sigrecompute                 - Command to recalculate the signature of the
-                                  computer's configuration.
-  singlesignon                 - Command for all single sign on available
-                                  actions. 
-  virtualmedia                 - Command for inserting and removing virtual
-                                  media.
-
-
-RAW COMMANDS
-  rawget                       - This is the raw form of the GET command.
-  rawpost                      - This is the raw form of the POST command.
-  rawput                       - This is the raw form of the PUT command.
-  rawdelete                    - This is the raw form of the DELETE command.
-  rawhead                      - This is the raw form of the HEAD command.
-  rawpatch                     - This is the raw form of the PATCH command.
-</code></pre>
-
-<blockquote>
-<p>Providing a specific command will list help regarding that specific command</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; help login
-Usage: login [URL] [USER] [PASSWORD]
-
-        To login remotely run using iLO url and iLO credentials
-        example: login &lt;iLO url&gt; -u &lt;iLO username&gt; -p &lt;iLO password&gt;
-
-        To login on a local server run without arguments
-        example: login
-
-Options:
-  -h, --help            show this help message and exit
-  -u USER, --user=USER  use the provided iLO username to login
-  -p PASSWORD, --password=PASSWORD
-                        use the provided iLO password to login
-  --includelogs         use this flag to include logs in the data retrieval
-  --selector=SELECTOR   use the provided type as the current selection
-  --filter=FILTER       use the provided filter for the current selection
-                        usage: --filter [FILTER_ATTRIBUTE=FILTER_VALUE]
-  --path=PATH           starting point for data collection
-                        default: /rest/v1
-  --biospassword=BIOSPASSWORD
-                        use the provided password for second level BIOS
-                        authentication
-</code></pre>
-
-<blockquote>
-<p>The alternate syntax to list details regarding a command</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login -h
-Usage: login [URL] [USER] [PASSWORD]
-
-        To login remotely run using iLO url and iLO credentials
-        example: login &lt;iLO url&gt; -u &lt;iLO username&gt; -p &lt;iLO password&gt;
-
-        To login on a local server run without arguments
-        example: login
-
-Options:
-  -h, --help            show this help message and exit
-  -u USER, --user=USER  use the provided iLO username to login
-  -p PASSWORD, --password=PASSWORD
-                        use the provided iLO password to login
-  --includelogs         use this flag to include logs in the data retrieval
-  --selector=SELECTOR   use the provided type as the current selection
-  --filter=FILTER       use the provided filter for the current selection
-                        usage: --filter [FILTER_ATTRIBUTE=FILTER_VALUE]
-  --path=PATH           starting point for data collection
-                        default: /rest/v1
-  --biospassword=BIOSPASSWORD
-                        use the provided password for second level BIOS
-                        authentication
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -679,9 +525,17 @@ Options:
 
 <p>Include to block copyright and logo.</p>
 
+<p><strong>-redfish</strong></p>
+
+<p>Use this flag if you wish to to enable Redfish only compliance. It is enabled by default in systems with iLO5 and above.</p>
+
+<p><strong>_Important: The **-redfish</strong> global option is required for iLO 4 firmware version 2.40 and is not required for iLO 5._** </p>
+
 <p><strong>&ndash;latestschema</strong></p>
 
-<p>Optionally use the latest schema instead of the one requested by the file. Note: May cause errors in some data retrieval due to difference in schema versions.</p>
+<p>Optionally use the latest schema instead of the one requested by the file. </p>
+
+<p>NOTE: Might cause errors in some data retrieval due to difference in schema versions.</p>
 
 <h4 id="inputs">Inputs</h4>
 
@@ -697,54 +551,19 @@ Options:
 <p>Login example commands:</p>
 
 <p>To login remotely, supply the URL, username, and password for the server. Here the selector tag has been included so that the <strong>HpBios</strong> type is selected once the user is logged in. You can prove that the <strong>HpBios</strong> type has indeed been selected when we enter the select command.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx -u username -p password --selector=HpBios.
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; select
-Current selection: 'HpBios.'
-</code></pre>
 
-<blockquote>
+<p><img title="Login example 1" alt="Login Example 1" src="images/examples/login_ex1.png" /></p>
+
 <p>Here the path was set to <strong>/rest/v1/systems/1/bios</strong> instead of the default <strong>/rest/v1/</strong>. To check that the path has indeed been set to a different place, the types command was entered and returned the types in the specified path, instead of in the default <strong>/rest/v1/</strong>. You can log in again with the default <strong>/rest/v1/</strong> to show the change.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx -u username -p password --path=/rest/v1/systems/1/bios
-Discovering data from iLO.....Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; types
-Type options:
-HpBaseConfigs.0.10.0
-HpBios.1.2.0
-HpBiosMapping.1.2.0
-HpServerBootSettings.1.2.0
-HpiSCSISoftwareInitiator.1.0.0
-…
-VirtualMedia.0.10.0
 
-ilorest &gt; login xx.xx.xx.xx –u username –p password –path=/rest/v1
-ilorest &gt; types
-Type options:
-AccountService.1.0.0
-BaseNetworkAdapter.1.1.0
-BaseNetworkAdapterCollection
-Chassis.1.0.0
-ChassisCollection
-ComputerSystem.1.0.1
-ComputerSystemCollection
-…
-SnmpService.1.0.0
-Thermal.1.1.0
-VirtualMedia.1.0.0
-VirtualMediaCollection
-</code></pre>
+<p><img title="Login example 2-1" alt="Login Example 2-1" src="images/examples/login_ex2-1.png" /></p>
 
-<blockquote>
+<p><img title="Login example 2-2" alt="Login Example 2-2" src="images/examples/login_ex2-2.png" /></p>
+
 <p>Here the URL, username, and password information are not specified here or in the configuration file, and the server was logged in to locally.</p>
+
+<p><img title="Login example 3" alt="Login Example 3" src="images/examples/login_ex3.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -822,64 +641,17 @@ WARNING: Cache is activated session keys are stored in plaintext
 <p>Types example commands:</p>
 
 <p>This command will list all the available types that you can select. The full list has been truncated for space.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx –u username –p password
-Discovering data from iLO...Done
-        WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; types 
-Type options:
-AccountService.0.9.5
-BaseNetworkAdapter.0.9.6
-Chassis.0.10.1
-Collection.0.9.5
-ComputerSystem.0.9.7
-…
-HPPowerMeter.0.9.5
-HpBaseConfigs.0.10.0
-HpBios.1.2.0
-HpServerPCISlot.0.9.5
-HpServerPciDevice.0.9.6
-SnmpService.0.9.6
-ThermalMetrics.0.9.7
-VirtualMedia.0.10.0
-</code></pre>
 
-<blockquote>
+<p><img title="Types example 1" alt="Types Example 1" src="images/examples/types_ex1.png" /></p>
+
 <p>This command simultaneously logs in to the server at the provided URL with the provided username and password, and list all the available types that you can select. The full list has been truncated here for space.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; types -u username -p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-Type options:
-AccountService.0.9.5
-BaseNetworkAdapter.0.9.6
-Chassis.0.10.1
-Collection.0.9.5
-ComputerSystem.0.9.7
-…
-HPPowerMeter.0.9.5
-HpBaseConfigs.0.10.0
-HpBios.1.2.0
-HpServerPCISlot.0.9.5
-HpServerPciDevice.0.9.6
-SnmpService.0.9.6
-ThermalMetrics.0.9.7
-VirtualMedia.0.10.0
-</code></pre>
 
-<blockquote>
+<p><img title="Types example 2" alt="Types Example 2" src="images/examples/types_ex2.png" /></p>
+
 <p>Specifying a path for the type command will print the types found in the given path. Here only the types found in <strong>/rest/v1/systems/1/bios/</strong> were returned.</p>
+
+<p><img title="Types example 3" alt="Types Example 3" src="images/examples/types_ex3.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; types -u username -p password --url=xx.xx.xx.xx --path=/rest/v1/systems/1/bios
-Discovering data from iLO.....Done
-WARNING: Cache is activated session keys are stored in plaintext
-Type options:
-HpBaseConfigs.0.10.0
-HpBios.1.2.0
-HpBiosMapping.1.2.0
-HpServerBootSettings.1.2.0
-HpiSCSISoftwareInitiator.1.0.0
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -950,24 +722,18 @@ HpiSCSISoftwareInitiator.1.0.0
 <blockquote>
 <p>Select example commands:</p>
 
-<p>Before the commands were entered here, the user was not logged in to the server. When you use the select tag with login credentials, you are logged in to the server and the inputted type is selected. The type was selected by entering the select command with no type specified is verified, which shows that the currently selected type is returned. Note the addition of a period after the type selected, <strong>HpBios</strong>. Using a period here limits the selection, preventing accidentally also selecting <strong>HpBiosMapping</strong>. This also removes the need to include the version.</p>
+<p>Before the commands were entered here, the user was not logged in to the server. When you use the select tag with login credentials, you are logged in to the server and the inputted type is selected. The type was selected by entering the select command with no type specified is verified, which shows that the currently selected type is returned. </p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; select HpBios. -u username -p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; select
-Current selection: 'HpBios.'
-</code></pre>
+
+<p>NOTE: Adding a period after the type selected, <strong>HpBios</strong>, limits the selection, preventing accidentally also selecting <strong>HpBiosMapping</strong>. This also removes the need to include the version.</p>
 
 <blockquote>
+<p><img title="Select example 1" alt="Select Example 1" src="images/examples/select_ex1.png" /></p>
+
 <p>Here the <strong>ComputerSystem</strong> type was selected instead of the <strong>HpBios</strong> type like in the example above.</p>
+
+<p><img title="Select example 2" alt="Select Example 2" src="images/examples/select_ex2.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; select ComputerSystem. -u username -p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; select
-Current selection: 'ComputerSystem.'
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -1051,148 +817,21 @@ Current selection: 'ComputerSystem.'
 <p>List command examples:</p>
 
 <p>This command shows the current values of the properties of the selected type, including reserved properties. The full list has been truncated here for space.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx –u username –p password
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; select HpBios.
-ilorest &gt; list
-AdminPassword=None
-BootMode=Uefi
-Dhcpv4=Enabled
-DynamicPowerCapping=Auto
-…
-Type=HpBios.1.2.0
-UrlBootFile=""
-Usb3Mode=Auto
-VlanPriority=0
-WakeOnLan=Enabled
-links
-        self
-                href=/rest/v1/systems/1/bios/Settings
-</code></pre>
 
-<blockquote>
+<p><img title="List example 1" alt="List Example 1" src="images/examples/list_ex1.png" /></p>
+
 <p>Including the <strong>&ndash;json</strong> tag preserves the JSON structure of the type’s information. The full list has been truncated here for space.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx –u username –p password 
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; select HpBios.
-ilorest &gt; list --json
-{
-  "AdminPassword": null,
-  "BootMode": "Uefi",
-  "Dhcpv4": "Enabled",
-  "DynamicPowerCapping": "Auto",
-  …
-  "Type": "HpBios.1.2.0",
-  "UrlBootFile": "",
-  "Usb3Mode": "Auto",
-  "VlanPriority": 0,
-  "WakeOnLan": "Enabled",
-  "links": {
-    "self": {
-      "href": "/rest/v1/systems/1/bios/Settings"
-    }
-  }
-}
-</code></pre>
 
-<blockquote>
+<p><img title="List example 2" alt="List Example 2" src="images/examples/list_ex2.png" /></p>
+
 <p>After the server is logged in to and the EthernetNetworkInterface type is selected, the list command reveals that there are two objects with that type on the server. So, to only show the one at <strong>href=/rest/v1/Managers/1/NICs/2</strong>, the list command was run again with the <strong>&ndash;filter</strong> flag included. The full list has been truncated here for space.</p>
+
+<p><img title="List example 3-1" alt="List Example 3-1" src="images/examples/list_ex3-1.png" /></p>
+
+<p><img title="List example 3-2" alt="List Example 3-2" src="images/examples/list_ex3-2.png" /></p>
+
+<p><img title="List example 3-3" alt="List Example 3-3" src="images/examples/list_ex3-3.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; list -u username -p password --url=xx.xx.xx.xx --selector=HpBios.
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-AdminPassword=None
-BootMode=Uefi
-Dhcpv4=Enabled
-DynamicPowerCapping=Auto
-…
-Type=HpBios.1.2.0
-UrlBootFile=""
-Usb3Mode=Auto
-VlanPriority=0
-WakeOnLan=Enabled
-links
-        self
-                href=/rest/v1/systems/1/bios/Settings
-</code></pre>
-<pre class="highlight plaintext"><code>ilorest &gt; select EthernetNetworkInterface. –u username –p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; list --json
-{
-  "Description": "Configuration of this Manager Network Interface",
-  …
-  "Name": "Manager Dedicated Network Interface",
-  …
-  "Type": "EthernetNetworkInterface.0.91.2",
-  "links": {
-    "NetworkServices": [
-      {
-        "href": "/rest/v1/Managers/1/NetworkService"
-      }
-    ],
-    "self": {
-      "href": "/rest/v1/Managers/1/NICs/1"
-    }
-  }
-}
-{
-  "Description": "Configuration of this Manager Network Interface",
-  …
-  "Name": "Manager Shared Network Interface",
-  …
-  "Type": "EthernetNetworkInterface.0.91.2",
-  "links": {
-    "NetworkServices": [
-      {
-        "href": "/rest/v1/Managers/1/NetworkService"
-      }
-    ],
-    "self": {
-      "href": "/rest/v1/Managers/1/NICs/2"
-    }
-  }
-} 
-ilorest &gt; list --filter Id=2 --json
-{
-  "@odata.context": "/redfish/v1/$metadata#Managers/Members/1/EthernetInterfaces/Members/$entity",
-  "@odata.id": "/redfish/v1/Managers/1/EthernetInterfaces/2/",
-  "@odata.type": "#EthernetInterface.1.0.0.EthernetInterface",
-  "AutoNeg": null,
-  "Autosense": null,
-  "Description": "Configuration of this Manager Network Interface",
-  "FQDN": "f250asha.americas.hpqcorp.net",
-  "FactoryMacAddress": "FC:15:B4:8E:11:3B",
-  "FullDuplex": true,
-  "HostName": "f250asha",
-  "IPv4Addresses": [
-    {
-      "SubnetMask": "255.255.252.0",
-      "AddressOrigin": "DHCP",
-      "Gateway": "16.83.60.1",
-      "Address": "16.83.63.43"
-    }
-  ],
-…
-  "Type": "EthernetNetworkInterface.0.92.0",
-  "VLANEnable": false,
-  "VLANId": null,
-  "links": {
-    "NetworkServices": [
-      {
-        "href": "/rest/v1/Managers/1/NetworkService"
-      }
-    ],
-    "self": {
-      "href": "/rest/v1/Managers/1/EthernetInterfaces/2"
-    }
-  }
-}
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -1245,6 +884,12 @@ ilorest &gt; list --filter Id=2 --json
 <aside class="notice"> Use this flag to narrow down your results. For example, selecting a common type might return multiple objects that are all of that type. If you want to modify the properties of only one of those objects, use the filter flag to narrow down results based on properties.</aside>
 
 <ul>
+<li><strong>&mdash;j, &ndash;json</strong></li>
+</ul>
+
+<p>Optionally include this flag if you wish to change the displayed output to JSON format. Preserving the JSON data structure makes the information easier to read.</p>
+
+<ul>
 <li><strong>&ndash;path=PATH</strong></li>
 </ul>
 
@@ -1272,94 +917,15 @@ ilorest &gt; list --filter Id=2 --json
 <p>Info command examples:</p>
 
 <p>Omitting a property when using the info command causes info to list all available options, given that you have already selected a type. The full list has been truncated for space.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx –u username –p password
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; select HpBios.
-ilorest &gt; info
-Info options:
-AdminPassword
-BootMode
-Dhcpv4
-…
-UrlBootFile
-Usb3Mode
-VlanPriority
-WakeOnLan
-</code></pre>
 
-<blockquote>
+<p><img title="Info example 1" alt="Info Example 1" src="images/examples/info_ex1.png" /></p>
+
 <p>Multiple properties under the VirtualMedia type are specified. By passing multiple properties, it returns the information on all of the properties passed.</p>
+
+<p><img title="Info example 2" alt="Info Example 2" src="images/examples/info_ex2.png" /></p>
+
+<p><img title="Info example 3" alt="Info Example 3" src="images/examples/info_ex3.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>info PowerSupplies – u admin – p password --url xx.xx.xx.xx --selector=Power.
-NAME
-    PowerSupplies
-
-DESCRIPTION
-    Details of the power supplies associated with this system or device
-
-TYPE
-    array
-
-READ-ONLY
-    True    
-</code></pre>
-<pre class="highlight plaintext"><code>ilorest &gt; info Id Name –u user –p password --url=xx.xx.xx.xx
-NAME
-    Id
-
-DESCRIPTION
-    Uniquely identifies the resource within the collection of like
-    resources.
-
-TYPE
-    string
-
-READ-ONLY
-    True
-
-NAME
-    Id
-
-DESCRIPTION
-    Uniquely identifies the resource within the collection of like
-    resources.
-
-TYPE
-    string
-
-READ-ONLY
-    True
-
-**************************************************
-
-NAME
-    Name
-
-DESCRIPTION
-    The name of the resource or array element.
-
-TYPE
-    string
-
-READ-ONLY
-    True
-
-NAME
-    Name
-
-DESCRIPTION
-    The name of the resource or array element.
-
-TYPE
-    string
-
-READ-ONLY
-    True
-
-**************************************************
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -1450,72 +1016,30 @@ READ-ONLY
 <blockquote>
 <p>Get example commands:</p>
 
-<p>Using get without any property specified shows the properties of the selected type. Note that no reserved properties are shown with the get command. Also, the full list has been truncated for space.</p>
+<p>Using get without any property specified shows the properties of the selected type. </p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx –u username –p password
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; select HpBios.
-ilorest &gt; get
-AdminPassword=None
-…
-UrlBootFile=""
-Usb3Mode=Auto
-VlanPriority=0
-WakeOnLan=Enabled
-</code></pre>
+
+<p>NOTE: No reserved properties are shown with the get command. Also, the full list is truncated for space.</p>
 
 <blockquote>
+<p><img title="Get example 1" alt="Get Example 1" src="images/examples/get_ex1.png" /></p>
+
 <p>Using get with a specific property lists the current value of that property, given that a type has already been selected.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx –u username –p password
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; select HpBios. 
-ilorest &gt; get AdminName
-AdminName=MichaelHendricks
-</code></pre>
 
-<blockquote>
+<p><img title="Get example 2" alt="Get Example 2" src="images/examples/get_ex2.png" /></p>
+
 <p>Here the server at xx.xx.xx.xx is logged into, the type HpBios. is selected, and the get command is used to retrieve the BootOrderPolicy property of HpBios.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; get BootOrderPolicy -u username -p password --url=xx.xx.xx.xx --selector=HpBios. 
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-BootOrderPolicy=RetryIndefinitely
-</code></pre>
 
-<blockquote>
+<p><img title="Get example 3" alt="Get Example 3" src="images/examples/get_ex3.png" /></p>
+
 <p>Because the logout flag was included here, the user is logged out of the server after the get command here is performed.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx –u username –p password
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; select HpBios.
-ilorest &gt; get UefiOptimizedBoot --logout
-UefiOptimzedBoot=Enabled
-Logging session out.
-</code></pre>
 
-<blockquote>
+<p><img title="Get example 4" alt="Get Example 4" src="images/examples/get_ex4.png" /></p>
+
 <p>Here, the get command utilizes its ability to take multiple properties as arguments. The first time the get command was used on the <strong>ConnectedVia</strong> and <strong>MediaTypes property</strong>, two objects of type <strong>VirtualMedia</strong> and <strong>MediaTypes</strong> were returned. However, to get the <strong>ConnectedVia</strong> and <strong>MediaTypes</strong> value for only one of the types, the filter tag was included. When the get command was run with the filter, the only value printed this time was the <strong>ConnectedVia</strong> value and the <strong>MediaTypes</strong> value for the <strong>VirtualMedia</strong> located at the specified address.</p>
+
+<p><img title="Get example 5" alt="Get Example 5" src="images/examples/get_ex5.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx –u username –p password 
-ilorest &gt; select VirtualMedia. 
-ilorest &gt; get ConnectedVia MediaTypes
-ConnectedVia=NotConnected 
-ConnectedVia=NotConnected 
-MediaTypes
-Floppy
-USBStick
-MediaTypes
-CD
-DVD
-ilorest &gt; get ConnectedVia MediaTypes --filter links/self/href=/rest/v1/Managers/1/VirtualMedia/2 
-ConnectedVia=NotConnected
-CD
-DVD 
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -1574,14 +1098,6 @@ DVD
 <aside class="notice"> Use this flag to narrow down your results. For example, selecting a common type might return multiple objects that are all of that type. If you want to modify the properties of only one of those objects, use the <b>filter</b> flag to narrow down results based on properties.</aside>
 
 <ul>
-<li><strong>&ndash;latestschema</strong></li>
-</ul>
-
-<p>Optionally use the latest schema instead of the one requested by the file.</p>
-
-<aside class="warning">This might cause errors in some data retrieval due to differences in the schema’s organizational structure between versions.</aside>
-
-<ul>
 <li><strong>-j, &ndash;json</strong></li>
 </ul>
 
@@ -1614,62 +1130,26 @@ DVD
 <blockquote>
 <p>Set example commands:</p>
 
-<p>Here the <strong>ServiceName</strong> property of the type <strong>HpBios</strong> has been set to the value <strong>ExampleService</strong>. When the get command is performed next, the value of <strong>ServiceName</strong> has been set to <strong>ExampleService</strong>. Note that, despite the get command showing that <strong>ServiceName</strong> has been set to <strong>ExampleService</strong>, if the commit command is not performed next, then the changes will not be reflected next time the server is logged into.</p>
+<p>Here the <strong>ServiceName</strong> property of the type <strong>HpBios</strong> has been set to the value <strong>ExampleService</strong>. When the get command is performed next, the value of <strong>ServiceName</strong> has been set to <strong>ExampleService</strong>. </p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx -u username -p password 
-Discovering data from iLO...Done 
-WARNING: Cache is activated session keys are stored in plaintext 
-ilorest &gt; select HpBios. 
-ilorest &gt; set “AdminName=John Doe” ServiceName=ExampleService
-ilorest &gt; get AdminName ServiceName 
-AdminName=”John Doe”
-ServiceName=ExampleService
-Here the AdminName property of the type HpBios has been set to the value John Doe as well as the ServiceName being set to Example service. When the get command is performed next, the value of AdminName shows John Doe, and ServiceName shows ExampleService.
-</code></pre>
+
+<p>NOTE: Even though the get command shows <strong>ServiceName</strong> is set to <strong>ExampleService</strong>, the commit command must be performed next for the changes to be reflected next time the server is logged into.</p>
 
 <blockquote>
+<p><img title="Set example 1" alt="Set Example 1" src="images/examples/set_ex1.png" /></p>
+
 <p>Set the attribute of a type using the set command. Here the server is logged into using the username, password, and URL flags, and then <strong>HpBios</strong> is selected with the selector flag. Then, the <strong>ServiceName</strong> property is set.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>set ServiceName=ExampleService2 -u username -p password --url=xx.xx.xx.xx --selector=HpBios.
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; get ServiceName
-ServiceName=ExampleService2
-</code></pre>
 
-<blockquote>
+<p><img title="Set example 2" alt="Set Example 2" src="images/examples/set_ex2.png" /></p>
+
 <p>Here the <strong>AdminName</strong> property of the type <strong>HpBios</strong> was set to the value <strong>JohnDoe</strong>. Including the commit flag committed the changes, so that after logging back into the server, the <strong>AdminName</strong> becomes <strong>JohnDoe</strong>. Otherwise it would have returned to its previous value. Include the <strong>biospassword</strong> flag to input a password if second level BIOS authentication is required.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; set AdminName=JohnDoe -u username -p password --url=xx.xx.xx.xx --selector=HpBios. --biospassword=BIOSPASSWORD --commit
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-Committing changes...
-One or more properties were changed and will not take effect until system is reset.
-Logging session out.
-ilorest &gt; login xx.xx.xx.xx -u username -p password
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; get AdminName --selector=HpBios.
-AdminName=JohnDoe
-</code></pre>
 
-<blockquote>
+<p><img title="Set example 3" alt="Set Example 3" src="images/examples/set_ex3.png" /></p>
+
 <p>Here the <strong>AdminName</strong> property of the type <strong>HpBios</strong> was set to the value <strong>JohnDoe</strong>. However, since the reboot flag was included but the commit flag was not, after the server is logged into again the <strong>AdminName</strong> property has returned to its original value.</p>
+
+<p><img title="Set example 4" alt="Set Example 4" src="images/examples/set_ex4.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; set AdminName=JohnDoe -u admin -p password --url=xx.xx.xx.xx --selector
-=HpBios. --biospassword=BIOSPASSWORD --reboot=ForceRestart
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-Committing changes...
-One or more properties were changed and will not take effect until system is res
-et.
-Logging session out.
-ilorest &gt; login xx.xx.xx.xx -u username -p password
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; get AdminName –u username –p password --url=xx.xx.xx.xx --selector=HpBios.
-AdminName=""
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -1825,15 +1305,9 @@ AdminName=""
 <p>Save example commands:</p>
 
 <p>Here, the server is logged into, HpBios is selected, and the corresponding JSON file is saved to a local directory as the file ilorest.json. The ilorest.json file holds all the information regarding the selected type. Here, the save function was performed on the HpBios type, so the ilorest.json file that was saved holds the information about HpBios. The file holding that information looks like the following. </p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; save --selector=HpBios. -u username -p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-Saving configuration...
-Configuration saved to: ilorest.json
-</code></pre>
 
-<blockquote>
+<p><img title="Save example 1" alt="Save Example 1" src="images/examples/save_ex1.png" /></p>
+
 <p>Example json file</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">[</span><span class="w">
@@ -1868,13 +1342,9 @@ Configuration saved to: ilorest.json
 
 <blockquote>
 <p>Here, <strong>HpBios</strong> is selected, and the corresponding JSON file is saved to a file called <strong>HpBiosInfo.json</strong> in a local directory. The attached &ndash;logout flag logs the user out after this command is completed.</p>
+
+<p><img title="Save example 2" alt="Save Example 2" src="images/examples/save_ex2.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; save –u username –p password --url=xx.xx.xx.xx --selector=HpBios. --filename=HpBiosInfo.json --logout
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-Saving configuration...
-Configuration saved to: HpBiosInfo.json
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -1964,58 +1434,29 @@ Configuration saved to: HpBiosInfo.json
 
 <p>JSON file</p>
 
+<p>Save a selected type to a file in JSON format. You can edit the values in the file, and then use the <code class="prettyprint">load</code> command to upload the changes to the server. </p>
+
 <h3 id="load-command">Load command</h3>
 
 <blockquote>
 <p>Load example commands:</p>
 
 <p>This is the multi-server configuration setup. You must pass in a multi-server file in the following format.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; load -m mpfilename.txt -f output.json
-Local login initiated...
-Loading configuration for multiple servers...
-Logging session out.
-Checking given server information...
-Create multiple processes to load configuration concurrently to all servers...
-Loading Configuration for 10.0.0.100 : SUCCESS
-</code></pre>
 
-<blockquote>
+<p><img title="Load example 1" alt="Load Example 1" src="images/examples/load_ex1.png" /></p>
+
 <p>All servers are configured concurrently. Because the filename tag is included, it searches for the file called <strong>output.json</strong> and loads that information to the servers by setting any property values that have changed. If no values have changed, the load process is complete. If any property values have changed, the changes are committed and the user is logged out of the server. Logs of the entire process are then stored in the same location as the ilorest logs.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>--url https://10.0.0.100 -u admin -p password
---url https://10.0.0.101 -u admin -p password
---url https://10.0.0.102 -u admin -p password
---url https://10.0.0.103 -u admin -p password
-</code></pre>
 
-<blockquote>
+<p><img title="Load example 2" alt="Load Example 2" src="images/examples/load_mpfile.png" /></p>
+
 <p>The load command entered here first logs into the server using the given information. Then, since no file was specified for it to load, it searches for the file called <strong>ilorest.json</strong> and loads that information to the server by setting any property values that have changed. If no values have changed, it is finished. Otherwise, it commits the changes and logs the user out of the server. Here there have been changes made, so the after changing property values the changes are committed and the server logged out of.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; load -u username -p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-Loading configuration...
-Property is read-only skipping 'TpmType'
-Property is read-only skipping 'SecureBootStatus'
-Property is read-only skipping 'TpmState'
-Committing changes...
-One or more properties were changed and will not take effect until system is reset.
-Logging session out.
-</code></pre>
 
-<blockquote>
+<p><img title="Load example 3" alt="Load Example 3" src="images/examples/load_ex2.png" /></p>
+
 <p>The load command entered here first logs into the server using the given information. Since the filename tag has been included, it searches for the file called <strong>biosconfig.json</strong> and loads that information to the server by setting any property values that have changed. If no values have changed, it is finished. Otherwise, it commits the changes. Here all the properties specified in <strong>biosconfig.json</strong> are the same as the values on the server, so the command is finished executing. </p>
+
+<p><img title="Load example 4" alt="Load Example 4" src="images/examples/load_ex3.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; load -u username -p password --url=xx.xx.xx.xx --biospassword=BIOSPASSWORD --filename=biosconfig.json
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-Loading configuration...
-Property is read-only skipping 'TpmType'
-Property is read-only skipping 'SecureBootStatus'
-Property is read-only skipping 'TpmState'
-Error: No differences found from current configuration.
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -2092,6 +1533,12 @@ Error: No differences found from current configuration.
 <p>Use the provided filename to obtain data.</p>
 
 <ul>
+<li><strong>-o OUTDIRECTORY, &ndash;outputdirectory=OUTDIRECTORY</strong></li>
+</ul>
+
+<p>Use the provided directory to output data for a multiple server configuration.</p>
+
+<ul>
 <li><strong>-o OFILENAME, &ndash;outputfilename=OFILENAME</strong></li>
 </ul>
 
@@ -2113,20 +1560,9 @@ Error: No differences found from current configuration.
 <p>Status example commands:</p>
 
 <p>The status command shows changes to be committed. Here we see that the Description property of <strong>ComputerSystem</strong> has been set to <strong>ComputerSystemView</strong>, and that the <strong>ServiceName</strong> property of <strong>HpBios</strong> has been set to <strong>SimpleService</strong>. The status command shows all pending changes, including changes for different types.</p>
+
+<p><img title="Status example 1" alt="Status Example 1" src="images/examples/status_ex1.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; select ComputerSystem. –u username –p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; set Description=ComputerSystemView
-ilorest &gt; select HpBios. 
-ilorest &gt; set ServiceName=SimpleService
-ilorest &gt; status
-Current changes found:
-ComputerSystem.0.9.7
-        Description=ComputerSystemView
-HpBios.1.2.0 (Currently selected)
-        ServiceName=SimpleService
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -2158,49 +1594,17 @@ HpBios.1.2.0 (Currently selected)
 <p>Commit example commands:</p>
 
 <p>Once you have made changes and are ready for them to take effect, use the commit command to commit your changes. Here the commit command saves the <strong>AdminName</strong> property of <strong>HpBios.</strong> to the new value of <strong>DeniseHarkins</strong>, and includes the <strong>biospassword=BIOSPASSWORD</strong> for second level BIOS authentication. The included reboot flag reboots the server. The commit command always logs out of the server.</p>
+
+<p><img title="Commit example 1" alt="Commit Example 1" src="images/examples/commit_ex1.png" /></p>
+
+<p>Here the logout flag was used to demonstrate that the server can be logged out of after another command. Here, after the <strong>EmbSata1Enabled</strong> property of HpBios was set to a new value, then the server was logged out of because the logout flag was included. </p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; select HpBios. –u username –p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; set AdminName=DeniseHarkins
-ilorest &gt; commit --biospassword=BIOSPASSWORD --reboot=FORCERESTART
-Committing changes...
-One or more properties were changed and will not take effect until system is reset.
-After the server is rebooted the session will be terminated.
-Please wait for the server to boot completely to login again.
-Rebooting server in 3 seconds...
-The operation completed successfully.
-Logging session out.
-</code></pre>
+
+<p>NOTE: The commit flag isn&rsquo;t used here; therefore, changes are not committed upon logout.</p>
 
 <blockquote>
-<p>Here the logout flag was used to demonstrate that the server can be logged out of after another command. Here, after the <strong>EmbSata1Enabled</strong> property of HpBios was set to a new value, then the server was logged out of because the logout flag was included. Note that the commit flag wasn’t used here, hence changes were not committed upon logout.</p>
+<p><img title="Commit example 2" alt="Commit Example 2" src="images/examples/commit_ex2.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx -u username -p password
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; select HpBios. 
-ilorest &gt; set "AdminName=ExampleName"
-ilorest &gt; set "AdminEmail=person@place.com"
-ilorest &gt; set "AdminPhone=888-888-8888"
-ilorest &gt; status
-Current changes found:
-HpBios.1.2.0 (Currently selected)
-        AdminName=ExampleName
-        AdminEmail=person@place.com
-        AdminPhone=888-888-8888
-ilorest &gt; commit
-Committing changes...
-One or more properties were changed and will not take effect until system is reset.
-Logging session out.
-ilorest &gt; login xx.xx.xx.xx –u username –p password
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; select HpBios. 
-ilorest &gt; set EmbSata1Enable=Disabled -logout
-Logging session out. 
-ilorest &gt;
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -2244,25 +1648,13 @@ ilorest &gt;
 <p>Logout example commands:</p>
 
 <p>Use the logout command to end the session and disconnect from the server.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx -u username -p password 
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; logout
-Logging session out.
-</code></pre>
 
-<blockquote>
+<p><img title="Logout example 1" alt="Logout Example 1" src="images/examples/logout_ex1.png" /></p>
+
 <p>Here the logout flag was used to demonstrate that the server can be logged out of after another command. Here, after the <strong>EmbSata1Enabled</strong> property of <strong>HpBios</strong> was set to a new value, the server was logged out of because the logout flag was included.</p>
+
+<p><img title="Logout example 2" alt="Logout Example 2" src="images/examples/logout_ex2.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx –u username –p password
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; select HpBios.
-ilorest &gt; set EmbSata1Enable=Disabled –logout
-Logging session out.
-ilorest &gt;
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -2294,15 +1686,9 @@ ilorest &gt;
 <p>Exit example commands</p>
 
 <p>This command exits the interactive shell.</p>
+
+<p><img title="Exit example 1" alt="Exit Example 1" src="images/examples/exit_ex1.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx -u admin -p password 
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; logout
-Logging session out.
-ilorest &gt; exit
-Bye for now
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -2338,75 +1724,21 @@ Bye for now
 <p>Bootorder example commands:</p>
 
 <p>In this example, the boot order was not specified first. The current persistent boot order is listed. Other options, such as continuous and one time boot options, as well as continuous and one time boot UEFI options are also displayed. Next, we call bootorder with a specified list. This sets the boot order to <strong>Generic.USB.1.1, HD.Emb.8.2., NIC.LOM.1.1.IPV6, NIC.LOM.1.1.IPV4,HD.Emb.8.1</strong>. The commit flag will commit the changes, otherwise changes are not saved.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx -u username -p password 
-Discovering data from iLO...Done 
-WARNING: Cache is activated session keys are stored in plaintext 
-ilorest &gt; bootorder 
 
-Current Persistent Boot Order: 
-1. HD.Emb.8.2 
-2. Generic.USB.1.1 
-3. NIC.LOM.1.1.IPv4 
-4. NIC.LOM.1.1.IPv6 
-5. HD.Emb.8.1
+<p><img title="Bootorder example 1" alt="Bootorder Example 1" src="images/examples/bootorder_ex1.png" /></p>
 
-Continuous and one time boot options: 
-1. None 
-2. Cd 
-3. Hdd 
-4. Usb 
-5. Utilities 
-6. Diags 
-7. BiosSetup 
-8. Pxe 
-9. UefiShell 
-
-Continuous and one time boot uefi options: 
-1. HD.Emb.8.2 
-2. Generic.USB.1.1 
-3. NIC.LOM.1.1.IPv4 
-4. NIC.LOM.1.1.IPv6 
-5. HD.Emb.8.1
-
-ilorest &gt; bootorder [2,1,4] --commit
-</code></pre>
-
-<blockquote>
 <p>Here the one time boot order was changed so that the next time the server boots it will boot from the hard drive.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx –u username –p password
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; bootorder --onetimeboot=Hdd --biospassword=BIOSPASSWORD --commit
-Committing changes...
-The operation completed successfully.
-Logging session out.
-</code></pre>
 
-<blockquote>
+<p><img title="Bootorder example 2" alt="Bootorder Example 2" src="images/examples/bootorder_ex2.png" /></p>
+
 <p>Here the continuous boot option was changed so that it will keep attempting to boot from the cd drive.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx –u username –p password
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; bootorder --continuousboot=Cd --biospassword=BIOSPASSWORD --commit
-Committing changes...
-The operation completed successfully.
-Logging session out.
-</code></pre>
 
-<blockquote>
+<p><img title="Bootorder example 3" alt="Bootorder Example 3" src="images/examples/bootorder_ex3.png" /></p>
+
 <p>To turn off any continuous or one-time boot options that have been configured, include the disablebootflag option. </p>
+
+<p><img title="Bootorder example 4" alt="Bootorder Example 4" src="images/examples/bootorder_ex4.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx –u username –p password
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; bootorder --disablebootflag --commit
-Committing changes...
-The operation completed successfully.
-Logging session out.
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -2484,6 +1816,12 @@ Logging session out.
 
 <p>Use this to disable either continuous or one-time boot modes.</p>
 
+<ul>
+<li><strong>&ndash;securebootkeys=SECUREBOOT</strong></li>
+</ul>
+
+<p>Use this flag to perform actions on secure boot keys.Possible values include defaultkeys: resets all keys to default,deletekeys: deletes all keys, deletepk: deletes all product keys.</p>
+
 <h4 id="inputs">Inputs</h4>
 
 <p>None</p>
@@ -2497,30 +1835,18 @@ Logging session out.
 <blockquote>
 <p>BiosDefaults example commands:</p>
 
-<p>Here after the server was logged into, the biosdefaults command resets the BIOS settings to their default values. Note that some changes will not be applied until the system is reset.</p>
+<p>Here after the server was logged into, the biosdefaults command resets the BIOS settings to their default values. </p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; biosdefaults -u username -p password --url=xx.xx.xx.xx --biospassword=BIOSPASSWORD
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-Resetting the current logged in servers BIOS settings to defaults.
-One or more properties were changed and will not take effect until system is reset.
-</code></pre>
+
+<p>NOTE: Some changes are not applied until the system is reset.</p>
 
 <blockquote>
-<p>Here after the server was logged into, the biosdefaults command reset the BIOS settings to their default values. The reboot flag was included so that some changes requiring a reboot will be reflected.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; biosdefaults -u username -p password --url=xx.xx.xx.xx --biospassword=BIOSPASSWORD --reboot=ForceRestart
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-Resetting the current logged in servers BIOS settings to defaults.
-One or more properties were changed and will not take effect until system is reset.
+<p><img title="BiosDefaults example 1" alt="BiosDefaults Example 1" src="images/examples/biosdefaults_ex1.png" /></p>
 
-After the server is rebooted the session will be terminated.
-Please wait for the server to boot completely to login again.
-Rebooting server in 3 seconds...
-The operation completed successfully.
-Logging session out.
-</code></pre>
+<p>Here after the server was logged into, the biosdefaults command reset the BIOS settings to their default values. The reboot flag was included so that some changes requiring a reboot will be reflected.</p>
+
+<p><img title="BiosDefaults example 2" alt="BiosDefaults Example 2" src="images/examples/biosdefaults_ex2.png" /></p>
+</blockquote>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -2568,6 +1894,18 @@ Logging session out.
 
 <p>Use this flag to perform a reboot command function after completion of operations. For help with parameters and descriptions regarding the reboot flag, run <code class="prettyprint">help reboot</code>.</p>
 
+<ul>
+<li><strong>&ndash;userdefaults</strong></li>
+</ul>
+
+<p>Sets bios to user defaults instead of factory defaults.</p>
+
+<ul>
+<li><strong>&ndash;manufacturingdefaults</strong></li>
+</ul>
+
+<p>Sets bios to manufacturer defaults instead of factory defaults.</p>
+
 <h4 id="inputs">Inputs</h4>
 
 <p>None</p>
@@ -2582,216 +1920,43 @@ Logging session out.
 <p>iSCSIConfig example commands:</p>
 
 <p>Using the iscsiconfig command without any flags will display the current ISCSI configuration, including ISCSI initiator name and currently configured boot entries.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx –u username –p password
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; iscsiconfig
 
-Iscsi Initiator Name: "iqn.1986-03.com.hp:uefi-P89 "
+<p><img title="iSCSIConfig example 1" alt="iSCSIConfig Example 1" src="images/examples/iscsi_ex1.png" /></p>
 
-Available iSCSI Boot Network Interfaces:
-[1] Embedded LOM 1 Port 1 : Port 1 - HP Ethernet 1Gb 4-port 331i Adapter
-[2] Embedded LOM 1 Port 2 : Port 2 - HP Ethernet 1Gb 4-port 331i Adapter
-[3] Embedded LOM 1 Port 3 : Port 3 - HP Ethernet 1Gb 4-port 331i Adapter
-[4] Embedded LOM 1 Port 4 : Port 4 - HP Ethernet 1Gb 4-port 331i Adapter
-</code></pre>
-
-<blockquote>
 <p>Use the list flag to retrieve the current configured iscsi boot attempts. If none are configured, as seen above, then you will see all sections with a message stating <strong>Not Added</strong>.</p>
+
+<p><img title="iSCSIConfig example 2" alt="iSCSIConfig Example 2" src="images/examples/iscsi_ex2.png" /></p>
+
+<p>The add [2] flag was included here to add a boot attempt. The [2] entry here causes the server to add a boot attempt with the <strong>iSCSINicSource NicBoot</strong> value of 2. Thus, the [2] supplied here caused a new entry to be added with <strong>iSCSINicSource</strong> value <strong>NicBoot2</strong>. </p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; iscsiconfig --list –u username –p password --url=xx.xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-Current iSCSI Attempts:
-[
-  {
-    "Not Added": {}
-  },
-  {
-    "Not Added": {}
-  },
-  {
-    "Not Added": {}
-  },
-  {
-    "Not Added": {}
-  }
-]
-</code></pre>
+
+<p>NOTE: The 2 inputted here is not the attempt number, as opposed to &ldquo;iscsiconfig &ndash;delete 2&rdquo; which does <em>delete the 2nd boot attempt.</em></p>
 
 <blockquote>
-<p>The add [2] flag was included here to add a boot attempt. The [2] entry here causes the server to add a boot attempt with the <strong>iSCSINicSource NicBoot</strong> value of 2. Thus, the [2] supplied here caused a new entry to be added with <strong>iSCSINicSource</strong> value <strong>NicBoot2</strong>. Note that the 2 inputted here is not the attempt number, as opposed to &ldquo;iscsiconfig &ndash;delete 2&rdquo; which does <em>delete the 2nd boot attempt.</em></p>
+<p><img title="iSCSIConfig example 3" alt="iSCSIConfig Example 3" src="images/examples/iscsi_ex3.png" /></p>
+
+<p>Here we first added a boot attempt, then decided to modify some properties. We do this by first writing the <strong>iscsiconfig</strong> properties to a file called <strong>output.txt</strong> using the –f flag. </p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; iscsiconfig --add [2] –u username –p password --url=xx.xx.xx.xx --biospassword=BIOSPASSWORD
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-One or more properties were changed and will not take effect until system is reset.
-ilorest &gt; iscsiconfig --list
-Current iSCSI Attempts:
-[
-  {
-    "Embedded LOM 1 Port 1 : Port 1 - Broadcom NetXtreme Gigabit Ethernet (BCM57
-19)": {
-      "Attempt 1": {
-        "iSCSIConnectTimeoutMS": 0,
-        "iSCSIChapUsername": null,
-        "iSCSIChapSecret": null,
-        "iSCSIInitiatorGateway": "0.0.0.0",
-        "iSCSINicSource": "NicBoot2",
-        "iSCSITargetInfoViaDHCP": true,
-        "iSCSIBootAttemptName": "1",
-        "iSCSIChapType": "OneWay",
-        "iSCSITargetIpAddress": "0.0.0.0",
-        "iSCSIIpAddressType": "IPv4",
-        "UEFIDevicePath": null
-      }
-    }
-  },
-  {
-    "Not Added": {}
-  },
-  {
-    "Not Added": {}
-  },
-  {
-    "Not Added": {}
-  }
-]
-</code></pre>
+
+<p>NOTE: The results are only written to the file if the &ndash;list flag is included as well.</p>
 
 <blockquote>
-<p>Here we first added a boot attempt, then decided to modify some properties. We do this by first writing the <strong>iscsiconfig</strong> properties to a file called <strong>output.txt</strong> using the –f flag. Note that the results will only be written to the file is the &ndash;list flag is included as well.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; iscsiconfig --add [1] –u username –p password --url=xx.xx.xx.xx --biospassword=BIOSPASSWORD
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-One or more properties were changed and will not take effect until system is reset.
-ilorest &gt; iscsiconfig --list –f output.txt
-Results written out to 'output.txt'
-ilorest &gt; iscsiconfig --modify output.txt --biospassword=BIOSPASSWORD
-One or more properties were changed and will not take effect until system is reset.
+<p><img title="iSCSIConfig example 4-1" alt="iSCSIConfig Example 4-1" src="images/examples/iscsi_ex4-1.png" /></p>
 
-Original file:
-[
-  {
-    "Embedded LOM 1 Port 1 : Port 1 - Broadcom NetXtreme Gigabit Ethernet (BCM5719)": {
-      "Attempt 1": {
-        "iSCSIConnectTimeoutMS": 0,
-        "iSCSIChapUsername": null,
-        "iSCSIChapSecret": null,
-        "iSCSIInitiatorGateway": "0.0.0.0",
-        "iSCSINicSource": "NicBoot1",
-        "iSCSITargetInfoViaDHCP": true,
-        "iSCSIBootAttemptName": "1",
-        "iSCSIChapType": "OneWay",
-        "iSCSITargetIpAddress": "0.0.0.0",
-        "iSCSIIpAddressType": "IPv4",
-        "UEFIDevicePath": null
-      }
+<p><img title="iSCSIConfig example 4-2" alt="iSCSIConfig Example 4-2" src="images/examples/iscsi_ex4-2.png" /></p>
 
-    }
-  }, 
-  {
-    "Not Added": {}
-  }, 
-  {
-    "Not Added": {}
-  }, 
-  {
-    "Not Added": {}
-  }
-]
+<p><img title="iSCSIConfig example 5-1" alt="iSCSIConfig Example 5-1" src="images/examples/iscsi_ex5-1.png" /></p>
 
-Modified File
-[
-  {
-    "Embedded LOM 1 Port 1 : Port 1 - Broadcom NetXtreme Gigabit Ethernet (BCM5719)": {
-      "Attempt 1": {
-        "iSCSIConnectTimeoutMS": 0,
-        "iSCSIChapUsername": null,
-        "iSCSIChapSecret": null,
-        "iSCSIInitiatorGateway": "0.0.0.0",
-        "iSCSINicSource": "NicBoot1",
-        "iSCSITargetInfoViaDHCP": false,
-        "iSCSIBootAttemptName": "1",
-        "iSCSIChapType": "OneWay",
-        "iSCSITargetIpAddress": "0.0.0.0",
-        "iSCSIIpAddressType": "IPv4",
-        "UEFIDevicePath": null
-      }
-
-    }
-  }, 
-  {
-    "Not Added": {}
-  }, 
-  {
-    "Not Added": {}
-  }, 
-  {
-    "Not Added": {}
-  }
-]
-</code></pre>
-
-<blockquote>
 <p>Then we opened up the output.txt file in a word processor, changed the property we wanted to, and re-uploaded the configuration to the server using the modify flag. Since second-level BIOS authentication was required, the biospassword flag was included as well. The original and modified output.txt files are given above, with the iSCSITargetInfoViaDHCP value changed from true to false. The original and modified output.txt files are given above, with the iSCSITargetInfoViaDHCP value changed from true to false.</p>
 
-<p>Here when the server was logged into, there was already a boot attempt configured. To delete a boot attempt, use the delete flag to remove the boot attempt. We then verified that the boot attempt was deleted with another list flag. Note that here, &ldquo;iscsiconfig &ndash;delete 1&rdquo; deletes the 1st iSCSI attempt. This is different from the number specified with &ldquo;iscsiconfig &ndash;add [1]&rdquo;, which implies add an iSCSI attempt with <strong>NicBoot1</strong>.</p>
+<p>Here when the server was logged into, there was already a boot attempt configured. To delete a boot attempt, use the delete flag to remove the boot attempt. We then verified that the boot attempt was deleted with another list flag. </p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; iscsiconfig --list -u username -p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-Current iSCSI Attempts:
-[
-  {
-    "Embedded LOM 1 Port 1 : Port 1 - Broadcom NetXtreme Gigabit Ethernet (BCM57
-19)": {
-      "Attempt 1": {
-        "iSCSIConnectTimeoutMS": 0,
-        "iSCSIChapUsername": null,
-        "iSCSIChapSecret": null,
-        "iSCSIInitiatorGateway": "0.0.0.0",
-        "iSCSINicSource": "NicBoot1",
-        "iSCSITargetInfoViaDHCP": false,
-        "iSCSIBootAttemptName": "1",
-        "iSCSIChapType": "OneWay",
-        "iSCSITargetIpAddress": "0.0.0.0",
-        "iSCSIIpAddressType": "IPv4",
-        "UEFIDevicePath": null
-      }
-    }
-  },
-  {
-    "Not Added": {}
-  },
-  {
-    "Not Added": {}
-  },
-  {
-    "Not Added": {}
-  }
-]
-ilorest &gt; iscsiconfig --delete 1 --biospassword=BIOSPASSWORD
-One or more properties were changed and will not take effect until system is reset.
-ilorest &gt; iscsiconfig --list
-Current iSCSI Attempts:
-[
-  {
-    "Not Added": {}
-  },
-  {
-    "Not Added": {}
-  },
-  {
-    "Not Added": {}
-  },
-  {
-    "Not Added": {}
-  }
-]
-</code></pre>
+
+<p>NOTE: The &ldquo;iscsiconfig &ndash;delete 1&rdquo; command deletes the 1st iSCSI attempt. This is different from the number specified with &ldquo;iscsiconfig &ndash;add [1]&rdquo;, which implies add an iSCSI attempt with <strong>NicBoot1</strong>.</p>
+
+<blockquote>
+<p><img title="iSCSIConfig example 5-2" alt="iSCSIConfig Example 5-2" src="images/examples/iscsi_ex5-2.png" /></p>
+</blockquote>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -2883,23 +2048,9 @@ Current iSCSI Attempts:
 <p>Results example commands:</p>
 
 <p>Using the results command without any parameters here shows any BIOS changes after a reboot. Here, Bios, Iscsi, and Boot all show as having been completed successfully.</p>
+
+<p><img title="Results example 1" alt="Results Example 1" src="images/examples/results_ex1.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; results
-
-Results of the previous BIOS change:
-
-Bios:
-
-The operation completed successfully.
-
-Iscsi:
-
-The operation completed successfully.
-
-Boot:
-
-The operation completed successfully.
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -2943,9 +2094,415 @@ The operation completed successfully.
 
 <p>None</p>
 
+<h3 id="setpassword-command">Setpassword command</h3>
+
+<blockquote>
+<p>Setpassword example commands:</p>
+
+<p>NOTE: Please make sure the order of passwords is maintained. The passwords are extracted base on their position in the arguments list.</p>
+
+<p>Setting the admin password with no previous password set.</p>
+
+<p><img title="Setpassword example 1" alt="Setpassword Example 1" src="images/examples/setpassword_ex1.png" /></p>
+
+<p>Setting the admin password back to nothing. </p>
+
+<p><img title="Setpassword example 2" alt="Setpassword Example 2" src="images/examples/setpassword_ex2.png" /></p>
+
+<p>Setting the power on password.</p>
+
+<p><img title="Setpassword example 3" alt="Setpassword Example 3" src="images/examples/setpassword_ex3.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>setpassword <em>[NEW_PASSWORD] [OLD_PASSWORD] [OPTIONS]</em></p>
+
+<h4 id="description">Description</h4>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>-p PASSWORD, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>Use the provided iLO password to log in.</p>
+
+<ul>
+<li><strong>&ndash;reboot=REBOOT</strong></li>
+</ul>
+
+<p>Use this flag to perform a reboot command function after completion of operations. &lsquo;REBOOT&rsquo; is replaceable parameter that can have multiple values. For help with parameters and descriptions regarding the reboot flag, run help reboot.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
           <h2 id="ilo-commands">iLO Commands</h2>
 
 <p>This section includes advanced functions for manipulating iLO using the RESTful Interface Tool. These commands include operations such as turning the server hardware on and off, resetting iLO, and updating firmware.</p>
+
+<p>iLO commands that are supported for a specific HPE server generation:
++ certificate: Gen10 with limited functionality for Gen9
++ fwintegritycheck: Gen10
++ iloclone: Gen10
++ sigrecompute: Gen9</p>
+
+<h3 id="certificate-command">Certificate command</h3>
+
+<blockquote>
+<p>Certificate example commands:</p>
+
+<p>NOTE: 
++ Please make sure the order of arguments is correct. The parameters are extracted base on their position in the arguments list.
++ Use the singlesignon command to import single sign on certificates.</p>
+
+<p>Generate an https certificate signing request.</p>
+
+<p><img title="Certificate example 1" alt="Certificate Example 1" src="images/examples/certificate_ex1.png" /></p>
+
+<p>Import auth CA certificate.</p>
+
+<p><img title="Certificate example 2" alt="Certificate Example 2" src="images/examples/certificate_ex2.png" /></p>
+
+<p>Import auth CRL certificate.</p>
+
+<p><img title="Certificate example 3" alt="Certificate Example 3" src="images/examples/certificate_ex3.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>certificate <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Command for importing iLO and login authorization certificates, and generating iLO certificate signing requests.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>-f FILENAME, &ndash;filename=FILENAME</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
+<h3 id="clearrestapistate-command">Clearrestapistate command</h3>
+
+<blockquote>
+<p>Clearrestapistate example commands:</p>
+
+<p>Clear the persistent RESTful API state.</p>
+
+<p><img title="Clearrestapistate example 1" alt="Clearrestapistate Example 1" src="images/examples/clearrestapistate_ex2.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>clearrestapistate <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Clear the persistent RESTful API state.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
+<h3 id="disableilofunctionality-command">Disableilofunctionality command</h3>
+
+<blockquote>
+<p>Disableilofunctionality example commands:</p>
+
+<p>Disable iLO functionality on the current logged in server.</p>
+
+<p><img title="Disableilofunctionality example 1" alt="Disableilofunctionality Example 1" src="images/examples/disableilofunctionality_ex1.png" />  </p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>disableilofunctionality <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Disable iLO functionality on the current logged in server.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
+<h3 id="eskm-command">Eskm command</h3>
+
+<blockquote>
+<p>Eskm example commands:</p>
+
+<p>Clear the ESKM logs.</p>
+
+<p><img title="Eskm example 1" alt="Eskm Example 1" src="images/examples/eskm_ex1.png" /></p>
+
+<p>Test the ESKM connections.</p>
+
+<p><img title="Eskm example 2" alt="Eskm Example 2" src="images/examples/eskm_ex2.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>eskm <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Command for all ESKM available actions.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
+<h3 id="factorydefaults-command">Factorydefaults command</h3>
+
+<blockquote>
+<p>Factorydefaults example commands:</p>
+
+<p>Reset iLO to factory defaults in the current loggen in server.</p>
+
+<p><img title="Factorydefaults example 1" alt="Factorydefaults Example 1" src="images/examples/factorydefaults_ex1.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>factorydefaults <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Reset iLO to factory defaults in the current logged in server.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
+<h3 id="fwintegritycheck-command">Fwintegritycheck command</h3>
+
+<blockquote>
+<p>Fwintegritycheck example commands:</p>
+
+<p>Perform a firmware integrity check on the current logged in server.</p>
+
+<p><img title="Fwintegritycheck example 1" alt="Fwintegritycheck Example 1" src="images/examples/fwintegritycheck_ex1.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>fwintegritycheck <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Perform a firmware integrity check on the current logged in server.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
 
 <h3 id="reboot-command">Reboot command</h3>
 
@@ -2953,49 +2510,29 @@ The operation completed successfully.
 <p>Reboot example commands:</p>
 
 <p>If the server is currently off, the reboot On command can be used to turn the server on. The reboot command logs the user out of the server.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; reboot On -u username -p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
 
-Session will now be terminated.
-Please wait for the server to boot completely to login again.
-Turning on the server in 3 seconds...
-The operation completed successfully.
-Logging session out.
-</code></pre>
+<p><img title="Reboot example 1" alt="Reboot Example 1" src="images/examples/reboot_ex1.png" /></p>
+
+<p>If the server has been turned on, the reboot ForceOff command can be used to turn the server off immediately. </p>
+</blockquote>
+
+<p>NOTE: The reboot command logs the user out of the server.</p>
 
 <blockquote>
-<p>If the server has been turned on, the reboot ForceOff command can be used to turn the server off immediately. Note that the reboot command logs the user out of the server.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; reboot ForceOff -u username -p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
+<p><img title="Reboot example 2" alt="Reboot Example 2" src="images/examples/reboot_ex2.png" /></p>
 
-Session will now be terminated.
-Please wait for the server to boot completely to login again.
-Turning on the server in 3 seconds...
-The operation completed successfully.
-Logging session out.
-</code></pre>
+<p>If the server is currently on, the reboot ForceRestart command can be used to turn the server off immediately and then start again. </p>
+</blockquote>
+
+<p>NOTE: The reboot command logs the user out of the server. </p>
 
 <blockquote>
-<p>If the server is currently on, the reboot ForceRestart command can be used to turn the server off immediately and then start again. Note that the reboot command logs the user out of the server. </p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; reboot ForceRestart -u username -p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
+<p><img title="Reboot example 3" alt="Reboot Example 3" src="images/examples/reboot_ex3.png" /></p>
 
-After the server is rebooted the session will be terminated.
-Please wait for the server to boot completely to login again.
-Rebooting server in 3 seconds...
-The operation completed successfully.
-Logging session out.
-</code></pre>
-
-<blockquote>
-<p>If the server is currently on, the reboot Nmi command can be used to generate a non-maskable interrupt to cause an immediate system halt. Note that the reboot command logs the user out of the server.</p>
+<p>If the server is currently on, the reboot Nmi command can be used to generate a non-maskable interrupt to cause an immediate system halt. </p>
 </blockquote>
+
+<p>NOTE: The reboot command logs the user out of the server.</p>
 <pre class="highlight plaintext"><code>ilorest &gt; reboot Nmi -username -p password --url=xx.xx.xx.xx
 Discovering data from iLO...Done
 WARNING: Cache is activated session keys are stored in plaintext
@@ -3008,18 +2545,14 @@ Logging session out.
 </code></pre>
 
 <blockquote>
-<p>The reboot PushPowerButton command can be used to simulate physically pressing the power button on the server. If the server is off, this command will turn the server on. If the server is on, this command will turn the server off. Note that the reboot command logs the user out of the server.</p>
+<p>The reboot PushPowerButton command can be used to simulate physically pressing the power button on the server. If the server is off, this command will turn the server on. If the server is on, this command will turn the server off. </p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; reboot PushPowerButton -u username -p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
 
-Server is powering off the session will be terminated.
-Please wait for the server to boot completely its operation to login again.
-Powering off the server in 3 seconds...
-The operation completed successfully.
-Logging session out.
-</code></pre>
+<p>NOTE: The reboot command logs the user out of the server.</p>
+
+<blockquote>
+<p><img title="Reboot example 4" alt="Reboot Example 4" src="images/examples/reboot_ex4.png" /></p>
+</blockquote>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -3062,6 +2595,24 @@ Logging session out.
 <p>Use this reboot type to simulate the pressing of the physical power button on this system.</p>
 
 <ul>
+<li><strong>Press</strong></li>
+</ul>
+
+<p>Simulates the pressing of the physical power button on this system.</p>
+
+<ul>
+<li><strong>PressAndHold</strong></li>
+</ul>
+
+<p>Simulates pressing and holding of the power button on this systems.</p>
+
+<ul>
+<li><strong>ColdBoot</strong></li>
+</ul>
+
+<p>Immidiately removes power from the server, followed by a restart of the system.</p>
+
+<ul>
 <li><strong>-h, &ndash;help</strong></li>
 </ul>
 
@@ -3099,24 +2650,199 @@ Logging session out.
 
 <p>None</p>
 
+<h3 id="sendtest-command">Sendtest command</h3>
+
+<blockquote>
+<p>Sendtest example commands:</p>
+
+<p>Send syslog test to the current logged in server.</p>
+
+<p><img title="Sendtest example 1" alt="Sendtest Example 1" src="images/examples/sendtest_ex1.png" /></p>
+
+<p>Send alert mail test to the current logged in server.</p>
+
+<p><img title="Sendtest example 2" alt="Sendtest Example 2" src="images/examples/sendtest_ex2.png" /></p>
+
+<p>Send SNMP test alert to the current logged in server.</p>
+
+<p><img title="Sendtest example 3" alt="Sendtest Example 3" src="images/examples/sendtest_ex3.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>sendtest <em>[Command] [Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Command for sending various tests to iLO.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
+<h3 id="serverlogs-command">Serverlogs command</h3>
+
+<blockquote>
+<p>Serverlogs example commands:</p>
+
+<p>Download the AHS logs from the logged in server.</p>
+
+<p><img title="Serverlogs example 1" alt="Serverlogs Example 1" src="images/examples/serverlogs_ex1.png" /></p>
+
+<p>Insert customized string if required for AHS log to be downloaded. (AHS LOGS ONLY FEATURE IN REMOTE MODE)</p>
+
+<p><img title="Serverlogs example 2" alt="Serverlogs Example 2" src="images/examples/serverlogs_ex2.png" /></p>
+
+<p>Clear the AHS logs from the logged in server.</p>
+
+<p><img title="Serverlogs example 3" alt="Serverlogs Example 3" src="images/examples/serverlogs_ex3.png" /></p>
+
+<p>Download the IEL logs from the logged in server.</p>
+
+<p><img title="Serverlogs example 4" alt="Serverlogs Example 4" src="images/examples/serverlogs_ex4.png" /></p>
+
+<p>Download the IML logs from the logged in server.</p>
+
+<p><img title="Serverlogs example 5" alt="Serverlogs Example 5" src="images/examples/serverlogs_ex5.png" /></p>
+
+<p>Insert entry in the IML logs from the logged in server. (IML LOGS ONLY FEATURE)</p>
+
+<p><img title="Serverlogs example 6" alt="Serverlogs Example 6" src="images/examples/serverlogs_ex6.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>serverlogs <em>[Log_Selection] [Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Download and perform log operations.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-f FILENAME, &ndash;filename=FILENAME</strong></li>
+</ul>
+
+<p>Use this flag if you wish to use a different filename than the default one. The default filename is ilorest.json.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>&ndash;filter=FILTER</strong></li>
+</ul>
+
+<p>Optionally set a filter value for a filter attribute. This uses the provided filter for the currently selected type. </p>
+
+<p>NOTE: Use this flag to narrow down your results. For example, selecting a common type might return multiple objects that are all of that type. If you want to modify the properties of only one of those objects, use the filter flag to narrow down results based on properties Usage: &ndash;filter [ATTRIBUTE]=[VALUE].</p>
+
+<ul>
+<li><strong>-j, &ndash;json</strong></li>
+</ul>
+
+<p>Optionally include this flag if you wish to change the displayed output to JSON format. Preserving the JSON data structure makes the information easier to parse.</p>
+
+<ul>
+<li><strong>&ndash;logout</strong></li>
+</ul>
+
+<p>Optionally include the logout flag to log out of the server after this command is completed. Using this flag when not logged in will have no effect.</p>
+
+<ul>
+<li><strong>&ndash;selectlog=SERVICE</strong></li>
+</ul>
+
+<p>Read log from the given log service. Options: IML, IEL or AHS.</p>
+
+<ul>
+<li><strong>-c, &ndash;clearlog, -m MAINMES, &ndash;maintenancemessage=MAINMES</strong></li>
+</ul>
+
+<p>Clears the logs for a the selected option. Maintenance message to be inserted into the log. (IML LOGS ONLY FEATURE)</p>
+
+<ul>
+<li><strong>&ndash;customiseAHS=CUSTOMISEAHS</strong></li>
+</ul>
+
+<p>Allows customized AHS log data to be downloaded.
+- <strong>&ndash;downloadallahs</strong></p>
+
+<p>Allows complete AHS log data to be downloaded.</p>
+
+<ul>
+<li><strong>&ndash;directorypath=DIRECTORYPATH</strong>
+Directory path for the ahs file.</li>
+</ul>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
 <h3 id="iloreset-command">iLOReset command</h3>
 
 <blockquote>
 <p>iLOReset example commands:</p>
 
 <p>Use this command to reset iLO on the currently logged in server. This will turn iLO off and on again.</p>
+
+<p><img title="iLOReset example 1" alt="iLOReset Example 1" src="images/examples/iloreset_ex1.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; iloreset -u username -p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-
-After ilo resets the session will be terminated.
-Please wait for iLO to initialize completely before loggin-in again.
-This process may take up to 3 minutes.
-
-An iLO reset is in progress.    
-Logging session out.
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -3165,22 +2891,14 @@ Logging session out.
 <blockquote>
 <p>Firmware update example commands:</p>
 
-<p>The firmwareupdate command updates the firmware for iLO. After the server was logged into, the firmware update at the given location was used to update the firmware. After the update was completed, iLO was reset and the session was terminated. Note that iLO does not always reset after a firmware update.</p>
+<p>The firmwareupdate command updates the firmware for iLO. After the server was logged into, the firmware update at the given location was used to update the firmware. After the update was completed, iLO was reset and the session was terminated. </p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; firmwareupdate https://fileurl/file.bin -u username -p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-The operation completed successfully.
-Starting upgrading process...
 
-Updating: \
+<p>NOTE: iLO does not always reset after a firmware update.</p>
 
-Firmware update has completed and iLO may reset.
-If iLO resets the session will be terminated.
-Please wait for iLO to initialize completely before logging in again.
-A reboot may be required for firmware changes to take effect.
-Logging session out.
-</code></pre>
+<blockquote>
+<p><img title="Firmware update example 1" alt="Firmware update Example 1" src="images/examples/firmwareupdate_ex1.png" /></p>
+</blockquote>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -3246,29 +2964,410 @@ Logging session out.
 
 <p>None</p>
 
+<h3 id="iloaccounts-command">Iloaccounts command</h3>
+
+<blockquote>
+<p>Iloaccounts example commands:</p>
+
+<p>Add an iLO user account the current logged in server.</p>
+
+<p><img title="Iloaccounts example 1" alt="Iloaccounts Example 1" src="images/examples/iloaccounts_ex1.png" /></p>
+
+<p>Get the ID and login name information for the iLO user accounts.</p>
+
+<p><img title="Iloaccounts example 2" alt="Iloaccounts Example 2" src="images/examples/iloaccounts_ex2.png" /></p>
+
+<p>Change the password of an account.</p>
+
+<p><img title="Iloaccounts example 3" alt="Iloaccounts Example 3" src="images/examples/iloaccounts_ex3.png" /></p>
+
+<p>Delete an iLO account.</p>
+
+<p><img title="Iloaccounts example 4" alt="Iloaccounts Example 4" src="images/examples/iloaccounts_ex4.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>iloaccounts <em>[COMMAND] [OPTIONS]</em></p>
+
+<h4 id="description">Description</h4>
+
+<ul>
+<li>LOGINNAME:  The account name, not used to login.</li>
+<li>USERNAME: The account username name, used to login. </li>
+<li>PASSWORD:  The account password, used to login.</li>
+<li><p>Id: The number associated with an iLO user account.</p>
+
+<p>NOTE: Please make sure the order of arguments is correct. The
+parameters are extracted based on their position in the arguments list.
+Only privileges available to the logged in account can be set to the new account.</p></li>
+</ul>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>&ndash;noremoteconsolepriv</strong></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the remote console privileges to false.</p>
+
+<ul>
+<li><strong>&ndash;noiloconfigpriv</strong><br></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the ilo config privileges to false.</p>
+
+<ul>
+<li><strong>&ndash;novirtualmediapriv</strong><br></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the virtual media privileges to false.</p>
+
+<ul>
+<li><strong>&ndash;nouserconfigpriv</strong><br></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the userconfig privileges to false.</p>
+
+<ul>
+<li><strong>&ndash;novirtualprpriv</strong><br></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the virtual power and reset privileges to false.</p>
+
+<ul>
+<li><strong>&ndash;nologinpriv</strong><br></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the login privileges to false.</p>
+
+<ul>
+<li><strong>&ndash;nobiosconfigpriv</strong><br></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the host BIOS config privileges to false. Only available on gen10 servers.</p>
+
+<ul>
+<li><strong>&ndash;nonicconfigpriv</strong><br></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the host NIC config privileges to false. Only available on gen10 servers.</p>
+
+<ul>
+<li><strong>&ndash;nohoststorageconfigpriv</strong> </li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the host storage config privileges to false. Only available on gen10 servers.</p>
+
+<ul>
+<li><strong>&ndash;nosysrecoveryconfigpriv</strong> </li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the system recovery config privileges to false. Only available on gen10 servers.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
+<h3 id="iloclone-command">Iloclone command</h3>
+
+<blockquote>
+<p>Iloclone  example commands:</p>
+
+<p>Create a clone file from the current logged in server.</p>
+
+<p><img title="Iloclone example 1" alt="Iloclone Example 1" src="images/examples/iloclone_ex1.png" /></p>
+
+<p>Load the saved clone file to currently logged in server.</p>
+
+<p><img title="Iloclone example 2" alt="Iloclone Example 2" src="images/examples/iloclone_ex2.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>iloclone <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Clone the iLO config of the currently logged in server and copy it to the server in the arguments.</p>
+
+<p>NOTE: This command is only available in local mode. During clone load, login using an iLO account with full privileges (such as the Administrator account) to ensure all items are cloned successfully.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>-f FILENAME, &ndash;filename=FILENAME</strong></li>
+</ul>
+
+<p>Use this flag if you wish to use a different filename than the default one. The default filename is clone.json.</p>
+
+<ul>
+<li><strong>&ndash;ssocert=SSOCERT</strong></li>
+</ul>
+
+<p>Use this flag during iloclone save if you wish to import a SSO certificate to the server to be cloned. Add the sso cert file or URL to be used to the working directory before running clone load.</p>
+
+<ul>
+<li><strong>&ndash;httpscert=HTTPSCERT</strong></li>
+</ul>
+
+<p>Use this flag during iloclone save if you wish to import a SSO certificate to the server to be cloned. Add the https cert file to be used to the working directory before running clone load.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
+<h3 id="ilofederation-command">Ilofederation command</h3>
+
+<blockquote>
+<p>Ilofederation example commands:</p>
+
+<p>Descriptions:
++  <em>FEDERATIONNAME</em>: The name (Id) of the federation group. 
++  <em>KEY</em>:  The key required to join the federation.</p>
+
+<p>NOTE: Please make sure the order of arguments is correct. The parameters are extracted based on their position in the arguments list. The federation key must be 8 characters or greater.</p>
+
+<p>Add an iLO federation group to the current logged in server.</p>
+
+<p><img title="Ilofederation example 1" alt="Ilofederation Example 1" src="images/examples/ilofederation_ex1.png" /></p>
+
+<p>See a list of federations on the system.</p>
+
+<p><img title="Ilofederation example 2" alt="Ilofederation Example 2" src="images/examples/ilofederation_ex2.png" />  </p>
+
+<p>Change the key of an iLO federation group.</p>
+
+<p><img title="Ilofederation example 3" alt="Ilofederation Example 3" src="images/examples/ilofederation_ex3.png" /></p>
+
+<p>Delete an iLO federation group.</p>
+
+<p><img title="Ilofederation example 4" alt="Ilofederation Example 4" src="images/examples/ilofederation_ex4.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>ilofederation <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Adds / deletes an iLO federaion group on the currently logged in server.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>&ndash;noremoteconsolepriv</strong></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the remote console privileges to false.</p>
+
+<ul>
+<li><strong>&ndash;noiloconfigpriv</strong></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the ilo config privileges to false.</p>
+
+<ul>
+<li><strong>&ndash;novirtualmediapriv</strong><br></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the virtual media privileges to false.</p>
+
+<ul>
+<li><strong>&ndash;nouserconfigpriv</strong><br></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the userconfig privileges to false.</p>
+
+<ul>
+<li><strong>&ndash;novirtualprpriv</strong><br></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the virtual power and reset privileges to false.</p>
+
+<ul>
+<li><strong>&ndash;nologinpriv</strong></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the login privileges to false.</p>
+
+<ul>
+<li><strong>&ndash;nobiosconfigpriv</strong></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the host BIOS config privileges to false. Only available on gen10 servers.</p>
+
+<ul>
+<li><strong>&ndash;nonicconfigpriv</strong></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the host NIC config privileges to false. Only available on gen10 servers.</p>
+
+<ul>
+<li><strong>&ndash;nohoststorageconfigpriv</strong> </li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the host storage config privileges to false. Only available on gen10 servers.</p>
+
+<ul>
+<li><strong>&ndash;nosysrecoveryconfigpriv</strong></li>
+</ul>
+
+<p>Optionally include this flag if you wish to set the system recovery config privileges to false. Only available on gen10 servers.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
+<h3 id="ilolicense-command">Ilolicense command</h3>
+
+<blockquote>
+<p>Ilolicense example commands:</p>
+
+<p>Set an iLO license on the current logged in server.</p>
+
+<p><img title="Ilolicense example 1" alt="Ilolicense Example 1" src="images/examples/ilolicense_ex1.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>ilolicense <em>[LICENSE_KEY] [OPTIONS]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Set an iLO license on the current logged in server.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
 <h3 id="serverstate-command">Serverstate command</h3>
 
 <blockquote>
 <p>Serverstate example commands:</p>
 
 <p>Here we use the serverstate command without any parameters, which tells use the current state of the server.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; serverstate
 
-The server is currently in state: InPostDiscoveryComplete
-</code></pre>
+<p><img title="Serverstate example 1" alt="Serverstate Example 1" src="images/examples/serverstate_ex1.png" /></p>
 
-<blockquote>
 <p>Here, serverstate is used along with login information to login and return the serverstate in one step.</p>
+
+<p><img title="Serverstate example 2" alt="Serverstate Example 2" src="images/examples/serverstate_ex2.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; serverstate –u user –p password –url=xx.xx.xx.xx
-
-Discovering data from iLO…Done
-
-WARNING: Cache is activated. Session keys are stored in plaintext. 
-
-The server is currently in state: InPostDiscoveryComplete
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -3312,6 +3411,1199 @@ The server is currently in state: InPostDiscoveryComplete
 
 <p>None</p>
 
+<h3 id="sigrecompute-command">Sigrecompute command</h3>
+
+<blockquote>
+<p>Sigrecompute  example commands:</p>
+
+<p>Recalculate the signature on the computers configuration.</p>
+
+<p><img title="Sigrecompute example 1" alt="Sigrecompute Example 1" src="images/examples/sigrecompute_ex1.png" /></p>
+
+<p>Log in to the computer and recalculate the signature.</p>
+
+<p><img title="Sigrecompute example 2" alt="Sigrecompute Example 2" src="images/examples/sigrecompute_ex2.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>sigrecompute <em>[OPTIONS]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Recalculate the signature on the computers configuration.</p>
+
+<p>NOTE: The sigrecompute command is not available on Redfish systems.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None </p>
+
+<h3 id="singlesignon-command">Singlesignon command</h3>
+
+<blockquote>
+<p>Singlesignon  example commands:</p>
+
+<p>Delete a specific SSO record.</p>
+
+<p><img title="Singlesignon example 1" alt="Singlesignon Example 1" src="images/examples/singlesignon_ex1.png" /></p>
+
+<p>Delete all SSO records.</p>
+
+<p><img title="Singlesignon example 2" alt="Singlesignon Example 2" src="images/examples/singlesignon_ex2.png" /></p>
+
+<p>Import a DNS name.</p>
+
+<p><img title="Singlesignon example 3" alt="Singlesignon Example 3" src="images/examples/singlesignon_ex3.png" /></p>
+
+<p>Import certificate from URI or file.</p>
+
+<p><img title="Singlesignon example 4" alt="Singlesignon Example 4" src="images/examples/singlesignon_ex4.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>Singlesignon <em>[OPTIONS]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Command for all single sign on available actions.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None </p>
+
+<h3 id="virtualmedia-command">Virtualmedia command</h3>
+
+<blockquote>
+<p>Virtualmedia  example commands:</p>
+
+<p>Insert virtual media and set to boot on next restart.</p>
+
+<p><img title="Virtualmedia example 1" alt="Virtualmedia Example 1" src="images/examples/virtualmedia_ex1.png" />  </p>
+
+<p>Run without arguments to view the available virtual media sources.</p>
+
+<p><img title="Virtualmedia example 2" alt="Virtualmedia Example 2" src="images/examples/virtualmedia_ex2.png" /> </p>
+
+<p>Remove current inserted media.</p>
+
+<p><img title="Virtualmedia example 3" alt="Virtualmedia Example 3" src="images/examples/virtualmedia_ex3.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>virtualmedia <em>[ID] [URI] [OPTIONS]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Command for inserting and removing virtual media.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>&ndash;reboot=REBOOT</strong></li>
+</ul>
+
+<p>Use this flag to perform a reboot command function after completion of operations.  For help with parameters and descriptions regarding the reboot flag, run help reboot.</p>
+
+<ul>
+<li><strong>&ndash;remove</strong></li>
+</ul>
+
+<p>Use this flag to remove the media from the selection.</p>
+
+<ul>
+<li><strong>&ndash;bootnextreset</strong></li>
+</ul>
+
+<p>Use this flag if you wish to boot from the image on next server reboot. </p>
+
+<p>NOTE: The image will be ejected automatically on the second server reboot so that the server does not boot to this image twice.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None </p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None </p>
+
+          <h2 id="ilo-repository-commands">iLO Repository Commands</h2>
+
+<p>The iLO repository commands are designed for use with HPE Gen10 servers. </p>
+
+<h3 id="deletecomp-command">Deletecomp command</h3>
+
+<blockquote>
+<p>Deletecomp example commands:</p>
+
+<p>Delete a single component by URI.</p>
+
+<p><img title="Deletecomp example 1" alt="Deletecomp Example 1" src="images/examples/deletecomp_ex1.png" /></p>
+
+<p>Delete multiple components by ID.</p>
+
+<p><img title="Deletecomp example 2" alt="Deletecomp Example 2" src="images/examples/deletecomp_ex2.png" /></p>
+
+<p>Delete all components. </p>
+
+<p><img title="Deletecomp example 3" alt="Deletecomp Example 3" src="images/examples/deletecomp_ex3.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>deletecomp <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Deletes components/binaries from the iLO repository.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>-a, &ndash;all</strong></li>
+</ul>
+
+<p>Delete all components.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
+<h3 id="downloadcomp-command">Downloadcomp command</h3>
+
+<blockquote>
+<p>Downloadcomp example commands:</p>
+
+<p>Run to download the file from path.</p>
+
+<p><img title="Downloadcomp example 1" alt="Downloadcomp Example 1" src="images/examples/downloadcomp_ex3.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>downloadcomp <em>[Component Path] [Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Downloads components/binaries from the iLO repository.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>sessionid=SESSIONID</strong></li>
+</ul>
+
+<p>Optionally include this flag if you would prefer to connect using a session id instead of a normal login.</p>
+
+<ul>
+<li><strong>includelogs</strong><br></li>
+</ul>
+
+<p>Optionally include logs in the data retrieval process.
+- <strong>logout</strong></p>
+
+<p>Optionally include the logout flag to log out of the server after this command is completed. Using this flag when not logged in will have no effect.</p>
+
+<ul>
+<li><strong>outdir=OUTDIR</strong></li>
+</ul>
+
+<p>output directory for saving the file.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None </p>
+
+<h3 id="installset-command">Installset command</h3>
+
+<blockquote>
+<p>Installset example commands:</p>
+
+<p>Add install set.</p>
+
+<p><img title="Installset example 1" alt="Installset Example 1" src="images/examples/installset_ex1.png" /></p>
+
+<p>List install sets.</p>
+
+<p><img title="Installset example 2" alt="Installset Example 2" src="images/examples/installset_ex2.png" /></p>
+
+<p>Delete install set.</p>
+
+<p><img title="Installset example 3" alt="Installset Example 3" src="images/examples/installset_ex1.png" /></p>
+
+<p>Complete JSON strucuture.</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"installset name"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"Description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"installset description"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"Sequence"</span><span class="p">:</span><span class="w"> </span><span class="p">[{</span><span class="w">
+            </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wait"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"UpdatableBy"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"RuntimeAgent"</span><span class="p">],</span><span class="w">
+            </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wait"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"WaitTimeSeconds"</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uniqueName"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"UpdatableBy"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"RuntimeAgent"</span><span class="p">],</span><span class="w">
+            </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ApplyUpdate"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"Filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"filename.exe"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uniqueName2"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"UpdatableBy"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Bmc"</span><span class="p">],</span><span class="w">
+            </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ApplyUpdate"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"WaitTimeSeconds"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"Filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"filename2.hex"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"uniqueName3"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"UpdatableBy"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"Uefi"</span><span class="p">,</span><span class="w"> </span><span class="s2">"RuntimeAgent"</span><span class="p">],</span><span class="w">
+            </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ApplyUpdate"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"WaitTimeSeconds"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"Filename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"filename3.x86_64.rpm"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Reboot"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"UpdatableBy"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"RuntimeAgent"</span><span class="p">],</span><span class="w">
+            </span><span class="nt">"Command"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ResetServer"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"IsRecovery"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>The list of Sequences. </p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+        {
+            "Name": "Wait",
+            "UpdatableBy": ["RuntimeAgent"],
+            "Command": "Wait",
+            "WaitTimeSeconds": 60
+        },
+        {
+            "Name": "uniqueName",
+            "UpdatableBy": ["RuntimeAgent"],
+            "Command": "ApplyUpdate",
+            "Filename": "filename.exe"
+        },
+        {
+            "Name": "Reboot",
+            "UpdatableBy": ["RuntimeAgent"],
+            "Command": "ResetServer"
+        }
+]
+</code></pre>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>installset <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Run to perform operations on install sets.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>-n NAME, &ndash;name=NAME</strong></li>
+</ul>
+
+<p>Install set name to create, remove, or invoke.</p>
+
+<ul>
+<li><strong>-r, &ndash;removeall</strong></li>
+</ul>
+
+<p>Remove all install sets.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None </p>
+
+<h3 id="listcomp-command">Listcomp command</h3>
+
+<blockquote>
+<p>Listcomp example commands:</p>
+
+<p>Run to list the components ofthe currently logged in system.</p>
+
+<p><img title="Listcomp example 1" alt="Listcomp Example 1" src="images/examples/listcomp_ex1.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>listcomp <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Run to list the components ofthe currently logged in system.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None </p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None </p>
+
+<h3 id="taskqueue-command">Taskqueue command</h3>
+
+<blockquote>
+<p>Taskqueue example commands:</p>
+
+<p>Create new wait task for 60 secs.</p>
+
+<p><img title="Taskqueue example 1" alt="Taskqueue Example 1" src="images/examples/taskqueue_ex1.png" /></p>
+
+<p>Create new component task.</p>
+
+<p><img title="Taskqueue example 2" alt="Taskqueue Example 2" src="images/examples/taskqueue_ex2.png" /></p>
+
+<p>Print update task queue.</p>
+
+<p><img title="Taskqueue example 3" alt="Taskqueue Example 3" src="images/examples/taskqueue_ex3.png" /></p>
+
+<p>Delete all tasks from update task queue.</p>
+
+<p><img title="Taskqueue example 4" alt="Taskqueue Example 4" src="images/examples/taskqueue_ex4.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>taskqueue <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Run to add or remove tasks from the task queue. Added tasks are appended to the end of the queue.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>-r, &ndash;resetqueue</strong></li>
+</ul>
+
+<p>Remove all update tasks in the queue.</p>
+
+<ul>
+<li><strong>-c, &ndash;cleanqueue</strong></li>
+</ul>
+
+<p>Clean up all finished or errored tasks - leave pending.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None </p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None </p>
+
+<h3 id="uploadcomp-command">Uploadcomp command</h3>
+
+<blockquote>
+<p>Uploadcomp example commands:</p>
+
+<p>Upload component to the iLO repository.</p>
+
+<p><img title="Uploadcomp example 1" alt="Uploadcomp Example 1" src="images/examples/uploadcomp_ex2.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>uploadcomp <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Run to upload the component on to iLO repository.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>sessionid=SESSIONID</strong></li>
+</ul>
+
+<p>Optionally include this flag if you would prefer to connect using a session id instead of a normal login.</p>
+
+<ul>
+<li><strong>&ndash;includelogs</strong></li>
+</ul>
+
+<p>Optionally include logs in the data retrieval process.</p>
+
+<ul>
+<li><strong>-j, &ndash;json</strong></li>
+</ul>
+
+<p>Optionally include this flag if you wish to change the displayed output to JSON format. Preserving the JSON data structure makes the information easier to parse.</p>
+
+<ul>
+<li><strong>&ndash;logout</strong></li>
+</ul>
+
+<p>Optionally include the logout flag to log out of the server after this command is completed. Using this flag when not logged in will have no effect.</p>
+
+<ul>
+<li><strong>&ndash;component=COMPONENT</strong></li>
+</ul>
+
+<p>Component or binary file path to upload to the update service.</p>
+
+<ul>
+<li><strong>&ndash;compsig=COMPONENTSIG</strong></li>
+</ul>
+
+<p>Component signature file path needed by iLO to authenticate the component file. If not provided will try to find the signature file from component file path.</p>
+
+<ul>
+<li><strong>&ndash;forceupload</strong></li>
+</ul>
+
+<p>Add this flag to force upload components with the same name already on the repository.</p>
+
+<ul>
+<li><strong>&ndash;update_repository</strong></li>
+</ul>
+
+<p>If true uploads the component/binary on to the Repository, Default[True].</p>
+
+<ul>
+<li><strong>&ndash;update_target</strong></li>
+</ul>
+
+<p>If true the uploaded component/binary will be flashed, Default[False].</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None </p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None </p>
+
+          <h2 id="smart-arrary-commands">Smart Arrary Commands</h2>
+
+<p>The Smart Array commands are designed for use with HPE Gen10 servers.</p>
+
+<h3 id="clearcontrollerconfig-command">Clearcontrollerconfig command</h3>
+
+<blockquote>
+<p>Clearcontrollerconfig example commands:</p>
+
+<p>To clear a controller config.</p>
+
+<p><img title="Clearcontrollerconfig example 1" alt="Clearcontrollerconfig 1" src="images/examples/clearcontrollerconfig_ex1.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>clearcontrollerconfig <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Clears smart array controller configuration.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>&ndash;controller=CONTROLLER</strong></li>
+</ul>
+
+<p>Use this flag to select the corresponding controller.</p>
+
+<ul>
+<li><strong>&ndash;all</strong></li>
+</ul>
+
+<p>Use this flag to sanitize all physical drives on a controller.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
+<h3 id="createlogicaldrive-command">Createlogicaldrive command</h3>
+
+<blockquote>
+<p>Createlogicaldrive example commands:</p>
+
+<p>To create a quick logical drive.</p>
+
+<p><img title="Createlogicaldrive example 1" alt="Createlogicaldrive 1" src="images/examples/createlogicaldrive_ex1.png" /></p>
+
+<p>To create a custom logical drive.</p>
+
+<p><img title="Createlogicaldrive example 2" alt="Createlogicaldrive 2" src="images/examples/createlogicaldrive_ex2.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>createlogicaldrive <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Creates a new logical drive on the selected controller.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>&ndash;controller=CONTROLLER</strong></li>
+</ul>
+
+<p>Use this flag to select the corresponding controller.</p>
+
+<ul>
+<li><strong>-n DRIVENAME, &ndash;name=DRIVENAME</strong></li>
+</ul>
+
+<p>Optionally include to set the drive name (usable in custom creation only).</p>
+
+<ul>
+<li><strong>&ndash;spare-drives=SPAREDRIVES</strong></li>
+</ul>
+
+<p>Optionally include to set the spare drives by the physical drive&rsquo;s index (usable in custom creation only).</p>
+
+<ul>
+<li><strong>&ndash;capacityGiB=CAPACITYGIB</strong></li>
+</ul>
+
+<p>Optionally include to set the capacity of the drive in GiB (usable in custom creation only, use -1 for max size).</p>
+
+<ul>
+<li><strong>&ndash;spare-type=SPARETYPE</strong></li>
+</ul>
+
+<p>Optionally include to choose the spare drive type (usable in custom creation only).</p>
+
+<ul>
+<li>*<em>&ndash;accelerator-type=ACCELERATORTYPE</em></li>
+</ul>
+
+<p>Optionally include to choose the accelerator type.</p>
+
+<ul>
+<li><strong>&ndash;legacy-boot=LEGACYBOOT</strong></li>
+</ul>
+
+<p>Optionally include to choose the legacy boot priority (usable in custom creation only).</p>
+
+<ul>
+<li><strong>&ndash;capacityBlocks=CAPACITYBLOCKS</strong></li>
+</ul>
+
+<p>Optionally include to choose the capacity in blocks (use -1 for max size, usable in custom creation only).</p>
+
+<ul>
+<li>*<em>&ndash;paritygroupcount=PARITYGROUP</em></li>
+</ul>
+
+<p>Optionally include to include the number of parity groups to use (only valid for certain RAID levels).</p>
+
+<ul>
+<li><strong>&ndash;paritytype=PARITYTYPE</strong></li>
+</ul>
+
+<p>Optionally include to choose the parity initialization type (usable in custom creation only).</p>
+
+<ul>
+<li><strong>&ndash;block-size-bytes=BLOCKSIZE</strong></li>
+</ul>
+
+<p>Optionally include to choose the block size of the disk drive (usable in custom creation only).</p>
+
+<ul>
+<li><strong>&ndash;strip-size-bytes=STRIPSIZE</strong></li>
+</ul>
+
+<p>Optionally include to choose the strip size in bytes (usable in custom creation only).</p>
+
+<ul>
+<li><strong>&ndash;stripe-size-bytes=STRIPESIZE</strong></li>
+</ul>
+
+<p>Optionally include to choose the stripe size in bytes (usable in custom creation only).</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None </p>
+
+<h3 id="deletelogicaldrive-command">Deletelogicaldrive command</h3>
+
+<blockquote>
+<p>Deletelogicaldrive example commands:</p>
+
+<p>To delete multiple logical drives by index.</p>
+
+<p><img title="Deletelogicaldrive example 1" alt="Deletelogicaldrive Example 1" src="images/examples/deletelogicaldrive_ex1.png" /></p>
+
+<p>To delete all logical drives on a controller.</p>
+
+<p><img title="Deletelogicaldrive example 2" alt="Deletelogicaldrive Example 2" src="images/examples/deletelogicaldrive_ex2.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>deletelogicaldrive <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Deletes logical drives from the selected controller.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>&ndash;controller=CONTROLLER</strong></li>
+</ul>
+
+<p>Use this flag to select the corresponding controller.</p>
+
+<ul>
+<li><strong>&ndash;all</strong></li>
+</ul>
+
+<p>Use this flag to delete all logical drives on a controller.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None </p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None </p>
+
+<h3 id="drivesanitize-command">Drivesanitize command</h3>
+
+<blockquote>
+<p>Drivesanitize example commands:</p>
+
+<p>To sanitize a physical drive by index.</p>
+
+<p><img title="Drivesanitize example 1" alt="Drivesanitize Example 1" src="images/examples/drivesanitize_ex1.png" /></p>
+
+<p>To sanitize multiple drives by index.</p>
+
+<p><img title="Drivesanitize example 2" alt="Drivesanitize Example 2" src="images/examples/drivesanitize_ex2.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>drivesanitize <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Erase/Sanitizes physical drives.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>&ndash;controller=CONTROLLER</strong></li>
+</ul>
+
+<p>Use this flag to select the corresponding controller.</p>
+
+<ul>
+<li><strong>&ndash;reboot</strong></li>
+</ul>
+
+<p>Include this flag to perform a coldboot command function after completion of operations and monitor sanitization.</p>
+
+<ul>
+<li><strong>&ndash;all</strong></li>
+</ul>
+
+<p>Use this flag to sanitize all physical drives on a controller.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None </p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None </p>
+
+<h3 id="factoryresetcontroller-command">Factoryresetcontroller command</h3>
+
+<blockquote>
+<p>Factoryresetcontroller example commands:</p>
+
+<p>To factory reset a controller by index.</p>
+
+<p><img title="Factoryresetcontroller example 1" alt="Factoryresetcontroller Example 1" src="images/examples/factoryresetcontroller_ex1.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>factoryresetcontroller <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Discovers all storage controllers installed in the server and managed by the SmartStorage.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>&ndash;controller=CONTROLLER</strong></li>
+</ul>
+
+<p>Use this flag to select the corresponding controller.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None </p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None </p>
+
+<h3 id="smartarray-command">Smartarray command</h3>
+
+<blockquote>
+<p>Smartarray example commands:</p>
+
+<p>Run without arguments for the current list of smart array controllers.</p>
+
+<p><img title="Smartarray example 1" alt="Smartarray 1" src="images/examples/smartarray_ex1.png" /></p>
+
+<p>To get more details on a specific controller select it by index.</p>
+
+<p><img title="Smartarray example 2" alt="Smartarray 2" src="images/examples/smartarray_ex2.png" /></p>
+
+<p>Get a list of all physical drives for the each controller.</p>
+
+<p><img title="Smartarray example 3" alt="Smartarray 3" src="images/examples/smartarray_ex3.png" /></p>
+
+<p>Get details about a specific drive for a specific controller.</p>
+
+<p><img title="Smartarray example 4" alt="Smartarray 4" src="images/examples/smartarray_ex4.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>Smartarray <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Discovers all storage controllers installed in the server and managed by the SmartStorage.  </p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>&ndash;controller=CONTROLLER</strong></li>
+</ul>
+
+<p>Use this flag to select the corresponding controller.</p>
+
+<ul>
+<li><strong>&ndash;physicaldrives</strong></li>
+</ul>
+
+<p>Use this flag to return the physical drives for the controller selected.</p>
+
+<ul>
+<li><strong>&ndash;logicaldrives</strong></li>
+</ul>
+
+<p>Use this flag to return the logical drives for the controller selected.</p>
+
+<ul>
+<li><strong>&ndash;pdrive=PDRIVE</strong></li>
+</ul>
+
+<p>Use this flag to select the corresponding physical disk.</p>
+
+<ul>
+<li><strong>&ndash;ldrive=LDRIVE</strong></li>
+</ul>
+
+<p>Use this flag to select the corresponding logical disk.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None </p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None </p>
+
           <h2 id="raw-commands">Raw commands</h2>
 
 <p>These are the raw HTTP RESTful operations that can be used through the RESTful Interface Tool. The commands and their examples that can be found in this section include the equivalents of HTTP RESTful <strong>PATCH, GET, POST, PUT, DELETE</strong>, and <strong>HEAD</strong>.</p>
@@ -3321,23 +4613,14 @@ The server is currently in state: InPostDiscoveryComplete
 <blockquote>
 <p>RawPatch example commands:</p>
 
-<p>Here, the <strong>AdminName</strong> of type <strong>HpBios</strong> was &ldquo;&rdquo; before. The rawpatch command sent the patch.json to change that property to become <strong>Jean Kranz</strong>. Commit is left out deliberately here since, raw commands (such as rawpost, rawput, etc.) do not require the commit command to be run since changes are made directly. Note that this particular change required second-level BIOS authentication, which is why the biospassword flag was included.</p>
+<p>Here, the <strong>AdminName</strong> of type <strong>HpBios</strong> was &ldquo;&rdquo; before. The rawpatch command sent the patch.json to change that property to become <strong>Jean Kranz</strong>. Commit is left out deliberately here since, raw commands (such as rawpost, rawput, etc.) do not require the commit command to be run since changes are made directly. </p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; get AdminName –u username –p password --url=xx.xx.xx.xx –-selector=HpBios.
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-AdminName=""
-ilorest &gt; rawpatch patch.json --biospassword=BIOSPASSWORD
-One or more properties were changed and will not take effect until system is reset.
-ilorest &gt; logout
-Logging session out.
-ilorest &gt; get AdminName --selector=HpBios. -u username -p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-AdminName=Jean Kranz
-</code></pre>
+
+<p>NOTE: This particular change requires second-level BIOS authentication, which is why the biospassword flag was included.</p>
 
 <blockquote>
+<p><img title="RawPatch example 1" alt="RawPatch Example 1" src="images/examples/rawpatch_ex1.png" /></p>
+
 <p>The following <strong>patch.json</strong> file was used in the above example:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -3400,6 +4683,37 @@ AdminName=Jean Kranz
 <p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
 
 <ul>
+<li><strong>&ndash;sessionid=SESSIONID</strong></li>
+</ul>
+
+<p>Optionally include this flag if you would prefer to connect using a session id instead of a normal login.</p>
+
+<ul>
+<li><strong>&ndash;silent</strong></li>
+</ul>
+
+<p>Use this flag to silence responses</p>
+
+<ul>
+<li><strong>&ndash;response</strong></li>
+</ul>
+
+<p>Use this flag to return the iLO response body.</p>
+
+<ul>
+<li><strong>&ndash;getheaders</strong></li>
+</ul>
+
+<p>Use this flag to return the iLO response headers.</p>
+
+<ul>
+<li><strong>&ndash;headers=HEADERS</strong></li>
+</ul>
+
+<p>Use this flag to add extra headers to the request.
+Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
+
+<ul>
 <li><strong>&ndash;biospassword=BIOSPASSWORD</strong></li>
 </ul>
 
@@ -3432,27 +4746,16 @@ AdminName=Jean Kranz
 <blockquote>
 <p>RawGet example commands:</p>
 
-<p><strong>Above:</strong> The rawget command here executed the GET command on the path <strong>/rest/v1/systems/1/bios/Settings</strong>. This displays the information in the given path. Note that the full list of information has been truncated here for space.</p>
+<p><strong>Above:</strong> The rawget command here executed the GET command on the path <strong>/rest/v1/systems/1/bios/Settings</strong>. This displays the information in the given path. </p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; rawget "/rest/v1/systems/1/bios/Settings" –u username –p password --url=xx.xx.xx.xx
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
 
-The operation completed successfully.
-{
-  "MemFastTraining": "Enabled",
-  "NvDimmSanitize": "Disabled",
-   …
-  "TpmState": "NotPresent",
-  "CollabPowerControl": "Enabled"
-} 
-</code></pre>
-<pre class="highlight plaintext"><code>ilorest &gt; rawget "/rest/v1/systems/1/bios/Settings" –u username –p password --url=xx.xx.xx.xx --filename=output.json
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-The operation completed successfully.
-Results written out to 'output.json'.
-</code></pre>
+<p>NOTE: The full list of information has been truncated for space.</p>
+
+<blockquote>
+<p><img title="RawGet example 1" alt="Rawget Example 1" src="images/examples/rawget_ex1.png" /></p>
+
+<p><img title="RawGet example 2" alt="Rawget Example 2" src="images/examples/rawget_ex2.png" /></p>
+</blockquote>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -3495,22 +4798,55 @@ Results written out to 'output.json'.
 <p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
 
 <ul>
-<li><strong>&ndash;biospassword=BIOSPASSWORD</strong></li>
+<li><strong>&ndash;response</strong></li>
 </ul>
 
-<p>Select this flag to input a BIOS password. Include this flag if second-level BIOS authentication is needed for the command to execute.</p>
+<p>Use this flag to return the iLO response body.</p>
 
 <ul>
-<li><strong>&ndash;providerid=PROVIDERID</strong></li>
+<li><strong>&ndash;getheaders</strong></li>
 </ul>
 
-<p>Use to pass in the provider ID header.</p>
+<p>Use this flag to return the iLO response headers.
+- <strong>&ndash;headers=HEADERS</strong></p>
+
+<p>Use this flag to add extra headers to the request. Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
+
+<ul>
+<li><strong>&ndash;silent</strong></li>
+</ul>
+
+<p>Use this flag to silence responses</p>
+
+<ul>
+<li><strong>&ndash;sessionid=SESSIONID</strong></li>
+</ul>
+
+<p>Optionally include this flag if you would prefer to connect using a session id instead of a normal login.</p>
+
+<ul>
+<li><strong>-f FILENAME, &ndash;filename=FILENAME</strong></li>
+</ul>
+
+<p>Write results to the specified file.</p>
+
+<ul>
+<li><strong>-b BINFILE, &ndash;writebin=BINFILE</strong></li>
+</ul>
+
+<p>Write the results to the specified file in binary.</p>
 
 <ul>
 <li><strong>&ndash;service</strong></li>
 </ul>
 
 <p>Use this flag to enable service mode and increase the function speed.</p>
+
+<ul>
+<li><strong>&ndash;expand</strong></li>
+</ul>
+
+<p>Use this flag to expand the path specified using the expand notation &rsquo;?$expand=.&rsquo;</p>
 
 <h4 id="inputs">Inputs</h4>
 
@@ -3527,13 +4863,14 @@ Results written out to 'output.json'.
 <blockquote>
 <p>RawPost example commands:</p>
 
-<p>The rawpost command performs an HTTP REST POST operation using the information provided in the provided file. Here the ForceRestart ResetType was set, so after the rawpost posted the changes iLO executed a ForceRestart. Note that if a full path is not given, the tool will search for the file in the location the RESTful Interface Tool is started in.</p>
+<p>The rawpost command performs an HTTP REST POST operation using the information provided in the provided file. Here the ForceRestart ResetType was set, so after the rawpost posted the changes iLO executed a ForceRestart. </p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; rawpost forcerestart.json -u username -p password --url=xx.xx.xx.xx
-The operation completed successfully.
-</code></pre>
+
+<p>NOTE: If a full path is not given, the tool searches for the file where the RESTful Interface Tool was started. </p>
 
 <blockquote>
+<p><img title="RawPost example 1" alt="RawPost Example 1" src="images/examples/rawpost_ex1.png" /></p>
+
 <p>The following <strong>forcerestart.json</strong> file is used in conjuncture:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -3598,10 +4935,35 @@ The operation completed successfully.
 <p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
 
 <ul>
-<li><strong>&ndash;biospassword=BIOSPASSWORD</strong></li>
+<li><strong>&ndash;response</strong></li>
 </ul>
 
-<p>Select this flag to input a BIOS password. Include this flag if second-level BIOS authentication is needed for the command to execute.</p>
+<p>Use this flag to return the iLO response body.</p>
+
+<ul>
+<li><strong>&ndash;getheaders</strong></li>
+</ul>
+
+<p>Use this flag to return the iLO response headers.</p>
+
+<ul>
+<li><strong>&ndash;headers=HEADERS</strong></li>
+</ul>
+
+<p>Use this flag to add extra headers to the request.
+Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
+
+<ul>
+<li><strong>&ndash;silent</strong></li>
+</ul>
+
+<p>Use this flag to silence responses</p>
+
+<ul>
+<li><strong>&ndash;sessionid=SESSIONID</strong></li>
+</ul>
+
+<p>Optionally include this flag if you would prefer to connect using a session id instead of a normal login.</p>
 
 <ul>
 <li><strong>&ndash;providerid=PROVIDERID</strong></li>
@@ -3631,12 +4993,9 @@ The operation completed successfully.
 <p>RawPut example commands:</p>
 
 <p><strong>Above:</strong> Here the rawput command was used to put the above put.json file to the server. Use the biospassword flag if the resource you are trying to modify requires second-level BIOS authentication to modify.</p>
-</blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; rawput put.json –u username –p password –-url=xx.xx.xx.xx –biospassword=BIOSPASSWORD
-One or more properties were changed and will not take effect until system is reset.
-</code></pre>
 
-<blockquote>
+<p><img title="RawPut example 1" alt="RawPut Example 1" src="images/examples/rawput_ex1.png" /></p>
+
 <p>This example uses the following <strong>put.json</strong> file:</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
@@ -3693,6 +5052,37 @@ One or more properties were changed and will not take effect until system is res
 <p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
 
 <ul>
+<li><strong>&ndash;response</strong></li>
+</ul>
+
+<p>Use this flag to return the iLO response body.</p>
+
+<ul>
+<li><strong>&ndash;getheaders</strong></li>
+</ul>
+
+<p>Use this flag to return the iLO response headers.</p>
+
+<ul>
+<li><strong>&ndash;headers=HEADERS</strong></li>
+</ul>
+
+<p>Use this flag to add extra headers to the request.
+Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
+
+<ul>
+<li><strong>&ndash;silent</strong></li>
+</ul>
+
+<p>Use this flag to silence responses</p>
+
+<ul>
+<li><strong>&ndash;sessionid=SESSIONID</strong></li>
+</ul>
+
+<p>Optionally include this flag if you would prefer to connect using a session id instead of a normal login.</p>
+
+<ul>
 <li><strong>&ndash;url=URL</strong></li>
 </ul>
 
@@ -3732,13 +5122,9 @@ One or more properties were changed and will not take effect until system is res
 <p>RawDelete example commands:</p>
 
 <p>Here the rawdelete command was used to delete a session. After the server was logged into, the provided session was deleted.</p>
+
+<p><img title="RawDelete example 1" alt="RawDelete Example 1" src="images/examples/rawdelete_ex1.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; login xx.xx.xx.xx –u username –p password
-Discovering data from iLO...Done
-WARNING: Cache is activated session keys are stored in plaintext
-ilorest &gt; rawdelete "/rest/v1/Sessions/admin556dba8328b43959"
-The operation completed successfully.
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -3812,21 +5198,9 @@ The operation completed successfully.
 <p>RawHead example commands:</p>
 
 <p>The rawhead command is the HTTP RESTful HEAD operation. It is used to retrieve the data from the passed in path.</p>
+
+<p><img title="RawHead example 1" alt="RawHead Example 1" src="images/examples/rawhead_ex1.png" /></p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest &gt; rawhead /rest/v1/systems/1/bios/Settings -u username -p password --url=xx.xx.xx.xx
-[200] No message returned by iLO.
-{
-  "Content-length": "3835",
-  "Server": "HP-iLO-Server/1.30",
-  "Connection": "keep-alive",
-  "ETag": "BB642DA122E434087C3E7E7A646A8DAB",
-  "Allow": "GET, HEAD, PUT, PATCH",
-  "Cache-Control": "no-cache",
-  "Date": "Mon, 01 Jun 2015 14:51:07 GMT",
-  "X_HP-CHRP-Service-Version": "1.0.3",
-  "Content-type": "application/json"
-}
-</code></pre>
 
 <h4 id="syntax">Syntax</h4>
 
@@ -3873,6 +5247,24 @@ The operation completed successfully.
 </ul>
 
 <p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>&ndash;silent</strong></li>
+</ul>
+
+<p>Use this flag to silence responses</p>
+
+<ul>
+<li><strong>&ndash;sessionid=SESSIONID</strong></li>
+</ul>
+
+<p>Optionally include this flag if you would prefer to connect using a session id instead of a normal login.</p>
+
+<ul>
+<li><strong>-f FILENAME, &ndash;filename=FILENAME</strong></li>
+</ul>
+
+<p>Use the provided filename to perform operations.</p>
 
 <ul>
 <li><strong>&ndash;service</strong></li>
@@ -3955,10 +5347,8 @@ The operation completed successfully.
 <p>Then when you log into the server again, the BIOS password will have been updated to the new value. However, you cannot see the values for <code class="prettyprint">AdminPassword</code> or <code class="prettyprint">OldAdminPassword</code>.</p>
 
 <h2 id="disabling-the-trusted-platform-module-tpm-on-servers-example">Disabling the Trusted Platform Module (TPM) on servers example</h2>
-<pre class="highlight plaintext"><code>ilorest login https://clientilo.domain.com -u username -p password 
-set Tpm2Visibility=Hidden --selector HpBios.
-commit --reboot=ForceRestart
-</code></pre>
+
+<p><img title="TPM Example" alt="TPM Example" src="images/TPM_disable.png" /></p>
 
 <blockquote>
 <p><strong>Above:</strong> When the server is rebooted, the <strong>TpmState</strong> is changed from <strong>PresentEnabled</strong> to <strong>PresentDisabled</strong>.</p>
@@ -3967,10 +5357,8 @@ commit --reboot=ForceRestart
 <p>If you need to disable TPM on a group of servers, you can use a set of commands in RESTful Interface Tool. For example, you are installing SPPs and OSs on bare-metal servers, and you need to disable TPM prior to starting installation.</p>
 
 <h3 id="enable-the-tpm-on-servers">Enable the TPM on servers</h3>
-<pre class="highlight plaintext"><code>ilorest login https://clientilo.domain.com -u username -p password
-set Tpm2Visibility=Visible --selector HpBios.
-commit --reboot=ForceRestart
-</code></pre>
+
+<p><img title="TPM Example" alt="TPM Example" src="images/TPM_enable.png" /></p>
 
 <p>To enable the TPM, you can set the <code class="prettyprint">TpmState</code> to <code class="prettyprint">PresentEnabled</code>. <strong>See side example</strong>.</p>
 
@@ -4550,8 +5938,48 @@ pause
 <td>Load skip setting error.</td>
 </tr>
 <tr>
+<td>54</td>
+<td>Incompatible iLO version error.</td>
+</tr>
+<tr>
+<td>55</td>
+<td>Invalid command list file error.</td>
+</tr>
+<tr>
+<td>56</td>
+<td>Unable to mount BB error.</td>
+</tr>
+<tr>
+<td>57</td>
+<td>Birthcertificate parse error.</td>
+</tr>
+<tr>
+<td>58</td>
+<td>Incompatible server type.</td>
+</tr>
+<tr>
+<td>59</td>
+<td>iLO license error.</td>
+</tr>
+<tr>
+<td>60</td>
+<td>Account exists error.</td>
+</tr>
+<tr>
 <td>61</td>
 <td>Error occurred when trying to change a value.</td>
+</tr>
+<tr>
+<td>62</td>
+<td>Reference path not found error.</td>
+</tr>
+<tr>
+<td>63</td>
+<td>iLO response error.</td>
+</tr>
+<tr>
+<td>64</td>
+<td>Unable to open a channel with iLO error.</td>
 </tr>
 <tr>
 <td>70</td>
@@ -4559,27 +5987,55 @@ pause
 </tr>
 <tr>
 <td>71</td>
-<td>Error occurred while trying to delete BLOB</td>
+<td>Error occurred while trying to delete BLOB.</td>
 </tr>
 <tr>
 <td>72</td>
-<td>Error occurred while trying to finalize BLOB</td>
+<td>Error occurred while trying to finalize BLOB.</td>
 </tr>
 <tr>
 <td>73</td>
-<td>BLOB could not be found</td>
+<td>BLOB could not be found.</td>
+</tr>
+<tr>
+<td>74</td>
+<td>JSON decoder error.</td>
+</tr>
+<tr>
+<td>75</td>
+<td>Security state error.</td>
+</tr>
+<tr>
+<td>76</td>
+<td>iLO RESTful API BLOB override error.</td>
+</tr>
+<tr>
+<td>80</td>
+<td>Resource allocation errors.</td>
 </tr>
 <tr>
 <td>100</td>
 <td>BIOS provider is unregistered. Please refer to the documentation for details on this issue.</td>
 </tr>
 <tr>
+<td>101</td>
+<td>Failed to download component.</td>
+</tr>
+<tr>
+<td>102</td>
+<td>Update service busy.</td>
+</tr>
+<tr>
+<td>103</td>
+<td>Failed to upload component.</td>
+</tr>
+<tr>
 <td>255</td>
-<td>A general error occurred while manipulating server settings. See the error message for details</td>
+<td>A general error occurred while manipulating server settings. See the error message for details.</td>
 </tr>
 </tbody></table>
 
-<aside class="warning">You might encounter the following error message: <b>Missing token required for operation. Please add the proper token.</b> To resolve this error, add the BIOS password for the server when executing the commands.</aside>
+<aside class="warning">You might encounter the following error message: <b>Missing token required for operation</b>. <b>Please add the proper token</b>. To resolve this error, add the BIOS password for the server when executing the commands.</aside>
 
       </div>
       <div class="dark-box">
