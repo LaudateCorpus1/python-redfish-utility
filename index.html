@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>RESTful Interface Tool 1.50 User Guide</title>
+    <title>RESTful Interface Tool 2.1.0 User Guide</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -535,7 +535,9 @@ ilorest.exe load -f %2
 
 <p>Optionally use the latest schema instead of the one requested by the file. </p>
 
-<p>NOTE: Might cause errors in some data retrieval due to difference in schema versions.</p>
+<aside class="notice">
+Might cause errors in some data retrieval due to difference in schema versions.
+</aside>
 
 <h4 id="inputs">Inputs</h4>
 
@@ -725,7 +727,9 @@ ilorest.exe load -f %2
 <p>Before the commands were entered here, the user was not logged in to the server. When you use the select tag with login credentials, you are logged in to the server and the inputted type is selected. The type was selected by entering the select command with no type specified is verified, which shows that the currently selected type is returned. </p>
 </blockquote>
 
-<p>NOTE: Adding a period after the type selected, <strong>HpBios</strong>, limits the selection, preventing accidentally also selecting <strong>HpBiosMapping</strong>. This also removes the need to include the version.</p>
+<aside class="notice">
+Adding a period after the type selected, **HpBios**, limits the selection, preventing accidentally also selecting **HpBiosMapping**. This also removes the need to include the version.
+</aside>
 
 <blockquote>
 <p><img title="Select example 1" alt="Select Example 1" src="images/examples/select_ex1.png" /></p>
@@ -1019,7 +1023,9 @@ ilorest.exe load -f %2
 <p>Using get without any property specified shows the properties of the selected type. </p>
 </blockquote>
 
-<p>NOTE: No reserved properties are shown with the get command. Also, the full list is truncated for space.</p>
+<aside class="notice">
+No reserved properties are shown with the get command. Also, the full list is truncated for space.
+</aside>
 
 <blockquote>
 <p><img title="Get example 1" alt="Get Example 1" src="images/examples/get_ex1.png" /></p>
@@ -1133,7 +1139,9 @@ ilorest.exe load -f %2
 <p>Here the <strong>ServiceName</strong> property of the type <strong>HpBios</strong> has been set to the value <strong>ExampleService</strong>. When the get command is performed next, the value of <strong>ServiceName</strong> has been set to <strong>ExampleService</strong>. </p>
 </blockquote>
 
-<p>NOTE: Even though the get command shows <strong>ServiceName</strong> is set to <strong>ExampleService</strong>, the commit command must be performed next for the changes to be reflected next time the server is logged into.</p>
+<aside class="notice">
+Even though the get command shows **ServiceName** is set to **ExampleService**, the commit command must be performed next for the changes to be reflected next time the server is logged into.
+</aside>
 
 <blockquote>
 <p><img title="Set example 1" alt="Set Example 1" src="images/examples/set_ex1.png" /></p>
@@ -1399,7 +1407,7 @@ ilorest.exe load -f %2
 <p>Include the selector flag to select a type to run the current command on. Use this flag when you wish to select a type without entering another command, or if you wish to work with a type that is different from the one you currently have selected.</p>
 
 <ul>
-<li><strong>&ndash;filter [FILTER_ATTRIBUTE=FILTER_VALUE]</strong></li>
+<li><strong>&ndash;filter [ATTRIBUTE]=[VALUE]</strong></li>
 </ul>
 
 <p>Optionally set a filter value for a filter attribute. This uses the provided filter for the currently selected type.</p>
@@ -1425,6 +1433,12 @@ ilorest.exe load -f %2
 </ul>
 
 <p>Optionally include the logout flag to log out of the server after this command is completed. You need to be logged in to use this flag.</p>
+
+<ul>
+<li><strong>-e ENCRYPTION, &ndash;encryption=ENCRYPTION</strong></li>
+</ul>
+
+<p>Optionally include this flag to encrypt/decrypt a file using the key provided.</p>
 
 <h4 id="inputs">Inputs</h4>
 
@@ -1544,6 +1558,12 @@ ilorest.exe load -f %2
 
 <p>Use the provided filename to output data.</p>
 
+<ul>
+<li><strong>-e ENCRYPTION, &ndash;encryption=ENCRYPTION</strong></li>
+</ul>
+
+<p>Optionally include this flag to encrypt/decrypt a file using the key provided.</p>
+
 <h4 id="inputs">Inputs</h4>
 
 <p>JSON Object</p>
@@ -1600,7 +1620,9 @@ ilorest.exe load -f %2
 <p>Here the logout flag was used to demonstrate that the server can be logged out of after another command. Here, after the <strong>EmbSata1Enabled</strong> property of HpBios was set to a new value, then the server was logged out of because the logout flag was included. </p>
 </blockquote>
 
-<p>NOTE: The commit flag isn&rsquo;t used here; therefore, changes are not committed upon logout.</p>
+<aside class="notice">
+The commit flag isn&rsquo;t used here; therefore, changes are not committed upon logout.
+</aside>
 
 <blockquote>
 <p><img title="Commit example 2" alt="Commit Example 2" src="images/examples/commit_ex2.png" /></p>
@@ -1838,7 +1860,9 @@ ilorest.exe load -f %2
 <p>Here after the server was logged into, the biosdefaults command resets the BIOS settings to their default values. </p>
 </blockquote>
 
-<p>NOTE: Some changes are not applied until the system is reset.</p>
+<aside class="notice">
+Some changes are not applied until the system is reset.
+</aside>
 
 <blockquote>
 <p><img title="BiosDefaults example 1" alt="BiosDefaults Example 1" src="images/examples/biosdefaults_ex1.png" /></p>
@@ -1930,7 +1954,9 @@ ilorest.exe load -f %2
 <p>The add [2] flag was included here to add a boot attempt. The [2] entry here causes the server to add a boot attempt with the <strong>iSCSINicSource NicBoot</strong> value of 2. Thus, the [2] supplied here caused a new entry to be added with <strong>iSCSINicSource</strong> value <strong>NicBoot2</strong>. </p>
 </blockquote>
 
-<p>NOTE: The 2 inputted here is not the attempt number, as opposed to &ldquo;iscsiconfig &ndash;delete 2&rdquo; which does <em>delete the 2nd boot attempt.</em></p>
+<aside class="notice">
+The 2 inputted here is not the attempt number, as opposed to &ldquo;iscsiconfig &ndash;delete 2&rdquo; which does *delete the 2nd boot attempt.*
+</aside>
 
 <blockquote>
 <p><img title="iSCSIConfig example 3" alt="iSCSIConfig Example 3" src="images/examples/iscsi_ex3.png" /></p>
@@ -1938,7 +1964,9 @@ ilorest.exe load -f %2
 <p>Here we first added a boot attempt, then decided to modify some properties. We do this by first writing the <strong>iscsiconfig</strong> properties to a file called <strong>output.txt</strong> using the –f flag. </p>
 </blockquote>
 
-<p>NOTE: The results are only written to the file if the &ndash;list flag is included as well.</p>
+<aside class="notice">
+The results are only written to the file if the &ndash;list flag is included as well.
+</aside>
 
 <blockquote>
 <p><img title="iSCSIConfig example 4-1" alt="iSCSIConfig Example 4-1" src="images/examples/iscsi_ex4-1.png" /></p>
@@ -1952,7 +1980,9 @@ ilorest.exe load -f %2
 <p>Here when the server was logged into, there was already a boot attempt configured. To delete a boot attempt, use the delete flag to remove the boot attempt. We then verified that the boot attempt was deleted with another list flag. </p>
 </blockquote>
 
-<p>NOTE: The &ldquo;iscsiconfig &ndash;delete 1&rdquo; command deletes the 1st iSCSI attempt. This is different from the number specified with &ldquo;iscsiconfig &ndash;add [1]&rdquo;, which implies add an iSCSI attempt with <strong>NicBoot1</strong>.</p>
+<aside class="notice">
+The &ldquo;iscsiconfig &ndash;delete 1&rdquo; command deletes the 1st iSCSI attempt. This is different from the number specified with &ldquo;iscsiconfig &ndash;add [1]&rdquo;, which implies add an iSCSI attempt with **NicBoot1**.
+</aside>
 
 <blockquote>
 <p><img title="iSCSIConfig example 5-2" alt="iSCSIConfig Example 5-2" src="images/examples/iscsi_ex5-2.png" /></p>
@@ -2094,12 +2124,66 @@ ilorest.exe load -f %2
 
 <p>None</p>
 
+<h3 id="pending-command">Pending command</h3>
+
+<blockquote>
+<p>Pending example commands:</p>
+
+<p><img title="Pending example 1" alt="Pending Example 1" src="images/examples/pending_ex1.png" /></p>
+
+<p><img title="Pending example 2" alt="Pending Example 2" src="images/examples/pending_ex2.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>pending <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Displays pending changes that will be applied after a reboot.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>Use the provided iLO URL to login.</p>
+
+<ul>
+<li><strong>-u USER, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p PASSWORD, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>Use the provided iLO password to log in.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
 <h3 id="setpassword-command">Setpassword command</h3>
+
+<aside class="notice">
+Please make sure the order of passwords is maintained. The passwords are extracted base on their position in the arguments list.
+</aside>
 
 <blockquote>
 <p>Setpassword example commands:</p>
-
-<p>NOTE: Please make sure the order of passwords is maintained. The passwords are extracted base on their position in the arguments list.</p>
 
 <p>Setting the admin password with no previous password set.</p>
 
@@ -2172,12 +2256,15 @@ ilorest.exe load -f %2
 
 <h3 id="certificate-command">Certificate command</h3>
 
+<aside class="notice">
+<ul>
+<li>Please make sure the order of arguments is correct. The parameters are extracted base on their position in the arguments list.</li>
+<li>Use the singlesignon command to import single sign on certificates.</li>
+</ul>
+</aside>
+
 <blockquote>
 <p>Certificate example commands:</p>
-
-<p>NOTE: 
-+ Please make sure the order of arguments is correct. The parameters are extracted base on their position in the arguments list.
-+ Use the singlesignon command to import single sign on certificates.</p>
 
 <p>Generate an https certificate signing request.</p>
 
@@ -2516,23 +2603,19 @@ ilorest.exe load -f %2
 <p>If the server has been turned on, the reboot ForceOff command can be used to turn the server off immediately. </p>
 </blockquote>
 
-<p>NOTE: The reboot command logs the user out of the server.</p>
+<aside class="notice">
+The reboot command logs the user out of the server.
+</aside>
 
 <blockquote>
 <p><img title="Reboot example 2" alt="Reboot Example 2" src="images/examples/reboot_ex2.png" /></p>
 
 <p>If the server is currently on, the reboot ForceRestart command can be used to turn the server off immediately and then start again. </p>
-</blockquote>
 
-<p>NOTE: The reboot command logs the user out of the server. </p>
-
-<blockquote>
 <p><img title="Reboot example 3" alt="Reboot Example 3" src="images/examples/reboot_ex3.png" /></p>
 
 <p>If the server is currently on, the reboot Nmi command can be used to generate a non-maskable interrupt to cause an immediate system halt. </p>
 </blockquote>
-
-<p>NOTE: The reboot command logs the user out of the server.</p>
 <pre class="highlight plaintext"><code>ilorest &gt; reboot Nmi -username -p password --url=xx.xx.xx.xx
 Discovering data from iLO...Done
 WARNING: Cache is activated session keys are stored in plaintext
@@ -2546,11 +2629,7 @@ Logging session out.
 
 <blockquote>
 <p>The reboot PushPowerButton command can be used to simulate physically pressing the power button on the server. If the server is off, this command will turn the server on. If the server is on, this command will turn the server off. </p>
-</blockquote>
 
-<p>NOTE: The reboot command logs the user out of the server.</p>
-
-<blockquote>
 <p><img title="Reboot example 4" alt="Reboot Example 4" src="images/examples/reboot_ex4.png" /></p>
 </blockquote>
 
@@ -2641,6 +2720,12 @@ Logging session out.
 </ul>
 
 <p>You can optionally choose to set the <strong>includelogs</strong> flag. Doing so will include logs in the data retrieval process.</p>
+
+<ul>
+<li><strong>&ndash;confirm</strong></li>
+</ul>
+
+<p>Optionally include to request user confirmation for reboot.</p>
 
 <h4 id="inputs">Inputs</h4>
 
@@ -2748,6 +2833,8 @@ Logging session out.
 
 <p>Download and perform log operations.</p>
 
+<aside class="warning">Please use the default name when downloading AHS logs, do not include the -f parameter.</aside>
+
 <h4 id="parameters">Parameters</h4>
 
 <ul>
@@ -2786,7 +2873,9 @@ Logging session out.
 
 <p>Optionally set a filter value for a filter attribute. This uses the provided filter for the currently selected type. </p>
 
-<p>NOTE: Use this flag to narrow down your results. For example, selecting a common type might return multiple objects that are all of that type. If you want to modify the properties of only one of those objects, use the filter flag to narrow down results based on properties Usage: &ndash;filter [ATTRIBUTE]=[VALUE].</p>
+<aside class="notice">
+Use this flag to narrow down your results. For example, selecting a common type might return multiple objects that are all of that type. If you want to modify the properties of only one of those objects, use the filter flag to narrow down results based on properties Usage: &ndash;filter [ATTRIBUTE]=[VALUE].
+</aside>
 
 <ul>
 <li><strong>-j, &ndash;json</strong></li>
@@ -2816,15 +2905,39 @@ Logging session out.
 <li><strong>&ndash;customiseAHS=CUSTOMISEAHS</strong></li>
 </ul>
 
-<p>Allows customized AHS log data to be downloaded.
-- <strong>&ndash;downloadallahs</strong></p>
+<p>Allows customized AHS log data to be downloaded.</p>
+
+<ul>
+<li><strong>&ndash;downloadallahs</strong></li>
+</ul>
 
 <p>Allows complete AHS log data to be downloaded.</p>
 
 <ul>
-<li><strong>&ndash;directorypath=DIRECTORYPATH</strong>
-Directory path for the ahs file.</li>
+<li><p><strong>&ndash;directorypath=DIRECTORYPATH</strong>
+Directory path for the ahs file.</p></li>
+<li><p><strong>&mdash;m MAINMES, &ndash;maintenancemessage=MAINMES</strong></p></li>
 </ul>
+
+<p>Maintenance message to be inserted into the log. (IML LOGS ONLY FEATURE)</p>
+
+<ul>
+<li><strong>&ndash;mpfile=MPFILENAME</strong></li>
+</ul>
+
+<p>Use the provided filename to obtain server information.</p>
+
+<ul>
+<li><strong>-o OUTDIRECTORY, &ndash;outputdirectory=OUTDIRECTORY</strong></li>
+</ul>
+
+<p>Use the provided directory to output data for multiple server downloads.</p>
+
+<ul>
+<li><strong>&ndash;mplog=MPLOG</strong></li>
+</ul>
+
+<p>Used to indicate the logs to be downloaded on multiple servers. Allowable values: IEL, IML, AHS, all or combination of any two.</p>
 
 <h4 id="inputs">Inputs</h4>
 
@@ -2894,7 +3007,9 @@ Directory path for the ahs file.</li>
 <p>The firmwareupdate command updates the firmware for iLO. After the server was logged into, the firmware update at the given location was used to update the firmware. After the update was completed, iLO was reset and the session was terminated. </p>
 </blockquote>
 
-<p>NOTE: iLO does not always reset after a firmware update.</p>
+<aside class="notice">
+iLO does not always reset after a firmware update.
+</aside>
 
 <blockquote>
 <p><img title="Firmware update example 1" alt="Firmware update Example 1" src="images/examples/firmwareupdate_ex1.png" /></p>
@@ -2998,9 +3113,11 @@ Directory path for the ahs file.</li>
 <li>PASSWORD:  The account password, used to login.</li>
 <li><p>Id: The number associated with an iLO user account.</p>
 
-<p>NOTE: Please make sure the order of arguments is correct. The
+<aside class="notice">
+Please make sure the order of arguments is correct. The
 parameters are extracted based on their position in the arguments list.
-Only privileges available to the logged in account can be set to the new account.</p></li>
+Only privileges available to the logged in account can be set to the new account.
+</aside></li>
 </ul>
 
 <h4 id="parameters">Parameters</h4>
@@ -3119,7 +3236,9 @@ Only privileges available to the logged in account can be set to the new account
 
 <p>Clone the iLO config of the currently logged in server and copy it to the server in the arguments.</p>
 
-<p>NOTE: This command is only available in local mode. During clone load, login using an iLO account with full privileges (such as the Administrator account) to ensure all items are cloned successfully.</p>
+<aside class="notice">
+This command is only available in local mode. During clone load, login using an iLO account with full privileges (such as the Administrator account) to ensure all items are cloned successfully.
+</aside>
 
 <h4 id="parameters">Parameters</h4>
 
@@ -3165,6 +3284,18 @@ Only privileges available to the logged in account can be set to the new account
 
 <p>Use this flag during iloclone save if you wish to import a SSO certificate to the server to be cloned. Add the https cert file to be used to the working directory before running clone load.</p>
 
+<ul>
+<li><strong>&ndash;uniqueitemoverride</strong></li>
+</ul>
+
+<p>Override the measures stoppping the tool from writing over items that are system unique. </p>
+
+<ul>
+<li><strong>-e ENCRYPTION, &ndash;encryption=ENCRYPTION</strong></li>
+</ul>
+
+<p>Optionally include this flag to encrypt/decrypt a file using the key provided.</p>
+
 <h4 id="inputs">Inputs</h4>
 
 <p>None</p>
@@ -3175,14 +3306,16 @@ Only privileges available to the logged in account can be set to the new account
 
 <h3 id="ilofederation-command">Ilofederation command</h3>
 
+<aside class="notice">
+Please make sure the order of arguments is correct. The parameters are extracted based on their position in the arguments list. The federation key must be 8 characters or greater.
+</aside>
+
 <blockquote>
 <p>Ilofederation example commands:</p>
 
 <p>Descriptions:
 +  <em>FEDERATIONNAME</em>: The name (Id) of the federation group. 
 +  <em>KEY</em>:  The key required to join the federation.</p>
-
-<p>NOTE: Please make sure the order of arguments is correct. The parameters are extracted based on their position in the arguments list. The federation key must be 8 characters or greater.</p>
 
 <p>Add an iLO federation group to the current logged in server.</p>
 
@@ -3433,7 +3566,9 @@ Only privileges available to the logged in account can be set to the new account
 
 <p>Recalculate the signature on the computers configuration.</p>
 
-<p>NOTE: The sigrecompute command is not available on Redfish systems.</p>
+<aside class="notice">
+The sigrecompute command is not available on Redfish systems.
+</aside>
 
 <h4 id="parameters">Parameters</h4>
 
@@ -3603,7 +3738,9 @@ Only privileges available to the logged in account can be set to the new account
 
 <p>Use this flag if you wish to boot from the image on next server reboot. </p>
 
-<p>NOTE: The image will be ejected automatically on the second server reboot so that the server does not boot to this image twice.</p>
+<aside class="notice">
+The image will be ejected automatically on the second server reboot so that the server does not boot to this image twice.
+</aside>
 
 <h4 id="inputs">Inputs</h4>
 
@@ -3728,17 +3865,17 @@ Only privileges available to the logged in account can be set to the new account
 <p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
 
 <ul>
-<li><strong>sessionid=SESSIONID</strong></li>
+<li><strong>&ndash;sessionid=SESSIONID</strong></li>
 </ul>
 
 <p>Optionally include this flag if you would prefer to connect using a session id instead of a normal login.</p>
 
 <ul>
-<li><strong>includelogs</strong><br></li>
+<li><strong>&ndash;includelogs</strong><br></li>
 </ul>
 
 <p>Optionally include logs in the data retrieval process.
-- <strong>logout</strong></p>
+- <strong>&ndash;logout</strong></p>
 
 <p>Optionally include the logout flag to log out of the server after this command is completed. Using this flag when not logged in will have no effect.</p>
 
@@ -4047,7 +4184,7 @@ Only privileges available to the logged in account can be set to the new account
 <p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
 
 <ul>
-<li><strong>sessionid=SESSIONID</strong></li>
+<li><strong>&ndash;sessionid=SESSIONID</strong></li>
 </ul>
 
 <p>Optionally include this flag if you would prefer to connect using a session id instead of a normal login.</p>
@@ -4177,6 +4314,10 @@ Only privileges available to the logged in account can be set to the new account
 <p>None</p>
 
 <h3 id="createlogicaldrive-command">Createlogicaldrive command</h3>
+
+<aside class="notice">
+The createlogicaldrive command requires a reboot before the logical drives can be created. If the drives are not present after a full reboot, run the results command to check for errors in the configuration
+</aside>
 
 <blockquote>
 <p>Createlogicaldrive example commands:</p>
@@ -4369,6 +4510,12 @@ Only privileges available to the logged in account can be set to the new account
 </ul>
 
 <p>Use this flag to delete all logical drives on a controller.</p>
+
+<ul>
+<li><strong>&ndash;force</strong></li>
+</ul>
+
+<p>Use this flag to override the &ldquo;are you sure?&rdquo; text when deleting a logical drive. </p>
 
 <h4 id="inputs">Inputs</h4>
 
@@ -4604,6 +4751,540 @@ Only privileges available to the logged in account can be set to the new account
 
 <p>None </p>
 
+          <h2 id="hpe-scalable-persistent-memory-commands">HPE Scalable Persistent Memory commands</h2>
+
+<p>This section covers commands related to the configuration of Scalable Persistent Memory.</p>
+
+<h3 id="show-scalable-persistent-memory-configuration-command">Show Scalable Persistent Memory configuration command</h3>
+
+<blockquote>
+<p>Example: Display the current Scalable Persistent Memory configuration.</p>
+</blockquote>
+<pre class="highlight plaintext"><code>iLOrest &gt; showscalablepmemconfig
+
+Overall Allocated Scalable Persistent Memory
+--------------------------------------------
+
+.----------------------------------------------------------.
+|||||||||||||||||||                                        |
+'----------------------------------------------------------'
+250 GiB of 786 GiB allocated (536 GiB available)
+
+
+Logical NVDIMMs
+---------------
+
+Size        Type               Location                Operation    
+--------------------------------------------------------------------
+  100 GiB   Single Processor   Processor 1, Index 1                 
+  100 GiB   Single Processor   Processor 1, Index 2                 
+   50 GiB   Single Processor   Processor 2, Index 1                 
+
+
+</code></pre>
+
+<blockquote>
+<p>Example: Display the available Scalable Persistent Memory capacity.</p>
+</blockquote>
+<pre class="highlight plaintext"><code>iLOrest &gt; showscalablepmemconfig --available
+
+Available Scalable Persistent Memory
+------------------------------------
+Available capacity to create logical NVDIMMs is constrained by the system
+hardware, including the number of backup storage devices selected.
+
+By Processor (for single processor logical NVDIMMs):
+
+Processor    Available For Scalable PMEM             
+-----------------------------------------------------
+  1             536 GiB (Max logical NVDIMMs created)
+  2             536 GiB 
+
+By Processor Pair (for spanned logical NVDIMMs):
+
+Processors   Available For Scalable PMEM             
+-----------------------------------------------------
+  1,2           536 GiB 
+
+
+</code></pre>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>showscalablepmemconfig <em>[&ndash;available] [&ndash;json]</em></p>
+
+<h4 id="description">Description</h4>
+
+<ul>
+<li>Displays overall Scalable Persistent Memory configuration summary.</li>
+<li>Displays the logical NVDIMMs.</li>
+<li>Displays the available Scalable Persistent Memory capacity.</li>
+<li>Indicates if pending operations exist that require a reboot.</li>
+</ul>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-a, &ndash;available</strong></li>
+</ul>
+
+<p>Show the available capacity per processor or processor pair.</p>
+
+<ul>
+<li><strong>-j, &ndash;json</strong></li>
+</ul>
+
+<p>Optionally include this flag to change the output to JSON format.</p>
+
+<h3 id="enable-scalable-persistent-memory-configuration-command">Enable Scalable Persistent Memory configuration command</h3>
+
+<blockquote>
+<p>Example: Enable Scalable Persistent Memory functionality.</p>
+</blockquote>
+<pre class="highlight plaintext"><code>iLOrest &gt; enablescalablepmem
+
+The Scalable Persistent Memory feature has been set to: Enabled
+
+
+</code></pre>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>enablescalablepmem <em>[&ndash;disable]</em></p>
+
+<h4 id="description">Description</h4>
+
+<ul>
+<li>Enable or disable the Scalable Persistent Memory feature.</li>
+<li>Scalable Persistent Memory must be enabled before configuration is allowed.</li>
+</ul>
+
+<h4 id="parameters">Parameters</h4>
+
+<p>If no parameters are specified, the Scalable Persistent Memory feature will be enabled.</p>
+
+<ul>
+<li><strong>&ndash;off, &ndash;no, &ndash;disable</strong></li>
+</ul>
+
+<p>Disable the Scalable Persistent Memory feature. Warning: any pending configuration changes will be lost.</p>
+
+<h3 id="show-backup-devices-command">Show Backup Devices command</h3>
+
+<blockquote>
+<p>Example: Display the supported Scalable Persistent Memory backup devices.</p>
+</blockquote>
+<pre class="highlight plaintext"><code>iLOrest &gt; showbackupdevices
+
+Scalable Persistent Memory Backup Storage Devices
+-------------------------------------------------
+
+ID     Location        Model        Type       Size    Status   Life PMEM Use  Operation           
+---------------------------------------------------------------------------------------------------
+2@1    Box 2 Bay 1     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%    Yes                         
+2@2    Box 2 Bay 2     MO0800KEFHP  SSD (NVMe) 800 GB  OK       100%   Yes                         
+3@3    Box 3 Bay 3     MO0800KEFHP  SSD (NVMe) 800 GB  OK       98%                                
+3@4    Box 3 Bay 4     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%                                
+
+Scalable Persistent Memory supported: 786 GiB
+
+
+</code></pre>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>showbackupdevices</p>
+
+<h4 id="description">Description</h4>
+
+<ul>
+<li>Displays all devices that are supported for use as Scalable Persistent Memory backup storage.</li>
+<li>Indicates if a device is currently in use for Scalable Persistent Memory, is being added, or is being removed.</li>
+<li>Reports the amount of Scalable Persistent Memory that is supported by the configuration.</li>
+<li>Drives are identified by Box and Bay.</li>
+<li>Use this command to identify drives to use with the <code class="prettyprint">setbackupdevices</code> command.</li>
+</ul>
+
+<h4 id="parameters">Parameters</h4>
+
+<p>None</p>
+
+<h3 id="set-backup-devices-command">Set Backup Devices command</h3>
+
+<blockquote>
+<p>Example: Set the backup devices 2@1 and 2@2</p>
+</blockquote>
+<pre class="highlight plaintext"><code>iLOrest &gt; setbackupdevices --device=2@1 --device=2@2
+
+ID     Location        Model        Type       Size    Status   Life PMEM Use  Operation           
+---------------------------------------------------------------------------------------------------
+2@1    Box 2 Bay 1     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%            Add,Initialize      
+2@2    Box 2 Bay 2     MO0800KEFHP  SSD (NVMe) 800 GB  OK       100%           Add,Initialize      
+3@3    Box 3 Bay 3     MO0800KEFHP  SSD (NVMe) 800 GB  OK       98%                                
+3@4    Box 3 Bay 4     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%                                
+
+Scalable Persistent Memory supported: 786 GiB
+
+
+*** The pending configuration operations require a restart to take effect ***
+
+</code></pre>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>setbackupdevices <em>(&ndash;device=ID&hellip; | &ndash;remove-all)</em></p>
+
+<h4 id="description">Description</h4>
+
+<ul>
+<li>Configures the specified devices for use as Scalable Persistent Memory backup storage</li>
+<li>Backup devices are not allowed to be removed while logical NVDIMMs exist</li>
+<li>The device IDs can be obtained from the <code class="prettyprint">showbackupdevices</code> command</li>
+</ul>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>&ndash;device=ID, &ndash;drive=ID</strong></li>
+</ul>
+
+<p>ID of the backup device to set, e.g. &lsquo;1@1&rsquo;</p>
+
+<ul>
+<li><strong>&ndash;remove-all</strong></li>
+</ul>
+
+<p>Remove all currently-configured backup devices</p>
+
+<h3 id="create-logical-nvdimm-command">Create Logical NVDIMM command</h3>
+
+<blockquote>
+<p>Example: Create a 100 GiB logical NVDIMM on processor 1</p>
+</blockquote>
+<pre class="highlight plaintext"><code>iLOrest &gt; createlogicalnvdimm --processor=1 --size=100
+
+Size        Type               Location                Operation    
+--------------------------------------------------------------------
+  100 GiB   Single Processor   Processor 1, Index 1    Create       
+
+
+*** The pending configuration operations require a restart to take effect ***
+
+
+</code></pre>
+
+<blockquote>
+<p>Example: Create a 100 GiB spanned logical NVDIMM on processors 1 and 2.</p>
+</blockquote>
+<pre class="highlight plaintext"><code>iLOrest &gt; createlogicalnvdimm --processors=1,2 --size=100
+
+Size        Type               Location                Operation    
+--------------------------------------------------------------------
+  100 GiB   Spanned            Processors 1,2          Create       
+  100 GiB   Single Processor   Processor 1, Index 1    Create       
+
+
+*** The pending configuration operations require a restart to take effect ***
+
+
+</code></pre>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>createlogicalnvdimm <em>&ndash;size=SIZE [&ndash;processor=NUMBER | &ndash;pair=PAIR]</em></p>
+
+<h4 id="description">Description</h4>
+
+<ul>
+<li>Create a logical NVDIMM.</li>
+<li>If only <code class="prettyprint">--size</code> is specified, the command automatically creates a single processor or spanned logical NVDIMM based on the size requested.</li>
+<li>Two logical NVDIMMs may be created per processor.</li>
+<li>One spanned logical NVDIMM may be created for processors 1 and 2.</li>
+</ul>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>&ndash;size=SIZE</strong></li>
+</ul>
+
+<p>Specify the size (GiB) of the logical NVDIMM to create.</p>
+
+<ul>
+<li><strong>&ndash;proc=NUMBER, &ndash;processor=NUMBER</strong></li>
+</ul>
+
+<p>Use to create a logical NVDIMM. Specify the processor (auto, 1, 2).</p>
+
+<ul>
+<li><strong>&ndash;pair=PAIR, &ndash;processors=PAIR</strong></li>
+</ul>
+
+<p>Use to create a spanned logical NVDIMM. Specify the pair of processors (auto or 1,2).</p>
+
+<h3 id="remove-logical-nvdimm-command">Remove Logical NVDIMM command</h3>
+
+<blockquote>
+<p>Example: Remove a logical NVDIMM on processor 1, index 1.</p>
+</blockquote>
+<pre class="highlight plaintext"><code>iLOrest &gt; removelogicalnvdimm --processor=1 --index=1
+
+Size        Type               Location                Operation    
+--------------------------------------------------------------------
+  128 GiB   Single Processor   Processor 1, Index 1    Remove       
+
+
+*** WARNING ***
+
+The pending configuration operations require a restart to take effect.
+
+All backup storage devices will be initialized during restart.
+Data on any existing logical NVDIMMs will be lost.
+
+The pending configuration changes can be discarded by running:
+
+     revertscalablepmemconfig
+
+*** Any data that needs to be preserved should be backed up before restarting ***
+
+</code></pre>
+
+<blockquote>
+<p>Example: Remove a spanned logical NVDIMM from processors 1 and 2.</p>
+</blockquote>
+<pre class="highlight plaintext"><code>iLOrest &gt; removelogicalnvdimm --processors=1,2
+
+Size        Type               Location                Operation    
+--------------------------------------------------------------------
+  100 GiB   Spanned            Processors 1,2          Remove       
+
+
+*** WARNING ***
+
+The pending configuration operations require a restart to take effect.
+
+All backup storage devices will be initialized during restart.
+Data on any existing logical NVDIMMs will be lost.
+
+The pending configuration changes can be discarded by running:
+
+     revertscalablepmemconfig
+
+*** Any data that needs to be preserved should be backed up before restarting ***
+
+</code></pre>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>removelogicalnvdimm <em>(&ndash;processor=NUMBER &ndash;index=INDEX | &ndash;pair=PAIR)</em></p>
+
+<h4 id="description">Description</h4>
+
+<ul>
+<li>Remove an existing logical NVDIMM.</li>
+<li>This operation causes the data stored on the NVDIMM to be lost. Back up all necessary data first.</li>
+<li>Obtain information about existing logical NVDIMMs using <code class="prettyprint">showscalablepmemconfig</code>.</li>
+</ul>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>&ndash;proc=NUMBER, &ndash;processor=NUMBER</strong></li>
+</ul>
+
+<p>Specify the processor number of the logical NVDIMM to remove (1, 2).</p>
+
+<ul>
+<li><strong>-i INDEX, &ndash;index=INDEX</strong></li>
+</ul>
+
+<p>Specify the index of the logical NVDIMM to remove (use with &ndash;processor).</p>
+
+<ul>
+<li><strong>&ndash;pair=PAIR, &ndash;processors=PAIR</strong></li>
+</ul>
+
+<p>Specify the pair of processors of the spanned logical NVDIMM to remove (1,2)</p>
+
+<h3 id="revert-scalable-persistent-memory-configuration-command">Revert Scalable Persistent Memory configuration command</h3>
+
+<blockquote>
+<p>Example: Remove a logical NVDIMM and revert the changes.</p>
+</blockquote>
+<pre class="highlight plaintext"><code>iLOrest &gt; removelogicalnvdimm --processor=1 --index=1
+
+Size        Type               Location                Operation    
+--------------------------------------------------------------------
+  128 GiB   Single Processor   Processor 1, Index 1    Remove       
+
+
+*** WARNING ***
+
+The pending configuration operations require a restart to take effect.
+
+All backup storage devices are initialized during restart.
+Data on any existing logical NVDIMMs will be lost.
+
+The pending configuration changes can be discarded by running:
+
+     revertscalablepmemconfig
+
+*** Any data that needs to be preserved should be backed up before restarting ***
+
+</code></pre>
+<pre class="highlight plaintext"><code>iLOrest &gt; revertscalablepmemconfig
+
+Logical NVDIMMs
+---------------
+
+Size        Type               Location                Operation    
+--------------------------------------------------------------------
+  128 GiB   Single Processor   Processor 1, Index 1                 
+
+Scalable Persistent Memory Backup Storage Devices
+-------------------------------------------------
+
+ID     Location        Model        Type       Size    Status   Life PMEM Use  Operation           
+---------------------------------------------------------------------------------------------------
+2@1    Box 2 Bay 1     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%    Yes                         
+2@2    Box 2 Bay 2     MO0800KEFHP  SSD (NVMe) 800 GB  OK       100%   Yes                         
+3@3    Box 3 Bay 3     MO0800KEFHP  SSD (NVMe) 800 GB  OK       98%                                
+3@4    Box 3 Bay 4     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%                                
+
+Scalable Persistent Memory supported: 786 GiB
+
+
+
+</code></pre>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>revertscalablepmemconfig</p>
+
+<h4 id="description">Description</h4>
+
+<ul>
+<li>Revert any pending Scalable Persistent Memory configuration changes so the changes are not applied during restart.</li>
+</ul>
+
+<h4 id="parameters">Parameters</h4>
+
+<p>None</p>
+
+<h3 id="replace-backup-device-command">Replace Backup Device command</h3>
+
+<blockquote>
+<p>Example: Replace a backup device (existing device 2@1 with new device 2@2).</p>
+</blockquote>
+<pre class="highlight plaintext"><code>iLOrest &gt; replacebackupdevice 2@1 2@2
+
+ID     Location        Model        Type       Size    Status   Life PMEM Use  Operation           
+---------------------------------------------------------------------------------------------------
+2@1    Box 2 Bay 1     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%            Remove,Initialize   
+2@2    Box 2 Bay 2     MO0800KEFHP  SSD (NVMe) 800 GB  OK       100%           Add,Initialize      
+3@3    Box 3 Bay 3     MO0800KEFHP  SSD (NVMe) 800 GB  OK       98%                                
+3@4    Box 3 Bay 4     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%                                
+
+Scalable Persistent Memory supported: 393 GiB
+
+
+*** The pending configuration operations require a restart to take effect ***
+
+</code></pre>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>replacebackupdevice <em>OLD-ID NEW-ID</em></p>
+
+<h4 id="description">Description</h4>
+
+<ul>
+<li>Replace a backup storage device for Scalable Persistent Memory.</li>
+<li>Specify devices by ID from the <code class="prettyprint">showbackupdevices</code> command.</li>
+</ul>
+
+<aside class="notice">Caution: This operation initializes all backup storage devices. Data on any existing logical NVDIMMs will be lost. Back up all data first.</aside>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>OLD-ID</strong></li>
+</ul>
+
+<p>ID of the original (in-use) backup device to replace, e.g. &#39;1@1&rsquo;</p>
+
+<ul>
+<li><strong>NEW-ID</strong></li>
+</ul>
+
+<p>The new backup device to use as a replacement, e.g. &#39;2@1&rsquo;</p>
+
+<h3 id="auto-select-backup-devices-command">Auto Select Backup Devices command</h3>
+
+<blockquote>
+<p>Example: Simulate the selection of backup storage devices to support 900 GiB of Scalable Persistent Memory:</p>
+</blockquote>
+<pre class="highlight plaintext"><code>iLOrest &gt; autoselectbackupdevices --size=900
+
+The following backup devices have been automatically selected for Scalable PMEM:
+[1] Box 2 Bay 1     (800 GB)
+[2] Box 2 Bay 2     (800 GB)
+[3] Box 3 Bay 3     (800 GB)
+
+</code></pre>
+
+<blockquote>
+<p>Example: Auto-select enough backup storage devices to support 1024 GiB of Scalable Persistent Memory.</p>
+</blockquote>
+<pre class="highlight plaintext"><code>iLOrest &gt; autoselectbackupdevices --size=1024 --confirm
+
+The following backup devices have been automatically selected for Scalable PMEM:
+[1] Box 2 Bay 1     (800 GB)
+[2] Box 2 Bay 2     (800 GB)
+[3] Box 3 Bay 3     (800 GB)
+
+
+ID     Location        Model        Type       Size    Status   Life PMEM Use  Operation           
+---------------------------------------------------------------------------------------------------
+2@1    Box 2 Bay 1     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%            Add,Initialize      
+2@2    Box 2 Bay 2     MO0800KEFHP  SSD (NVMe) 800 GB  OK       100%           Add,Initialize      
+3@3    Box 3 Bay 3     MO0800KEFHP  SSD (NVMe) 800 GB  OK       98%            Add,Initialize      
+3@4    Box 3 Bay 4     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%                                
+
+Scalable Persistent Memory supported: 1180 GiB
+
+
+*** The pending configuration operations require a restart to take effect ***
+
+</code></pre>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>autoselectbackupdevices <em>&ndash;size=SIZE [&ndash;confirm]</em></p>
+
+<h4 id="description">Description</h4>
+
+<ul>
+<li>Automatically select the correct number of backup storage devices necessary for the desired amount of Scalable Persistent Memory.</li>
+<li>Only works if no logical NVDIMMs have been created and no backup devices have been configured.</li>
+</ul>
+
+<aside class="notice">Caution: using the `&ndash;confirm` flag will automatically change the device operation mode. All backup storage devices will be initialized. Back up all data first.</aside>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-s SIZE, &ndash;size=SIZE</strong></li>
+</ul>
+
+<p>Amount (in GiB) of Scalable Persistent Memory to be supported by the new backup storage device configuration.</p>
+
+<ul>
+<li><strong>&ndash;confirm</strong></li>
+</ul>
+
+<p>Confirm the configuration of the automatically selected backup devices. If not specified, no changes will occur.</p>
+
           <h2 id="raw-commands">Raw commands</h2>
 
 <p>These are the raw HTTP RESTful operations that can be used through the RESTful Interface Tool. The commands and their examples that can be found in this section include the equivalents of HTTP RESTful <strong>PATCH, GET, POST, PUT, DELETE</strong>, and <strong>HEAD</strong>.</p>
@@ -4616,7 +5297,9 @@ Only privileges available to the logged in account can be set to the new account
 <p>Here, the <strong>AdminName</strong> of type <strong>HpBios</strong> was &ldquo;&rdquo; before. The rawpatch command sent the patch.json to change that property to become <strong>Jean Kranz</strong>. Commit is left out deliberately here since, raw commands (such as rawpost, rawput, etc.) do not require the commit command to be run since changes are made directly. </p>
 </blockquote>
 
-<p>NOTE: This particular change requires second-level BIOS authentication, which is why the biospassword flag was included.</p>
+<aside class="notice">
+This particular change requires second-level BIOS authentication, which is why the biospassword flag was included.
+</aside>
 
 <blockquote>
 <p><img title="RawPatch example 1" alt="RawPatch Example 1" src="images/examples/rawpatch_ex1.png" /></p>
@@ -4749,7 +5432,9 @@ Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
 <p><strong>Above:</strong> The rawget command here executed the GET command on the path <strong>/rest/v1/systems/1/bios/Settings</strong>. This displays the information in the given path. </p>
 </blockquote>
 
-<p>NOTE: The full list of information has been truncated for space.</p>
+<aside class="notice">
+The full list of information has been truncated for space.
+</aside>
 
 <blockquote>
 <p><img title="RawGet example 1" alt="Rawget Example 1" src="images/examples/rawget_ex1.png" /></p>
@@ -4866,7 +5551,9 @@ Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
 <p>The rawpost command performs an HTTP REST POST operation using the information provided in the provided file. Here the ForceRestart ResetType was set, so after the rawpost posted the changes iLO executed a ForceRestart. </p>
 </blockquote>
 
-<p>NOTE: If a full path is not given, the tool searches for the file where the RESTful Interface Tool was started. </p>
+<aside class="notice">
+If a full path is not given, the tool searches for the file where the RESTful Interface Tool was started.
+</aside>
 
 <blockquote>
 <p><img title="RawPost example 1" alt="RawPost Example 1" src="images/examples/rawpost_ex1.png" /></p>
@@ -5350,9 +6037,7 @@ Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
 
 <p><img title="TPM Example" alt="TPM Example" src="images/TPM_disable.png" /></p>
 
-<blockquote>
-<p><strong>Above:</strong> When the server is rebooted, the <strong>TpmState</strong> is changed from <strong>PresentEnabled</strong> to <strong>PresentDisabled</strong>.</p>
-</blockquote>
+<p>When the server is rebooted, the <strong>TpmState</strong> is changed from <strong>PresentEnabled</strong> to <strong>PresentDisabled</strong>.</p>
 
 <p>If you need to disable TPM on a group of servers, you can use a set of commands in RESTful Interface Tool. For example, you are installing SPPs and OSs on bare-metal servers, and you need to disable TPM prior to starting installation.</p>
 
@@ -5627,6 +6312,14 @@ pause
 <aside class="notice">Access to some updates might require product entitlement when accessed through the <b>Hewlett Packard Enterprise Support Center</b>. You must have an HP Passport set up with relevant entitlements.</aside>
 
 <h2 id="websites-and-documents">Websites and documents</h2>
+
+<h3 id="tutorial-videos">Tutorial Videos</h3>
+
+<p><a href="https://www.youtube.com/watch?v=CGl8DsYTdQo">Creating iLO REST Extensions</a></p>
+
+<p><a href="https://www.youtube.com/watch?v=xfEN95pNNfY">An Introduction to the RESTful Interface Tool</a></p>
+
+<p><a href="https://www.youtube.com/watch?v=WPz2FP8bXYU">Benefits of RESTful Interface Tool vs. CONREP</a></p>
 
 <h3 id="websites">Websites</h3>
 
