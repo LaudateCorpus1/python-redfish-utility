@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>RESTful Interface Tool 2.1.0 User Guide</title>
+    <title>RESTful Interface Tool 2.2.0 User Guide</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -141,6 +141,7 @@
 <li>Local management: Gen9 server with a Windows OS or Linux OS (64–bit) installed (If you want to install the tool locally on the server).</li>
 <li>Remote management: Gen9 server with or without an OS installed.</li>
 <li>iLO 4 2.00 or later.</li>
+<li>Before you run the tool on a Linux system, the <strong>/tmp</strong> folder must be configured to allow code to execute. If the <strong>/tmp</strong> folder is set to <em>no-execution</em>, the tool will not run.</li>
 <li>The install packages are available for download from <a href="http://www.hpe.com/info/resttool">http://www.hpe.com/info/resttool</a>.</li>
 </ul>
 
@@ -447,6 +448,7 @@ ilorest.exe load -f %2
 <li>Linux OS: <code class="prettyprint">/etc/ilorest/ilorest.conf</code></li>
 </ul>
 
+          
           <h1 id="commands-for-the-restful-interface-tool">Commands for the RESTful Interface Tool</h1>
 
           <h2 id="global-commands">Global commands</h2>
@@ -2999,6 +3001,84 @@ Directory path for the ahs file.</p></li>
 
 <p>None</p>
 
+<h3 id="ipprofiles-command">Ipprofiles command</h3>
+
+<blockquote>
+<p>Ipprofiles example commands:</p>
+
+<p>To list the current profiles on the server, run the ipprofiles command without arguments. This server currently does not have any profiles.</p>
+
+<p><img title="Ipprofiles example 1" alt="Ipprofiles Example 1" src="images/images/examples/ipprofiles_list_cmd.png" /></p>
+
+<p>To upload an ipprofile, run the ipprofiles command with a valid JSON file path as an argument. When you run the command to list the profiles, a new profile has been added.</p>
+
+<p><img title="Ipprofiles example 2" alt="Ipprofiles Example 2" src="images/images/examples/ipprofiles_decode_cmd.png" /></p>
+
+<p>To remove a profile, use the unique key contained in the profile with the delete option. When you run the command to list the profiles, a profile has been removed.</p>
+
+<p><img title="Ipprofiles example 3" alt="Ipprofiles Example 3" src="images/images/examples/ipprofiles_delete_cmd.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>ipprofiles <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Run this command to manage the hpeipprofile data store.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>&ndash;sessionid=SESSIONID</strong></li>
+</ul>
+
+<p>Optionally include this flag if you would prefer to connect using a session id instead of a normal login.</p>
+
+<ul>
+<li><strong>-f FILENAME, &ndash;filename=FILENAME</strong></li>
+</ul>
+
+<p>Write results to the specified file.</p>
+
+<ul>
+<li><strong>-d DEL_KEY, &ndash;delete=DEL_KEY</strong></li>
+</ul>
+
+<p>Look for the key or keys in the ipprofile manager and delete.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
 <h3 id="firmware-update-command">Firmware update command</h3>
 
 <blockquote>
@@ -3830,6 +3910,10 @@ The image will be ejected automatically on the second server reboot so that the 
 <p><img title="Downloadcomp example 1" alt="Downloadcomp Example 1" src="images/examples/downloadcomp_ex3.png" /></p>
 </blockquote>
 
+<aside class="warning">The output directory and files in that directory must be set to writable.</aside>
+
+<aside class="warning">Any file in the output directory with the same name as the downloading component will be overwritten.</aside>
+
 <h4 id="syntax">Syntax</h4>
 
 <p>downloadcomp <em>[Component Path] [Optional Parameters]</em></p>
@@ -3910,7 +3994,7 @@ The image will be ejected automatically on the second server reboot so that the 
 
 <p><img title="Installset example 3" alt="Installset Example 3" src="images/examples/installset_ex1.png" /></p>
 
-<p>Complete JSON strucuture.</p>
+<p>Complete JSON structure.</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"installset name"</span><span class="p">,</span><span class="w">
@@ -4034,7 +4118,7 @@ The image will be ejected automatically on the second server reboot so that the 
 <blockquote>
 <p>Listcomp example commands:</p>
 
-<p>Run to list the components ofthe currently logged in system.</p>
+<p>Run to list the components of the currently logged in system.</p>
 
 <p><img title="Listcomp example 1" alt="Listcomp Example 1" src="images/examples/listcomp_ex1.png" /></p>
 </blockquote>
@@ -4770,6 +4854,8 @@ Overall Allocated Scalable Persistent Memory
 '----------------------------------------------------------'
 250 GiB of 786 GiB allocated (536 GiB available)
 
+Estimated total backup boot time for this configuration: 2m 18s
+
 
 Logical NVDIMMs
 ---------------
@@ -4779,6 +4865,7 @@ Size        Type               Location                Operation
   100 GiB   Single Processor   Processor 1, Index 1                 
   100 GiB   Single Processor   Processor 1, Index 2                 
    50 GiB   Single Processor   Processor 2, Index 1                 
+
 
 
 </code></pre>
@@ -4791,7 +4878,7 @@ Size        Type               Location                Operation
 Available Scalable Persistent Memory
 ------------------------------------
 Available capacity to create logical NVDIMMs is constrained by the system
-hardware, including the number of backup storage devices selected.
+ hardware, including the number of backup storage devices selected.
 
 By Processor (for single processor logical NVDIMMs):
 
@@ -4937,9 +5024,9 @@ Scalable Persistent Memory supported: 786 GiB
 <h4 id="description">Description</h4>
 
 <ul>
-<li>Configures the specified devices for use as Scalable Persistent Memory backup storage</li>
-<li>Backup devices are not allowed to be removed while logical NVDIMMs exist</li>
-<li>The device IDs can be obtained from the <code class="prettyprint">showbackupdevices</code> command</li>
+<li>Configures the specified devices for use as Scalable Persistent Memory backup storage.</li>
+<li>Backup devices are not allowed to be removed while logical NVDIMMs exist.</li>
+<li>The device IDs can be obtained from the <code class="prettyprint">showbackupdevices</code> command.</li>
 </ul>
 
 <h4 id="parameters">Parameters</h4>
@@ -4959,13 +5046,16 @@ Scalable Persistent Memory supported: 786 GiB
 <h3 id="create-logical-nvdimm-command">Create Logical NVDIMM command</h3>
 
 <blockquote>
-<p>Example: Create a 100 GiB logical NVDIMM on processor 1</p>
+<p>Example: Create a 100 GiB logical NVDIMM on processor 1.</p>
 </blockquote>
 <pre class="highlight plaintext"><code>iLOrest &gt; createlogicalnvdimm --processor=1 --size=100
 
 Size        Type               Location                Operation    
 --------------------------------------------------------------------
   100 GiB   Single Processor   Processor 1, Index 1    Create       
+
+Estimated total backup boot time for this configuration: 1m 33s
+
 
 
 *** The pending configuration operations require a restart to take effect ***
@@ -4982,6 +5072,9 @@ Size        Type               Location                Operation
 --------------------------------------------------------------------
   100 GiB   Spanned            Processors 1,2          Create       
   100 GiB   Single Processor   Processor 1, Index 1    Create       
+
+Estimated total backup boot time for this configuration: 2m 3s
+
 
 
 *** The pending configuration operations require a restart to take effect ***
@@ -5020,7 +5113,7 @@ Size        Type               Location                Operation
 <li><strong>&ndash;pair=PAIR, &ndash;processors=PAIR</strong></li>
 </ul>
 
-<p>Use to create a spanned logical NVDIMM. Specify the pair of processors (auto or 1,2).</p>
+<p>Use to create a spanned logical NVDIMM.  Specify the pair of processors (auto or 1,2).</p>
 
 <h3 id="remove-logical-nvdimm-command">Remove Logical NVDIMM command</h3>
 
@@ -5034,11 +5127,12 @@ Size        Type               Location                Operation
   128 GiB   Single Processor   Processor 1, Index 1    Remove       
 
 
+
 *** WARNING ***
 
 The pending configuration operations require a restart to take effect.
 
-All backup storage devices will be initialized during restart.
+All backup storage devices will be initialized upon restart.
 Data on any existing logical NVDIMMs will be lost.
 
 The pending configuration changes can be discarded by running:
@@ -5059,11 +5153,12 @@ Size        Type               Location                Operation
   100 GiB   Spanned            Processors 1,2          Remove       
 
 
+
 *** WARNING ***
 
 The pending configuration operations require a restart to take effect.
 
-All backup storage devices will be initialized during restart.
+All backup storage devices will be initialized upon restart.
 Data on any existing logical NVDIMMs will be lost.
 
 The pending configuration changes can be discarded by running:
@@ -5104,7 +5199,7 @@ The pending configuration changes can be discarded by running:
 <li><strong>&ndash;pair=PAIR, &ndash;processors=PAIR</strong></li>
 </ul>
 
-<p>Specify the pair of processors of the spanned logical NVDIMM to remove (1,2)</p>
+<p>Specify the pair of processors of the spanned logical NVDIMM to remove (1,2).</p>
 
 <h3 id="revert-scalable-persistent-memory-configuration-command">Revert Scalable Persistent Memory configuration command</h3>
 
@@ -5118,11 +5213,12 @@ Size        Type               Location                Operation
   128 GiB   Single Processor   Processor 1, Index 1    Remove       
 
 
+
 *** WARNING ***
 
 The pending configuration operations require a restart to take effect.
 
-All backup storage devices are initialized during restart.
+All backup storage devices will be initialized upon restart.
 Data on any existing logical NVDIMMs will be lost.
 
 The pending configuration changes can be discarded by running:
@@ -5141,6 +5237,9 @@ Size        Type               Location                Operation
 --------------------------------------------------------------------
   128 GiB   Single Processor   Processor 1, Index 1                 
 
+Estimated total backup boot time for this configuration: 1m 41s
+
+
 Scalable Persistent Memory Backup Storage Devices
 -------------------------------------------------
 
@@ -5152,6 +5251,8 @@ ID     Location        Model        Type       Size    Status   Life PMEM Use  O
 3@4    Box 3 Bay 4     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%                                
 
 Scalable Persistent Memory supported: 786 GiB
+Estimated total backup boot time for this configuration: 1m 41s
+
 
 
 
@@ -5222,7 +5323,7 @@ Scalable Persistent Memory supported: 393 GiB
 <h3 id="auto-select-backup-devices-command">Auto Select Backup Devices command</h3>
 
 <blockquote>
-<p>Example: Simulate the selection of backup storage devices to support 900 GiB of Scalable Persistent Memory:</p>
+<p>Example: Simulate the selection of backup storage devices to support 900 GiB of Scalable Persistent Memory.</p>
 </blockquote>
 <pre class="highlight plaintext"><code>iLOrest &gt; autoselectbackupdevices --size=900
 
@@ -6001,7 +6102,7 @@ Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
 
 <p><img title="BootOrder example 6" alt="Bootorder Example 6" src="images/BootOrder_6.png" /></p>
 
-<p>Once the changes have been made to the boot order, the changes are finally committed with the <code class="prettyprint">commi</code> command, which also logs the user out.</p>
+<p>Once the changes have been made to the boot order, the changes are finally committed with the <code class="prettyprint">commit</code> command, which also logs the user out.</p>
 
 <p>All of the commands shown here are executed the same way in the actual <code class="prettyprint">bootorder</code> command, and were called in this same order to execute the <code class="prettyprint">bootorder</code> command. You can write your own scripts to combine commands just like bootorder did, to use the provided commands in the RESTful Interface Tool for higher level functionality.</p>
 
@@ -6037,7 +6138,9 @@ Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
 
 <p><img title="TPM Example" alt="TPM Example" src="images/TPM_disable.png" /></p>
 
-<p>When the server is rebooted, the <strong>TpmState</strong> is changed from <strong>PresentEnabled</strong> to <strong>PresentDisabled</strong>.</p>
+<blockquote>
+<p><strong>Above:</strong> When the server is rebooted, the <strong>TpmState</strong> is changed from <strong>PresentEnabled</strong> to <strong>PresentDisabled</strong>.</p>
+</blockquote>
 
 <p>If you need to disable TPM on a group of servers, you can use a set of commands in RESTful Interface Tool. For example, you are installing SPPs and OSs on bare-metal servers, and you need to disable TPM prior to starting installation.</p>
 
@@ -6048,6 +6151,90 @@ Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
 <p>To enable the TPM, you can set the <code class="prettyprint">TpmState</code> to <code class="prettyprint">PresentEnabled</code>. <strong>See side example</strong>.</p>
 
 <aside class="notice">When you are disabling or enabling TPM, depending on the TPM chip type on the server, the TPM visibility might be <b>Tpm2Visibility</b> or <b>TpmVisibility</b>.</aside>
+
+<h2 id="finding-ilo-mac-address">Finding iLO MAC address</h2>
+
+<p>Finding the iLO MAC address is not implemented in the restful interface tool but is easily reached by a set of <code class="prettyprint">select</code> and <code class="prettyprint">list</code> commands</p>
+
+<p><img title="Mac Address example 1" alt="MAC Address Example 1" src="images/images/MacAddress1.png" /></p>
+
+<p>First login to the server. Then <code class="prettyprint">select</code> the <code class="prettyprint">EthernetInterfaces.</code> type</p>
+
+<p><img title="Mac Address example 2" alt="MAC Address Example 2" src="images/images/MacAddress2.png" /></p>
+
+<p>Now using the <code class="prettyprint">list</code> command, list the <code class="prettyprint">name</code>, <code class="prettyprint">macaddress</code>, and <code class="prettyprint">status</code> values with the filter of the value <code class="prettyprint">Name</code> starting with Manager.</p>
+
+<aside class="notice">the &ndash;filter flag is case-sensitive.</aside>
+
+<h2 id="setting-active-ilo-nic">Setting Active iLO NIC</h2>
+
+<blockquote>
+<p>Use this for gen10 servers.</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/redfish/v1/Managers/1/EthernetInterfaces/1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"Oem"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+            </span><span class="nt">"Hpe"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+                </span><span class="nt">"NICEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>Use this for gen9 servers.</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"path"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/redfish/v1/Managers/1/EthernetInterfaces/1"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"body"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"Oem"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+            </span><span class="nt">"Hp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+                </span><span class="nt">"NICEnabled"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+     </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>To set the iLO NIC, First login to the server. Then use a <code class="prettyprint">rawpatch</code> command </p>
+
+<p><img title="Mac Address example 1" alt="NIC Example 1" src="images/images/NIC.png" /></p>
+
+<p>To set the NIC, first login to the server. Then we will be using a <code class="prettyprint">rawpatch</code> command</p>
+
+<h2 id="setting-ilo-timezone">Setting iLO Timezone</h2>
+
+<p>In setting the iLO Timezone, we will be using both a rawpost and commands.</p>
+
+<p><img title="Time Zone example 1" alt="Timezone Example 1" src="images/images/timezone1.png" /></p>
+
+<p>First we login and select the HpeiLODateTime. type. If using Gen9, select the HpiLODateTime type instead. We then <code class="prettyprint">list</code> the <code class="prettyprint">TimeZoneList</code>. </p>
+
+<p>Now scroll around looking for the timezone that is wanted. In the case of the example, we will be using US/Hawaii. Take note of the index associated with the Name.(2 in the case of US/Hawaii)</p>
+
+<p><img title="Time Zone example 2" alt="Timezone Example 2" src="images/images/timezone2.png" /></p>
+
+<p>Finally, we <code class="prettyprint">set</code> the Index to 2. Check the status to make sure the change is queued and finally make sure to <code class="prettyprint">commit</code> to finalize the changes.</p>
+
+<h2 id="getting-powermetric-average">Getting Powermetric Average</h2>
+
+<p>First login to the server.</p>
+
+<p><img title="Powermetric example 1" alt="Power Example 1" src="images/images/power.png" /></p>
+
+<p>Next <code class="prettyprint">select</code> the Power. type. Finally <code class="prettyprint">list</code> powercontrol. The powermetric average is represented by the <code class="prettyprint">AverageConsumedWatts</code> value.</p>
+
+<h2 id="getting-encryption-settings">Getting Encryption Settings</h2>
+
+<p>To get the encryption settings, first login to the server</p>
+
+<p><img title="Encryption Setting example 1" alt="Encryption Setting Example 1" src="images/images/encryptionsettings.png" /></p>
+
+<p>Then <code class="prettyprint">select</code> the <code class="prettyprint">HpeSmartStorageArrayControllerCollection</code> type. If on a <code class="prettyprint">Gen9</code> server select <code class="prettyprint">HpSmartStorageArrayControllerCollection</code> instead.</p>
+
+<p>In the provided example, many of the resources for the encryption setting are not available. If available there will be values of <code class="prettyprint">Name</code>, <code class="prettyprint">Model</code>, <code class="prettyprint">SerialNumber</code>, <code class="prettyprint">EncryptionBootPasswordSet</code>, <code class="prettyprint">EncryptionCryptoOfficerPasswordSet</code>, <code class="prettyprint">EncrpytionLocalKeyCacheEnabled</code>, <code class="prettyprint">EncryptionMixedVolumesEnabled</code>,<code class="prettyprint">EncryptionPhyiscalDriveCount</code>,<code class="prettyprint">EncryptionRecoveryParamsSet</code>,<code class="prettyprint">EncryptionStandaloneModeEnabled</code>, and/or <code class="prettyprint">EncryptionUserPasswordSet</code>.</p>
 
 <h2 id="using-the-parallel-distributed-shell-pdsh-to-execute-commands-in-parallel-example">Using the Parallel Distributed Shell (PDSH) to execute commands in parallel example</h2>
 
@@ -6675,6 +6862,10 @@ pause
 <td>Unable to open a channel with iLO error.</td>
 </tr>
 <tr>
+<td>65</td>
+<td>Error parsing schema. Try running with the “&ndash;latestschema flag”.</td>
+</tr>
+<tr>
 <td>70</td>
 <td>Error occurred while trying to write BLOB.</td>
 </tr>
@@ -6703,8 +6894,16 @@ pause
 <td>iLO RESTful API BLOB override error.</td>
 </tr>
 <tr>
+<td>77</td>
+<td>Error occurred during the blob operation after maximum retries.</td>
+</tr>
+<tr>
 <td>80</td>
 <td>Resource allocation errors.</td>
+</tr>
+<tr>
+<td>83</td>
+<td>The requested path is unavailable.</td>
 </tr>
 <tr>
 <td>100</td>
