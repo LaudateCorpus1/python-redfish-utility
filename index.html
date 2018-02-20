@@ -448,7 +448,41 @@ ilorest.exe load -f %2
 <li>Linux OS: <code class="prettyprint">/etc/ilorest/ilorest.conf</code></li>
 </ul>
 
-          
+          <h2 id="higher-security-modes">Higher Security Modes</h2>
+
+<p>This section describes how to set higher security modes and how to use RESTful Interface Tool in these modes.
+<aside class="notice">These security settings are only available in HPE Gen10 servers.</aside></p>
+
+<h3 id="setting-ilo-higher-security-modes">Setting iLO Higher Security Modes</h3>
+
+<blockquote>
+<p>To set security modes in RESTful Interface Tool, select the &ldquo;HpeSecurityService.&rdquo; type, and then set the &ldquo;SecurityState&rdquo; property to one of the allowed values and commit.
+<img title="Set Security 1" alt="Set Security 1" src="images/Security_1.png" /></p>
+</blockquote>
+
+<aside class="notice">After the commit operation has been completed, iLO will reset to apply the changes.</aside>
+
+<h3 id="using-restful-interface-tool-in-ilo-higher-security-modes">Using RESTful Interface Tool in iLO Higher Security Modes</h3>
+
+<p>RESTful Interface Tool in remote mode continues to function normally in higher security modes.
+To use RESTful Interface Tool locally in higher security modes, you must pass credentials along with your commands.
+<aside class="warning">In interactive mode, you only need to pass your credentials during the login command. In command line mode, you must pass credentials for EACH COMMAND, even if you are already logged in.</aside></p>
+
+<blockquote>
+<p>RESTful Interface Tool functions normally with higher security settings in remote mode.
+<img title="Set Security 2" alt="Set Security 2" src="images/Security_2.png" />
+To use RESTful Interface Tool locally in higher security modes, you must pass credentials to your commands.
+<img title="Set Security 3" alt="Set Security 3" src="images/Security_3.png" />
+If you do not pass the proper credentials in local mode, you receive a similar error.
+<img title="Set Security 4" alt="Set Security 4" src="images/Security_4.png" /></p>
+</blockquote>
+
+<h3 id="a-note-on-os-fips-modes">A note on OS FIPS modes</h3>
+
+<p>RESTful Interface Tool 2.2 and greater have OS FIPS support. If an OS is set to enforce FIPS, RESTful Interface Tool used a FIPS version of OpenSSL.</p>
+
+<p>For users running from source that would like FIPS support, please see <a href="https://developer.hpe.com/blog">this link</a> containing information on including this feature.</p>
+
           <h1 id="commands-for-the-restful-interface-tool">Commands for the RESTful Interface Tool</h1>
 
           <h2 id="global-commands">Global commands</h2>
@@ -3008,15 +3042,15 @@ Directory path for the ahs file.</p></li>
 
 <p>To list the current profiles on the server, run the ipprofiles command without arguments. This server currently does not have any profiles.</p>
 
-<p><img title="Ipprofiles example 1" alt="Ipprofiles Example 1" src="images/images/examples/ipprofiles_list_cmd.png" /></p>
+<p><img title="Ipprofiles example 1" alt="Ipprofiles Example 1" src="images/examples/ipprofiles_list_cmd.png" /></p>
 
 <p>To upload an ipprofile, run the ipprofiles command with a valid JSON file path as an argument. When you run the command to list the profiles, a new profile has been added.</p>
 
-<p><img title="Ipprofiles example 2" alt="Ipprofiles Example 2" src="images/images/examples/ipprofiles_decode_cmd.png" /></p>
+<p><img title="Ipprofiles example 2" alt="Ipprofiles Example 2" src="images/examples/ipprofiles_decode_cmd.png" /></p>
 
 <p>To remove a profile, use the unique key contained in the profile with the delete option. When you run the command to list the profiles, a profile has been removed.</p>
 
-<p><img title="Ipprofiles example 3" alt="Ipprofiles Example 3" src="images/images/examples/ipprofiles_delete_cmd.png" /></p>
+<p><img title="Ipprofiles example 3" alt="Ipprofiles Example 3" src="images/examples/ipprofiles_delete_cmd.png" /></p>
 </blockquote>
 
 <h4 id="syntax">Syntax</h4>
@@ -6156,11 +6190,11 @@ Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
 
 <p>Finding the iLO MAC address is not implemented in the restful interface tool but is easily reached by a set of <code class="prettyprint">select</code> and <code class="prettyprint">list</code> commands</p>
 
-<p><img title="Mac Address example 1" alt="MAC Address Example 1" src="images/images/MacAddress1.png" /></p>
+<p><img title="Mac Address example 1" alt="MAC Address Example 1" src="images/MacAddress1.png" /></p>
 
 <p>First login to the server. Then <code class="prettyprint">select</code> the <code class="prettyprint">EthernetInterfaces.</code> type</p>
 
-<p><img title="Mac Address example 2" alt="MAC Address Example 2" src="images/images/MacAddress2.png" /></p>
+<p><img title="Mac Address example 2" alt="MAC Address Example 2" src="images/MacAddress2.png" /></p>
 
 <p>Now using the <code class="prettyprint">list</code> command, list the <code class="prettyprint">name</code>, <code class="prettyprint">macaddress</code>, and <code class="prettyprint">status</code> values with the filter of the value <code class="prettyprint">Name</code> starting with Manager.</p>
 
@@ -6200,7 +6234,7 @@ Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
 
 <p>To set the iLO NIC, First login to the server. Then use a <code class="prettyprint">rawpatch</code> command </p>
 
-<p><img title="Mac Address example 1" alt="NIC Example 1" src="images/images/NIC.png" /></p>
+<p><img title="Mac Address example 1" alt="NIC Example 1" src="images/NIC.png" /></p>
 
 <p>To set the NIC, first login to the server. Then we will be using a <code class="prettyprint">rawpatch</code> command</p>
 
@@ -6208,13 +6242,13 @@ Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
 
 <p>In setting the iLO Timezone, we will be using both a rawpost and commands.</p>
 
-<p><img title="Time Zone example 1" alt="Timezone Example 1" src="images/images/timezone1.png" /></p>
+<p><img title="Time Zone example 1" alt="Timezone Example 1" src="images/timezone1.png" /></p>
 
 <p>First we login and select the HpeiLODateTime. type. If using Gen9, select the HpiLODateTime type instead. We then <code class="prettyprint">list</code> the <code class="prettyprint">TimeZoneList</code>. </p>
 
 <p>Now scroll around looking for the timezone that is wanted. In the case of the example, we will be using US/Hawaii. Take note of the index associated with the Name.(2 in the case of US/Hawaii)</p>
 
-<p><img title="Time Zone example 2" alt="Timezone Example 2" src="images/images/timezone2.png" /></p>
+<p><img title="Time Zone example 2" alt="Timezone Example 2" src="images/timezone2.png" /></p>
 
 <p>Finally, we <code class="prettyprint">set</code> the Index to 2. Check the status to make sure the change is queued and finally make sure to <code class="prettyprint">commit</code> to finalize the changes.</p>
 
@@ -6222,7 +6256,7 @@ Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
 
 <p>First login to the server.</p>
 
-<p><img title="Powermetric example 1" alt="Power Example 1" src="images/images/power.png" /></p>
+<p><img title="Powermetric example 1" alt="Power Example 1" src="images/power.png" /></p>
 
 <p>Next <code class="prettyprint">select</code> the Power. type. Finally <code class="prettyprint">list</code> powercontrol. The powermetric average is represented by the <code class="prettyprint">AverageConsumedWatts</code> value.</p>
 
@@ -6230,7 +6264,7 @@ Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
 
 <p>To get the encryption settings, first login to the server</p>
 
-<p><img title="Encryption Setting example 1" alt="Encryption Setting Example 1" src="images/images/encryptionsettings.png" /></p>
+<p><img title="Encryption Setting example 1" alt="Encryption Setting Example 1" src="images/encryptionsettings.png" /></p>
 
 <p>Then <code class="prettyprint">select</code> the <code class="prettyprint">HpeSmartStorageArrayControllerCollection</code> type. If on a <code class="prettyprint">Gen9</code> server select <code class="prettyprint">HpSmartStorageArrayControllerCollection</code> instead.</p>
 
