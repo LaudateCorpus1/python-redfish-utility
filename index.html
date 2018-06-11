@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>RESTful Interface Tool 2.2.0 User Guide</title>
+    <title>RESTful Interface Tool 2.3.0 User Guide</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -120,7 +120,7 @@
         
           <h1 id="overview">Overview</h1>
 
-<p>The RESTful Interface Tool is a command line interface that allows you to manage Hewlett Packard Enterprise products that take advantage of RESTful APIs. For this release of the tool, you can manage HPE Gen9 servers running iLO 4 2.00 or later through iLO RESTful APIs. You can install the tool on your computer for remote use or you can install the tool locally on a server with a Windows OS or Linux OS. In addition to using the tool manually to execute individual commands, you can create scripts to automate tasks.</p>
+<p>The RESTful Interface Tool is a command line interface that allows you to manage Hewlett Packard Enterprise products that take advantage of RESTful APIs. For this release of the tool, you can manage HPE Gen9 servers running iLO 4 2.10 or later through iLO RESTful APIs. You can install the tool on your computer for remote use or you can install the tool locally on a server with a Windows OS or Linux OS. In addition to using the tool manually to execute individual commands, you can create scripts to automate tasks.</p>
 
 <p>The RESTful Interface Tool can display and set parameters for the following:</p>
 
@@ -140,7 +140,7 @@
 <ul>
 <li>Local management: Gen9 server with a Windows OS or Linux OS (64–bit) installed (If you want to install the tool locally on the server).</li>
 <li>Remote management: Gen9 server with or without an OS installed.</li>
-<li>iLO 4 2.00 or later.</li>
+<li>iLO 4 2.10 or later.</li>
 <li>Before you run the tool on a Linux system, the <strong>/tmp</strong> folder must be configured to allow code to execute. If the <strong>/tmp</strong> folder is set to <em>no-execution</em>, the tool will not run.</li>
 <li>The install packages are available for download from <a href="http://www.hpe.com/info/resttool">http://www.hpe.com/info/resttool</a>.</li>
 </ul>
@@ -215,10 +215,10 @@ C:\Program Files\Hewlett Packard Enterprise\HP RESTful Interface Tool\
 <h3 id="scriptable-mode">Scriptable mode</h3>
 
 <blockquote>
-<p>The following script can be called to retrieve information regarding the <strong>HpBios</strong> type:</p>
+<p>The following script can be called to retrieve information regarding the <strong>Bios</strong> type:</p>
 </blockquote>
 <pre class="highlight plaintext"><code>:: This is a batch file that logs into a remote server,
-:: selects the HpBios type, and gets the BootMode value
+:: selects the Bios type, and gets the BootMode value
 
 :: Usage :: 
 :: selectget.bat [URI] [USERNAME] [PASSWORD] 
@@ -240,9 +240,9 @@ goto :EOF
 @echo *****************************************
 ilorest.exe login %1 -u %2 -p %3
 @echo *****************************************
-@echo ******* selecting HpBios type... ********
+@echo ******* selecting Bios type... ********
 @echo *****************************************
-ilorest.exe select HpBios.
+ilorest.exe select Bios.
 @echo *****************************************
 @echo ********** getting BootMode... **********
 @echo *****************************************
@@ -252,7 +252,7 @@ pause
 
 <p>Scriptable mode is used if you want to script all the commands with the use of an external input file. The script contains a list of the RESTful Interface Tool command lines that let users get and set properties of server objects.</p>
 
-<p>In this example, first the <code class="prettyprint">HpBios</code> type is selected, and then the <strong>get</strong> command is used to retrieve information about the <code class="prettyprint">BootMode</code> property of <code class="prettyprint">HpBios</code></p>
+<p>In this example, first the <code class="prettyprint">Bios</code> type is selected, and then the <strong>get</strong> command is used to retrieve information about the <code class="prettyprint">BootMode</code> property of <code class="prettyprint">Bios</code></p>
 
 <h3 id="file-based-mode">File-based mode</h3>
 
@@ -297,9 +297,9 @@ ilorest.exe load -f %2
 
 <p><img title="File Based Mode example" alt="File Mode example" src="images/FileBasedMode_1.png" /></p>
 
-<p>Here, the <code class="prettyprint">HpBios</code> type is saved to a file called <code class="prettyprint">ilorest1.json</code>. Then, after you modify any properties, the <strong>load</strong> command is used to make these changes on the server. </p>
+<p>Here, the <code class="prettyprint">Bios</code> type is saved to a file called <code class="prettyprint">ilorest1.json</code>. Then, after you modify any properties, the <strong>load</strong> command is used to make these changes on the server. </p>
 
-<p>The properties of <code class="prettyprint">HpBios</code> can be edited here, and then loaded on the server. When the file is loaded on the server, changes to read-only values are not reflected. The full list in this example is truncated to save space.</p>
+<p>The properties of <code class="prettyprint">Bios</code> can be edited here, and then loaded on the server. When the file is loaded on the server, changes to read-only values are not reflected. The full list in this example is truncated to save space.</p>
 
 <blockquote>
 <p>After saving this configuration, the <strong>ilorest1.json</strong> file looks like this:</p>
@@ -565,7 +565,7 @@ If you do not pass the proper credentials in local mode, you receive a similar e
 
 <p>Use this flag if you wish to to enable Redfish only compliance. It is enabled by default in systems with iLO5 and above.</p>
 
-<p><strong>_Important: The **-redfish</strong> global option is required for iLO 4 firmware version 2.40 and is not required for iLO 5._** </p>
+<p><strong><em>Important: The &ndash;redfish global option is required for iLO 4 firmware version 2.40 and is not required for iLO 5.</em></strong> </p>
 
 <p><strong>&ndash;latestschema</strong></p>
 
@@ -588,11 +588,11 @@ Might cause errors in some data retrieval due to difference in schema versions.
 <blockquote>
 <p>Login example commands:</p>
 
-<p>To login remotely, supply the URL, username, and password for the server. Here the selector tag has been included so that the <strong>HpBios</strong> type is selected once the user is logged in. You can prove that the <strong>HpBios</strong> type has indeed been selected when we enter the select command.</p>
+<p>To login remotely, supply the URL, username, and password for the server. Here the selector tag has been included so that the <strong>Bios</strong> type is selected once the user is logged in. You can prove that the <strong>Bios</strong> type has indeed been selected when we enter the select command.</p>
 
 <p><img title="Login example 1" alt="Login Example 1" src="images/examples/login_ex1.png" /></p>
 
-<p>Here the path was set to <strong>/rest/v1/systems/1/bios</strong> instead of the default <strong>/rest/v1/</strong>. To check that the path has indeed been set to a different place, the types command was entered and returned the types in the specified path, instead of in the default <strong>/rest/v1/</strong>. You can log in again with the default <strong>/rest/v1/</strong> to show the change.</p>
+<p>Here the path was set to <strong>/redfish/v1/systems/1/bios/</strong> instead of the default <strong>/redfish/v1/</strong>. To check that the path has indeed been set to a different place, the types command was entered and returned the types in the specified path, instead of in the default <strong>/redfish/v1/</strong>. You can log in again with the default <strong>/redfish/v1/</strong> to show the change.</p>
 
 <p><img title="Login example 2-1" alt="Login Example 2-1" src="images/examples/login_ex2-1.png" /></p>
 
@@ -671,7 +671,9 @@ Might cause errors in some data retrieval due to difference in schema versions.
 
 <p>Select this flag to input a BIOS password. Include this flag if second-level BIOS authentication is needed for the command to execute.</p>
 
-<aside class="warning">Cache is activated session keys and it is normal to see these keys stored in plaintext. This warning regarding an activated cache is normal to see. The full list has been truncated for space.</aside>
+<aside class="warning">Cache is activated session keys and it is normal to see these keys stored in plaintext. This warning regarding an activated cache is normal to see in versions earlier than 2.3, it is not seen version 2.3 and greater of the tool.</aside>
+
+<aside class="notice">This flag is used only on iLO 4 systems and not required on iLO 5 systems.</aside>
 
 <h3 id="types-command">Types command</h3>
 
@@ -753,7 +755,7 @@ Might cause errors in some data retrieval due to difference in schema versions.
 
 <p>None</p>
 
-<aside class="notice">See the iLO RESTful API Data Model Reference (iLO 4) at <a href=" http://www.hpe.com/info/restfulinterface/docs">http://www.hpe.com/info/restfulinterface/docs</a> for a list and description of all the possible types.</aside>
+<aside class="notice">See the iLO RESTful API Data Model Reference at <a href=" https://hewlettpackard.github.io/ilo-rest-api-docs/">https://hewlettpackard.github.io/ilo-rest-api-docs/</a> for a list and description of all the possible types.</aside>
 
 <h3 id="select-command">Select command</h3>
 
@@ -764,13 +766,13 @@ Might cause errors in some data retrieval due to difference in schema versions.
 </blockquote>
 
 <aside class="notice">
-Adding a period after the type selected, **HpBios**, limits the selection, preventing accidentally also selecting **HpBiosMapping**. This also removes the need to include the version.
+Adding a period after the type selected, **Bios**, limits the selection, preventing accidentally also selecting **BiosMapping**. This also removes the need to include the version.
 </aside>
 
 <blockquote>
 <p><img title="Select example 1" alt="Select Example 1" src="images/examples/select_ex1.png" /></p>
 
-<p>Here the <strong>ComputerSystem</strong> type was selected instead of the <strong>HpBios</strong> type like in the example above.</p>
+<p>Here the <strong>ComputerSystem</strong> type was selected instead of the <strong>Bios</strong> type like in the example above.</p>
 
 <p><img title="Select example 2" alt="Select Example 2" src="images/examples/select_ex2.png" /></p>
 </blockquote>
@@ -842,6 +844,8 @@ Adding a period after the type selected, **HpBios**, limits the selection, preve
 </ul>
 
 <p>Select this flag to input a BIOS password. Include this flag if second-level BIOS authentication is needed for the command to execute.</p>
+
+<aside class="notice">This flag is used only on iLO 4 systems and not required on iLO 5 systems.</aside>
 
 <h4 id="inputs">Inputs</h4>
 
@@ -960,9 +964,11 @@ Adding a period after the type selected, **HpBios**, limits the selection, preve
 
 <p><img title="Info example 1" alt="Info Example 1" src="images/examples/info_ex1.png" /></p>
 
-<p>Multiple properties under the VirtualMedia type are specified. By passing multiple properties, it returns the information on all of the properties passed.</p>
+<p>Here the server is logged into and type <strong>Power</strong> is selected, the power supplies information is displayed.</p>
 
 <p><img title="Info example 2" alt="Info Example 2" src="images/examples/info_ex2.png" /></p>
+
+<p>Multiple properties under the VirtualMedia type are specified. By passing multiple properties, it returns the information on all of the properties passed.</p>
 
 <p><img title="Info example 3" alt="Info Example 3" src="images/examples/info_ex3.png" /></p>
 </blockquote>
@@ -1056,11 +1062,11 @@ Adding a period after the type selected, **HpBios**, limits the selection, preve
 <blockquote>
 <p>Get example commands:</p>
 
-<p>Using get without any property specified shows the properties of the selected type. </p>
+<p>Using get without any property specified shows the properties of the selected type. The full list is truncated for space.</p>
 </blockquote>
 
 <aside class="notice">
-No reserved properties are shown with the get command. Also, the full list is truncated for space.
+No reserved properties are shown with the get command.
 </aside>
 
 <blockquote>
@@ -1070,7 +1076,7 @@ No reserved properties are shown with the get command. Also, the full list is tr
 
 <p><img title="Get example 2" alt="Get Example 2" src="images/examples/get_ex2.png" /></p>
 
-<p>Here the server at xx.xx.xx.xx is logged into, the type HpBios. is selected, and the get command is used to retrieve the BootOrderPolicy property of HpBios.</p>
+<p>Here the server at xx.xx.xx.xx is logged into, the type Bios. is selected, and the get command is used to retrieve the BootOrderPolicy property of Bios.</p>
 
 <p><img title="Get example 3" alt="Get Example 3" src="images/examples/get_ex3.png" /></p>
 
@@ -1129,13 +1135,17 @@ No reserved properties are shown with the get command. Also, the full list is tr
 <li><strong>&ndash;includelogs</strong></li>
 </ul>
 
-<p>Optionally choose to set the <strong>includelogs</strong> flag. Doing so will include logs in the data retrieval process.</p>
+<p>Optional: Include this flag to set the <strong>includelogs</strong> flag. This will include logs in the data retrieval process.</p>
+
+<p>-<strong>&ndash;selector=SELECTOR</strong></p>
+
+<p>Optional: Include this flag to select a file to run the current command on. Use this command to select a type without entering another command, or to work with a type that is different from the one currently selected.</p>
 
 <ul>
 <li><strong>&ndash;filter [FILTER_ATTRIBUTE=FILTER_VALUE]</strong></li>
 </ul>
 
-<p>Optionally set a filter value for a filter attribute. This uses the provided filter for the currently selected type.</p>
+<p>Optional:Include to set a filter value for a filter attribute. This uses the provided filter for the currently selected type.</p>
 
 <aside class="notice"> Use this flag to narrow down your results. For example, selecting a common type might return multiple objects that are all of that type. If you want to modify the properties of only one of those objects, use the <b>filter</b> flag to narrow down results based on properties.</aside>
 
@@ -1143,13 +1153,13 @@ No reserved properties are shown with the get command. Also, the full list is tr
 <li><strong>-j, &ndash;json</strong></li>
 </ul>
 
-<p>Optionally include this flag if you wish to change the displayed output to JSON format. Preserving the JSON data structure makes the information easier to read.</p>
+<p>Optional: Include this flag to change the displayed output to JSON format. Preserving the JSON data structure makes the information easier to read.</p>
 
 <ul>
 <li><strong>&ndash;path=PATH</strong></li>
 </ul>
 
-<p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be <code class="prettyprint">/rest/v1</code>.</p>
+<p>Optional: Include this flag to set a starting point for data collection. If you do not specify a starting point, the default path will be <code class="prettyprint">/rest/v1</code>.</p>
 
 <aside class="notice"> The <b>path</b> flag can only be specified at the time of login, so if you are already logged in to the server, the <b>path</b> flag will not change the path. If you are entering a command that isn’t the login command, but include your login information, you can still specify the <b>path</b> flag there.</aside>
 
@@ -1157,7 +1167,13 @@ No reserved properties are shown with the get command. Also, the full list is tr
 <li><strong>&ndash;logout</strong></li>
 </ul>
 
-<p>Optionally include the logout flag to log out of the server after this command is completed. You need to be logged in to use this flag.</p>
+<p>Optional: Include the logout flag to log out of the server after this command is completed. You need to be logged in to use this flag.</p>
+
+<ul>
+<li><strong>&ndash;noreadonly</strong></li>
+</ul>
+
+<p>Optional: Include this flag to display properties that are not read-only. This is useful to see what is configurable with the selected type(s).</p>
 
 <h4 id="inputs">Inputs</h4>
 
@@ -1172,7 +1188,7 @@ No reserved properties are shown with the get command. Also, the full list is tr
 <blockquote>
 <p>Set example commands:</p>
 
-<p>Here the <strong>ServiceName</strong> property of the type <strong>HpBios</strong> has been set to the value <strong>ExampleService</strong>. When the get command is performed next, the value of <strong>ServiceName</strong> has been set to <strong>ExampleService</strong>. </p>
+<p>Here the <strong>ServiceName</strong> property of the type <strong>Bios</strong> has been set to the value <strong>ExampleService</strong>. When the get command is performed next, the value of <strong>ServiceName</strong> has been set to <strong>ExampleService</strong>. </p>
 </blockquote>
 
 <aside class="notice">
@@ -1182,15 +1198,15 @@ Even though the get command shows **ServiceName** is set to **ExampleService**, 
 <blockquote>
 <p><img title="Set example 1" alt="Set Example 1" src="images/examples/set_ex1.png" /></p>
 
-<p>Set the attribute of a type using the set command. Here the server is logged into using the username, password, and URL flags, and then <strong>HpBios</strong> is selected with the selector flag. Then, the <strong>ServiceName</strong> property is set.</p>
+<p>Set the attribute of a type using the set command. Here the server is logged into using the username, password, and URL flags, and then <strong>Bios</strong> is selected with the selector flag. Then, the <strong>ServiceName</strong> property is set.</p>
 
 <p><img title="Set example 2" alt="Set Example 2" src="images/examples/set_ex2.png" /></p>
 
-<p>Here the <strong>AdminName</strong> property of the type <strong>HpBios</strong> was set to the value <strong>JohnDoe</strong>. Including the commit flag committed the changes, so that after logging back into the server, the <strong>AdminName</strong> becomes <strong>JohnDoe</strong>. Otherwise it would have returned to its previous value. Include the <strong>biospassword</strong> flag to input a password if second level BIOS authentication is required.</p>
+<p>Here the <strong>AdminName</strong> property of the type <strong>Bios</strong> was set to the value <strong>JohnDoe</strong>. Including the commit flag committed the changes, so that after logging back into the server, the <strong>AdminName</strong> becomes <strong>JohnDoe</strong>. Otherwise it would have returned to its previous value. Include the <strong>biospassword</strong> flag to input a password if second level BIOS authentication is required.</p>
 
 <p><img title="Set example 3" alt="Set Example 3" src="images/examples/set_ex3.png" /></p>
 
-<p>Here the <strong>AdminName</strong> property of the type <strong>HpBios</strong> was set to the value <strong>JohnDoe</strong>. However, since the reboot flag was included but the commit flag was not, after the server is logged into again the <strong>AdminName</strong> property has returned to its original value.</p>
+<p>Here the <strong>AdminName</strong> property of the type <strong>Bios</strong> was set to the value <strong>JohnDoe</strong>. However, since the reboot flag was included but the commit flag was not, after the server is logged into again the <strong>AdminName</strong> property has returned to its original value.</p>
 
 <p><img title="Set example 4" alt="Set Example 4" src="images/examples/set_ex4.png" /></p>
 </blockquote>
@@ -1323,6 +1339,8 @@ Even though the get command shows **ServiceName** is set to **ExampleService**, 
 
 <p>Select this flag to input a BIOS password. Include this flag if second-level BIOS authentication is needed for the command to execute.</p>
 
+<aside class="notice">This flag is used only on iLO 4 systems and not required on iLO 5 systems.</aside>
+
 <ul>
 <li><strong>&ndash;reboot=REBOOT</strong></li>
 </ul>
@@ -1348,7 +1366,7 @@ Even though the get command shows **ServiceName** is set to **ExampleService**, 
 <blockquote>
 <p>Save example commands:</p>
 
-<p>Here, the server is logged into, HpBios is selected, and the corresponding JSON file is saved to a local directory as the file ilorest.json. The ilorest.json file holds all the information regarding the selected type. Here, the save function was performed on the HpBios type, so the ilorest.json file that was saved holds the information about HpBios. The file holding that information looks like the following. </p>
+<p>Here, the server is logged into, Bios is selected, and the corresponding JSON file is saved to a local directory as the file ilorest.json. The ilorest.json file holds all the information regarding the selected type. Here, the save function was performed on the Bios type, so the ilorest.json file that was saved holds the information about Bios. The file holding that information looks like the following. </p>
 
 <p><img title="Save example 1" alt="Save Example 1" src="images/examples/save_ex1.png" /></p>
 
@@ -1385,7 +1403,7 @@ Even though the get command shows **ServiceName** is set to **ExampleService**, 
 </span></code></pre>
 
 <blockquote>
-<p>Here, <strong>HpBios</strong> is selected, and the corresponding JSON file is saved to a file called <strong>HpBiosInfo.json</strong> in a local directory. The attached &ndash;logout flag logs the user out after this command is completed.</p>
+<p>Here, <strong>Bios</strong> is selected, and the corresponding JSON file is saved to a file called <strong>BiosInfo.json</strong> in a local directory. The attached &ndash;logout flag logs the user out after this command is completed.</p>
 
 <p><img title="Save example 2" alt="Save Example 2" src="images/examples/save_ex2.png" /></p>
 </blockquote>
@@ -1564,6 +1582,8 @@ Even though the get command shows **ServiceName** is set to **ExampleService**, 
 
 <p>Select this flag to input a BIOS password. Include this flag if second-level BIOS authentication is needed for the command to execute.</p>
 
+<aside class="notice">This flag is used only on iLO 4 systems and not required on iLO 5 systems.</aside>
+
 <ul>
 <li><strong>&ndash;logout</strong></li>
 </ul>
@@ -1615,7 +1635,7 @@ Even though the get command shows **ServiceName** is set to **ExampleService**, 
 <blockquote>
 <p>Status example commands:</p>
 
-<p>The status command shows changes to be committed. Here we see that the Description property of <strong>ComputerSystem</strong> has been set to <strong>ComputerSystemView</strong>, and that the <strong>ServiceName</strong> property of <strong>HpBios</strong> has been set to <strong>SimpleService</strong>. The status command shows all pending changes, including changes for different types.</p>
+<p>The status command shows changes to be committed. Here we see that the AssetTag property of <strong>ComputerSystem</strong> has been set to <strong>newtag</strong>, and that the <strong>ServiceName</strong> property of <strong>Bios</strong> has been set to <strong>SimpleService</strong>. The status command shows all pending changes, including changes for different types.</p>
 
 <p><img title="Status example 1" alt="Status Example 1" src="images/examples/status_ex1.png" /></p>
 </blockquote>
@@ -1649,11 +1669,11 @@ Even though the get command shows **ServiceName** is set to **ExampleService**, 
 <blockquote>
 <p>Commit example commands:</p>
 
-<p>Once you have made changes and are ready for them to take effect, use the commit command to commit your changes. Here the commit command saves the <strong>AdminName</strong> property of <strong>HpBios.</strong> to the new value of <strong>DeniseHarkins</strong>, and includes the <strong>biospassword=BIOSPASSWORD</strong> for second level BIOS authentication. The included reboot flag reboots the server. The commit command always logs out of the server.</p>
+<p>Once you have made changes and are ready for them to take effect, use the commit command to commit your changes. Here the commit command saves the <strong>AdminName</strong> property of <strong>Bios.</strong> to the new value of <strong>DeniseHarkins</strong>, and includes the <strong>biospassword=BIOSPASSWORD</strong> for second level BIOS authentication. The included reboot flag reboots the server. The commit command always logs out of the server.</p>
 
 <p><img title="Commit example 1" alt="Commit Example 1" src="images/examples/commit_ex1.png" /></p>
 
-<p>Here the logout flag was used to demonstrate that the server can be logged out of after another command. Here, after the <strong>EmbSata1Enabled</strong> property of HpBios was set to a new value, then the server was logged out of because the logout flag was included. </p>
+<p>Here the logout flag was used to demonstrate that the server can be logged out of after another command. Here, after the <strong>EmbSata1Enabled</strong> property of Bios was set to a new value, then the server was logged out of because the logout flag was included. </p>
 </blockquote>
 
 <aside class="notice">
@@ -1686,6 +1706,8 @@ The commit flag isn&rsquo;t used here; therefore, changes are not committed upon
 
 <p>Select this flag to input a BIOS password. Include this flag if second-level BIOS authentication is needed for the command to execute.</p>
 
+<aside class="notice">This flag is used only on iLO 4 systems and not required on iLO 5 systems.</aside>
+
 <ul>
 <li><strong>&ndash;reboot=REBOOT</strong></li>
 </ul>
@@ -1709,7 +1731,7 @@ The commit flag isn&rsquo;t used here; therefore, changes are not committed upon
 
 <p><img title="Logout example 1" alt="Logout Example 1" src="images/examples/logout_ex1.png" /></p>
 
-<p>Here the logout flag was used to demonstrate that the server can be logged out of after another command. Here, after the <strong>EmbSata1Enabled</strong> property of <strong>HpBios</strong> was set to a new value, the server was logged out of because the logout flag was included.</p>
+<p>Here the logout flag was used to demonstrate that the server can be logged out of after another command. Here, after the <strong>EmbSata1Enabled</strong> property of <strong>Bios</strong> was set to a new value, the server was logged out of because the logout flag was included.</p>
 
 <p><img title="Logout example 2" alt="Logout Example 2" src="images/examples/logout_ex2.png" /></p>
 </blockquote>
@@ -1781,7 +1803,7 @@ The commit flag isn&rsquo;t used here; therefore, changes are not committed upon
 <blockquote>
 <p>Bootorder example commands:</p>
 
-<p>In this example, the boot order was not specified first. The current persistent boot order is listed. Other options, such as continuous and one time boot options, as well as continuous and one time boot UEFI options are also displayed. Next, we call bootorder with a specified list. This sets the boot order to <strong>Generic.USB.1.1, HD.Emb.8.2., NIC.LOM.1.1.IPV6, NIC.LOM.1.1.IPV4,HD.Emb.8.1</strong>. The commit flag will commit the changes, otherwise changes are not saved.</p>
+<p>In this example, the boot order was not specified first. The current persistent boot order is listed. Other options, such as continuous and one time boot options, as well as continuous and one time boot UEFI options are also displayed. Next, we call bootorder with a specified list. This sets the boot order to <strong>Generic.USB.1.1, HD.EmbRAID.1.3., NIC.LOM.1.1.Httpv4, HD.SD.1.2, NIC.LOM.1.1.IPV4, NIC.LOM.1.1.Httpv6, NIC.LOM.1.1.IPv6, HD.EmbRAID.1.5, HD.EmbRAID1.6, HD.EmbRAID.1.4, HD.EmbRAID1.2</strong>. The commit flag will commit the changes, otherwise changes are not saved.</p>
 
 <p><img title="Bootorder example 1" alt="Bootorder Example 1" src="images/examples/bootorder_ex1.png" /></p>
 
@@ -1849,6 +1871,8 @@ The commit flag isn&rsquo;t used here; therefore, changes are not committed upon
 </ul>
 
 <p>Select this flag to input a BIOS password. Include this flag if second-level BIOS authentication is needed for the command to execute.</p>
+
+<aside class="notice">This flag is used only on iLO 4 systems and not required on iLO 5 systems.</aside>
 
 <ul>
 <li><strong>&ndash;reboot=REBOOT</strong></li>
@@ -1947,6 +1971,8 @@ Some changes are not applied until the system is reset.
 </ul>
 
 <p>Select this flag to input a BIOS password. Include this flag if second-level BIOS authentication is needed for the command to execute.</p>
+
+<aside class="notice">This flag is used only on iLO 4 systems and not required on iLO 5 systems.</aside>
 
 <ul>
 <li><strong>&ndash;reboot=REBOOT</strong></li>
@@ -2094,6 +2120,8 @@ The &ldquo;iscsiconfig &ndash;delete 1&rdquo; command deletes the 1st iSCSI atte
 
 <p>Select this flag to input a BIOS password. Include this flag if second-level BIOS authentication is needed for the command to execute.</p>
 
+<aside class="notice">This flag is used only on iLO 4 systems and not required on iLO 5 systems.</aside>
+
 <ul>
 <li><strong>&ndash;reboot=REBOOT</strong></li>
 </ul>
@@ -2165,7 +2193,11 @@ The &ldquo;iscsiconfig &ndash;delete 1&rdquo; command deletes the 1st iSCSI atte
 <blockquote>
 <p>Pending example commands:</p>
 
+<p>Here when first running the pending command on a server with no changes we see there are no changes found.</p>
+
 <p><img title="Pending example 1" alt="Pending Example 1" src="images/examples/pending_ex1.png" /></p>
+
+<p>Now we set and commit AdminName to the new value &ldquo;newadminname&rdquo;. After we log back into the server we see pending command shows our change to AdminName that will take effect on reboot.</p>
 
 <p><img title="Pending example 2" alt="Pending Example 2" src="images/examples/pending_ex2.png" /></p>
 </blockquote>
@@ -2176,7 +2208,7 @@ The &ldquo;iscsiconfig &ndash;delete 1&rdquo; command deletes the 1st iSCSI atte
 
 <h4 id="description">Description</h4>
 
-<p>Displays pending changes that will be applied after a reboot.</p>
+<p>Displays pending committed changes that will be applied after a reboot.</p>
 
 <h4 id="parameters">Parameters</h4>
 
@@ -2380,6 +2412,8 @@ Please make sure the order of passwords is maintained. The passwords are extract
 <h4 id="description">Description</h4>
 
 <p>Clear the persistent RESTful API state.</p>
+
+<aside class="warning">Some types such as Bios, Icsci, and SmartStorageConfig will not be available until a system reboot occurs after running this command.</aside>
 
 <h4 id="parameters">Parameters</h4>
 
@@ -2932,10 +2966,10 @@ Use this flag to narrow down your results. For example, selecting a common type 
 <p>Read log from the given log service. Options: IML, IEL or AHS.</p>
 
 <ul>
-<li><strong>-c, &ndash;clearlog, -m MAINMES, &ndash;maintenancemessage=MAINMES</strong></li>
+<li><strong>-c, &ndash;clearlog</strong></li>
 </ul>
 
-<p>Clears the logs for a the selected option. Maintenance message to be inserted into the log. (IML LOGS ONLY FEATURE)</p>
+<p>Clears the logs for the selected option.</p>
 
 <ul>
 <li><strong>&ndash;customiseAHS=CUSTOMISEAHS</strong></li>
@@ -2950,9 +2984,13 @@ Use this flag to narrow down your results. For example, selecting a common type 
 <p>Allows complete AHS log data to be downloaded.</p>
 
 <ul>
-<li><p><strong>&ndash;directorypath=DIRECTORYPATH</strong>
-Directory path for the ahs file.</p></li>
-<li><p><strong>&mdash;m MAINMES, &ndash;maintenancemessage=MAINMES</strong></p></li>
+<li><strong>&ndash;directorypath=DIRECTORYPATH</strong></li>
+</ul>
+
+<p>Directory path for the ahs file.</p>
+
+<ul>
+<li><strong>&mdash;m MAINMES, &ndash;maintenancemessage=MAINMES</strong></li>
 </ul>
 
 <p>Maintenance message to be inserted into the log. (IML LOGS ONLY FEATURE)</p>
@@ -3137,7 +3175,7 @@ iLO does not always reset after a firmware update.
 
 <p>Use this command to update the firmware via URI.</p>
 
-<aside class="notice">The firmware update command is only supported in <b>iLO 2.20</b> or higher.</aside>
+<aside class="notice">The firmware update command is only supported in <b>iLO 4 2.20</b> or higher.</aside>
 
 <h4 id="parameters">Parameters</h4>
 
@@ -3220,6 +3258,8 @@ iLO does not always reset after a firmware update.
 <p>iloaccounts <em>[COMMAND] [OPTIONS]</em></p>
 
 <h4 id="description">Description</h4>
+
+<p>Adds/deletes an iLO account on the currently logged in server.</p>
 
 <ul>
 <li>LOGINNAME:  The account name, not used to login.</li>
@@ -3427,10 +3467,6 @@ Please make sure the order of arguments is correct. The parameters are extracted
 <blockquote>
 <p>Ilofederation example commands:</p>
 
-<p>Descriptions:
-+  <em>FEDERATIONNAME</em>: The name (Id) of the federation group. 
-+  <em>KEY</em>:  The key required to join the federation.</p>
-
 <p>Add an iLO federation group to the current logged in server.</p>
 
 <p><img title="Ilofederation example 1" alt="Ilofederation Example 1" src="images/examples/ilofederation_ex1.png" /></p>
@@ -3454,7 +3490,9 @@ Please make sure the order of arguments is correct. The parameters are extracted
 
 <h4 id="description">Description</h4>
 
-<p>Adds / deletes an iLO federaion group on the currently logged in server.</p>
+<p>Adds / deletes an iLO federaion group on the currently logged in server.
+- <em>FEDERATIONNAME</em>: The name (Id) of the federation group.
+- <em>KEY</em>:  The key required to join the federation.</p>
 
 <h4 id="parameters">Parameters</h4>
 
@@ -3866,7 +3904,9 @@ The image will be ejected automatically on the second server reboot so that the 
 
           <h2 id="ilo-repository-commands">iLO Repository Commands</h2>
 
-<p>The iLO repository commands are designed for use with HPE Gen10 servers. </p>
+<aside class="notice">
+The iLO repository commands are designed for use with HPE Gen10 servers.
+</aside>
 
 <h3 id="deletecomp-command">Deletecomp command</h3>
 
@@ -4011,6 +4051,74 @@ The image will be ejected automatically on the second server reboot so that the 
 
 <p>None </p>
 
+<h3 id="flashfwpkg-command">Flashfwpkg command</h3>
+
+<blockquote>
+<p>flashfwpkg example commands:</p>
+
+<p>Upload component and add a task to flash.</p>
+
+<p><img title="Flashfwpkg example 1" alt="Flashfwpkg Example 1" src="images/examples/fwpkg_ex1.png" /></p>
+
+<p>Skip extra checks before adding taskqueue.</p>
+
+<p><img title="Flashfwpkg example 2" alt="Flashfwpkg Example 2" src="images/examples/fwpkg_ex2.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>flashfwpkg <em>[FWPKG PATH] [Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Run to upload and flash fwpkg components using the iLO repository.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet , use this flag along with the provided iLO URL to login to the server.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;forceupload</strong></li>
+</ul>
+
+<p>Include this flag to force upload firmware with the same name already on the repository.</p>
+
+<ul>
+<li><strong>&ndash;ignorechecks</strong></li>
+</ul>
+
+<p>Include this flag to ignore all checks to the taskqueue before attempting to process the .fwpkg file. </p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
 <h3 id="installset-command">Installset command</h3>
 
 <blockquote>
@@ -4028,7 +4136,7 @@ The image will be ejected automatically on the second server reboot so that the 
 
 <p><img title="Installset example 3" alt="Installset Example 3" src="images/examples/installset_ex1.png" /></p>
 
-<p>Complete JSON structure.</p>
+<p>Install sets can be added by either the complete JSON structure.</p>
 </blockquote>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"installset name"</span><span class="p">,</span><span class="w">
@@ -4070,7 +4178,7 @@ The image will be ejected automatically on the second server reboot so that the 
 </span></code></pre>
 
 <blockquote>
-<p>The list of Sequences. </p>
+<p>Or a list of sequences. </p>
 </blockquote>
 <pre class="highlight plaintext"><code>[
         {
@@ -4139,6 +4247,34 @@ The image will be ejected automatically on the second server reboot so that the 
 
 <p>Remove all install sets.</p>
 
+<ul>
+<li><strong>-j, &ndash;json</strong></li>
+</ul>
+
+<p>Optional: Include this flag to change the displayed output to JSON format. Preserving the JSON data structure makes the information easier to parse.</p>
+
+<ul>
+<li><strong>&ndash;expire=EXAFTER</strong></li>
+</ul>
+
+<p>Optional: Include this flag to set the expiry time for installset. ISO 8601 Redfish-style time string to be written after which iLO will automatically change state to Expired.</p>
+
+<p>-<strong>&ndash;startafter=SAFTER</strong></p>
+
+<p>Optional: Insclude this flag to set the earliest execution time for installset. ISO 8601 Redfish-style time string to be used.</p>
+
+<p>-<strong>&ndash;   tpmover</strong></p>
+
+<p>Use this flag if the server you are currently logged into has a TPM chip installed.</p>
+
+<p>-<strong>&ndash;updaterecoveryset</strong></p>
+
+<p>If set then the components in the flash operations are used to replace matching contents in the Recovery Set.</p>
+
+<p>-<strong>&ndash;cleartaskqueue</strong></p>
+
+<p>This option clears previous items in the task queue before the Install Set is invoked.</p>
+
 <h4 id="inputs">Inputs</h4>
 
 <p>None</p>
@@ -4192,6 +4328,137 @@ The image will be ejected automatically on the second server reboot so that the 
 <h4 id="outputs">Outputs</h4>
 
 <p>None </p>
+
+<h3 id="maintenancewindow-command">Maintenancewindow command</h3>
+
+<blockquote>
+<p>maintenancewindow example commands:</p>
+
+<p>Print the current maintenancewindows on the system.</p>
+
+<p><img title="Maintenancewindow example 1" alt="Maintenancewindow Example 1" src="images/examples/maintenancewindow_ex1.png" /></p>
+
+<p>Create a new maintenance window with startup time 1998-11-21T00:00:00 and user defined expire time, name, and description.</p>
+
+<p><img title="Maintenancewindow example 2" alt="Maintenancewindow Example 2" src="images/examples/maintenancewindow_ex2.png" /></p>
+
+<p>Delete maintenance windows by ID or name. </p>
+
+<p><img title="Maintenancewindow example 3" alt="Maintenancewindow Example 3" src="images/examples/maintenancewindow_ex3.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>maintenancewindow <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Run to add, remove, or delete maintenance windows from the iLO repository.</p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help on the usage of this command.</p>
+
+<ul>
+<li><strong>-u User, &ndash;user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, including this flag along with the password and URL flags can be used to log into a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, &ndash;password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>&ndash;url=URL</strong></li>
+</ul>
+
+<p>If you are not logged in yet , use this flag along with the provided iLO URL to login.</p>
+
+<ul>
+<li><strong>-j, &ndash;json</strong></li>
+</ul>
+
+<p>Optional: Include this flag to change the displayed output to JSON format. Preserving the JSON data structure makes the information easier to parse.</p>
+
+<ul>
+<li><strong>-description=DESCRIPTION</strong></li>
+</ul>
+
+<p>Optional: Include this flag to add a description to the maintenance window created by you.</p>
+
+<ul>
+<li><strong>-n NAME, &ndash;name=NAME</strong></li>
+</ul>
+
+<p>Optional: Include this flag to name the maintenance window created by you. If a name is not specified, system will add a unique name.</p>
+
+<ul>
+<li><strong>-e EXPIRE, &ndash;expire=EXPIRE</strong></li>
+</ul>
+
+<p>Optional: Include this flag to add the time a maintenance window expires.</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
+
+<h3 id="makeinstallset-command">Makeinstallset command</h3>
+
+<blockquote>
+<p>Makeinstallset example commands:</p>
+
+<p>Run without logging in for basic guidance on making an install set.</p>
+
+<p><img title="Makeinstallset example 1" alt="Makeinstallset Example 1" src="images/examples/minstallset_ex1.png" /></p>
+
+<p>Run while logged into a system for guidance based on the current components on that system.</p>
+
+<p><img title="Makeinstallset example 2" alt="Makeinstallset Example 2" src="images/examples/minstallset_ex2.png" /></p>
+</blockquote>
+
+<h4 id="syntax">Syntax</h4>
+
+<p>makeinstallset <em>[Optional Parameters]</em></p>
+
+<h4 id="description">Description</h4>
+
+<p>Run to make installsets for iLO. 
+If not logged into the server, the command will provide basic guidance on making an installset.
+If logged into the server, the command will provide guidance based on the current components on the system.
+<aside class="notice">When using this command on a logged in sever, for best results, make sure to upload the components before running this command.</aside></p>
+
+<h4 id="parameters">Parameters</h4>
+
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
+
+<p>Including the help flag on this command will display help.</p>
+
+<ul>
+<li><strong>-f FILENAME, &ndash;filename=FILENAME</strong></li>
+</ul>
+
+<p>Include this flag to use a different filename than the default one. The default filename is myinstallset.json</p>
+
+<h4 id="inputs">Inputs</h4>
+
+<p>None</p>
+
+<h4 id="outputs">Outputs</h4>
+
+<p>None</p>
 
 <h3 id="taskqueue-command">Taskqueue command</h3>
 
@@ -5429,14 +5696,10 @@ Scalable Persistent Memory supported: 1180 GiB
 <blockquote>
 <p>RawPatch example commands:</p>
 
-<p>Here, the <strong>AdminName</strong> of type <strong>HpBios</strong> was &ldquo;&rdquo; before. The rawpatch command sent the patch.json to change that property to become <strong>Jean Kranz</strong>. Commit is left out deliberately here since, raw commands (such as rawpost, rawput, etc.) do not require the commit command to be run since changes are made directly. </p>
-</blockquote>
+<p>Here, the <strong>AdminName</strong> of type <strong>Bios</strong> was &ldquo;&rdquo; before. The rawpatch command sent the patch.json to change that property to become <strong>Jean Kranz</strong>. Commit is left out deliberately here since, raw commands (such as rawpost, rawput, etc.) do not require the commit command to be run since changes are made directly. </p>
 
-<aside class="notice">
-This particular change requires second-level BIOS authentication, which is why the biospassword flag was included.
-</aside>
+<p>This particular change requires second-level BIOS authentication, which is why the biospassword flag was included.</p>
 
-<blockquote>
 <p><img title="RawPatch example 1" alt="RawPatch Example 1" src="images/examples/rawpatch_ex1.png" /></p>
 
 <p>The following <strong>patch.json</strong> file was used in the above example:</p>
@@ -5536,6 +5799,8 @@ Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
 </ul>
 
 <p>Select this flag to input a BIOS password. Include this flag if second-level BIOS authentication is needed for the command to execute.</p>
+
+<aside class="notice">This flag is used only on iLO 4 systems and not required on iLO 5 systems.</aside>
 
 <ul>
 <li><strong>&ndash;providerid=PROVIDERID</strong></li>
@@ -5916,6 +6181,8 @@ Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
 
 <p>Select this flag to input a BIOS password. Include this flag if second-level BIOS authentication is needed for the command to execute.</p>
 
+<aside class="notice">This flag is used only on iLO 4 systems and not required on iLO 5 systems.</aside>
+
 <ul>
 <li><strong>&ndash;providerid=PROVIDERID</strong></li>
 </ul>
@@ -6114,7 +6381,7 @@ Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
 
 <p><img title="BootOrder example 1" alt="Bootorder Example 1" src="images/BootOrder_1.png" /></p>
 
-<p>First the server is logged into, and the <code class="prettyprint">select</code> and <code class="prettyprint">get</code> commands are performed on the <code class="prettyprint">HpBios</code> type and the <code class="prettyprint">BootMode</code> property, respectively.</p>
+<p>First the server is logged into, and the <code class="prettyprint">select</code> and <code class="prettyprint">get</code> commands are performed on the <code class="prettyprint">Bios</code> type and the <code class="prettyprint">BootMode</code> property, respectively.</p>
 
 <p><img title="BootOrder example 2" alt="Bootorder Example 2" src="images/BootOrder_2.png" /></p>
 
@@ -6144,7 +6411,7 @@ Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
 
 <p>Another command that has not been implemented in the RESTful Interface Tool but could easily be set up as a macro is changing the administrator password for second-level BIOS authentication. This example shows how to write such a command as well as serves to explain how the BIOS password works.</p>
 
-<p>The <code class="prettyprint">HpBios</code> type has two properties that both need to be used to change the administrator password, <code class="prettyprint">AdminPassword</code> and <code class="prettyprint">OldAdminPassword</code>. <code class="prettyprint">AdminPassword</code> is the new password you want to change to, and <code class="prettyprint">OldAdminPassword</code> is the current password you have.</p>
+<p>The <code class="prettyprint">Bios</code> type has two properties that both need to be used to change the administrator password, <code class="prettyprint">AdminPassword</code> and <code class="prettyprint">OldAdminPassword</code>. <code class="prettyprint">AdminPassword</code> is the new password you want to change to, and <code class="prettyprint">OldAdminPassword</code> is the current password you have.</p>
 
 <aside class="notice">If there is no current password, you must include <b>OldAdminPassword=””</b>.</aside>
 
@@ -6154,7 +6421,7 @@ Usage: &ndash;headers=HEADER:VALUE,HEADER:VALUE</p>
 
 <p><img title="BIOS Password Example 2" alt="BIOS Password Example 2" src="images/BIOSPassword_2.png" /></p>
 
-<p>In order to change the administrator password, you need to set the <code class="prettyprint">AdminPassword</code> (the new value you want) and the <code class="prettyprint">OldAdminPassword</code> (what the admin password was before), as well as include the <code class="prettyprint">–biospassword</code> flag.</p>
+<p>In order to change the administrator password, you need to set the <code class="prettyprint">AdminPassword</code> (the new value you want) and the <code class="prettyprint">OldAdminPassword</code> (what the admin password was before), as well as include the <code class="prettyprint">–biospassword</code> flag if the system is iLO 4.</p>
 
 <aside class="notice">The <b>biospassword</b> value is the same as the <b>OldAdminPassword</b> value.</aside>
 
@@ -6368,9 +6635,9 @@ goto :EOF
 @echo *****************************************
 ilorest.exe login %1 -u %2 -p %3
 @echo *****************************************
-@echo ******* selecting HpBios type... ********
+@echo ******* selecting Bios type... ********
 @echo *****************************************
-ilorest.exe select HpBios.
+ilorest.exe select Bios.
 @echo *****************************************
 @echo ********** getting BootMode... **********
 @echo *****************************************
@@ -6378,7 +6645,7 @@ ilorest.exe get
 pause
 </code></pre>
 
-<p>This is a batch file that logs into a remote server, selects the <code class="prettyprint">HpBios</code> type, and gets the <code class="prettyprint">BootMode</code> value.</p>
+<p>This is a batch file that logs into a remote server, selects the <code class="prettyprint">Bios</code> type, and gets the <code class="prettyprint">BootMode</code> value.</p>
 
 <h2 id="saving-and-loading-a-file-using-file-based-editing-mode">Saving and loading a file using file-based editing mode</h2>
 <pre class="highlight plaintext"><code>:: saveload.bat [SELECTOR] [FILENAME]
@@ -6936,6 +7203,14 @@ pause
 <td>Resource allocation errors.</td>
 </tr>
 <tr>
+<td>81</td>
+<td>Error occured during encryption.</td>
+</tr>
+<tr>
+<td>82</td>
+<td>The drive is missing.</td>
+</tr>
+<tr>
 <td>83</td>
 <td>The requested path is unavailable.</td>
 </tr>
@@ -6950,6 +7225,10 @@ pause
 <tr>
 <td>102</td>
 <td>Update service busy.</td>
+</tr>
+<tr>
+<td>104</td>
+<td>Error occured in the order of task queue items.</td>
 </tr>
 <tr>
 <td>103</td>
