@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>RESTful Interface Tool 2.3.0 User Guide</title>
+    <title>RESTful Interface Tool 2.5.0 User Guide</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -540,6 +540,10 @@ If you do not pass the proper credentials in local mode, you receive a similar e
 <p><strong>&ndash;latestschema</strong></p>
 
 <p>Optionally use the latest schema instead of the one requested by the file. </p>
+
+<p><strong>&ndash;proxy=URL</strong></p>
+
+<p>Use the provided proxy for communication. </p>
 
 <aside class="notice">
 Might cause errors in some data retrieval due to difference in schema versions.
@@ -6739,9 +6743,7 @@ The contents of type: '#HpeiLOFederationGroup.v2_0_0.HpeiLOFederationGroup' shou
 
 <aside class="notice">When loading a clone file, login using an iLO account with full administrative privileges (such as the Administrator account) to ensure all system parameters are cloned successfully.</aside>
 
-<aside class="notice">When working with iLO Managment Accounts or iLO Federation Groups, remove entries from the JSON clone file (within the relevant dictionary) in order to perform deletion. In order to create new accounts on the server, simply add relevant nested dictionaries to the JSON file.</aside>
-
-<aside class="notice">The Administrator account can not be deleted using serverclone.</aside>
+<aside class="notice">When working with iLO Managment Accounts or iLO Federation Groups, remove entries from the JSON clone file (within the relevant dictionary) in order to perform deletion. In order to create new accounts on the server, simply add relevant nested dictionaries to the JSON file. <font color="#ff0000"> The default Administrator account can not be deleted using serverclone.</font></aside>
 
 <aside class="notice">If settings for a particular type should not be changed, it is suggested to completely omit this dictionary from the JSON clone file.</aside>
 
@@ -8150,12 +8152,28 @@ iLOrest > <font color="#01a982">smartarray --controller=1 --ldrive=1</font>
 
 <blockquote>
 <p>Clearcontrollerconfig example commands:</p>
+</blockquote>
 
+<aside class="notice">
+By default all available smart array controllers are included. Use &rsquo;&ndash;controller&rsquo; to target a specific index or slot for clearing controller configuration.
+</aside>
+
+<blockquote>
 <p>To clear a controller configuration run the command including the <code class="prettyprint">--controller</code> option specifying the controller to clear.</p>
 </blockquote>
 
 <pre> 
 ilorest > <font color="#01a982">clearcontrollerconfig --controller=1</font>
+One or more properties were changed an will not take effect until system is reset.
+</pre>
+
+<blockquote>
+<p>To clear controller configuration on all available smart array controllers use <code class="prettyprint">--all</code>.</p>
+</blockquote>
+
+<pre> 
+ilorest > <font color="#01a982">clearcontrollerconfig --all</font>
+Are you sure you would like to clear all available smart array controller configurations? (y/n) <font color="#01a982"> y </font>
 One or more properties were changed an will not take effect until system is reset.
 </pre>
 
@@ -8203,7 +8221,13 @@ One or more properties were changed an will not take effect until system is rese
 <li><strong>&ndash;all</strong></li>
 </ul>
 
-<p>Use this flag to sanitize all physical drives on a controller.</p>
+<p>Use this flag to factory reset all controllers.</p>
+
+<ul>
+<li><strong>&ndash;force</strong></li>
+</ul>
+
+<p>Use this flag to override the &ldquo;are you sure?&rdquo; text when clearing configurations on all available smart array controllers. </p>
 
 <h4 id="inputs">Inputs</h4>
 
@@ -8237,7 +8261,7 @@ One or more properties were changed an will not take effect until system is rese
 <pre> 
 iLOrest > login
 Discovering data...Done
-ilorest > <font color="#01a982">createlogicaldrive customdrive Raid5 2,3,4,5,6 --controller=1 --name=ANewLogicalDrive --spare-drives=2 --capacityGiB=100 --legacy-boot=Primary --accelerator-type=ControllerCache --sparetye=Dedicated</font>
+ilorest > <font color="#01a982">createlogicaldrive customdrive Raid5 2,3,4,5,6 --controller=1 --name=ANewLogicalDrive --spare-drives=2 --capacityGiB=100 --legacy-boot=Primary --accelerator-type=ControllerCache --spare-type=Dedicated</font>
 One or more properties were changed an will not take effect until system is reset.
 </pre>
 
@@ -8552,7 +8576,13 @@ Sanitization will occur on the next system reboot.
 
 <blockquote>
 <p>Factoryresetcontroller example commands:</p>
+</blockquote>
 
+<aside class="notice">
+By default all available smart array controllers are included. Use &rsquo;&ndash;controller&rsquo; to target a specific index or slot for a factory reset.
+</aside>
+
+<blockquote>
 <p>To factory reset a controller run this command and specify it&rsquo;s index with the <code class="prettyprint">--controller</code> option.</p>
 </blockquote>
 
@@ -8562,12 +8592,15 @@ One or more properties were changed and will not take effect until system is res
 </pre>
 
 <blockquote>
-<p>To factory reset all controllers run this command and include the <code class="prettyprint">--all</code> option.</p>
+<p>To factory reset all controllers <code class="prettyprint">--all</code> option.</p>
 </blockquote>
 
 <pre> 
-ilorest > factoryresetcontroller <font color="#01a982">--all</font>
-One or more properties were changed and will not take effect until system is reset.
+ilorest > <font color="#01a982">factoryresetcontroller --all</font>
+Are you sure you would like to factory reset all available smart array controllers? (y/n) <font color="#01a982">y</font>
+[1]: Slot 0 - has been reset to factory defaults.
+[2]: Slot 1 - has been reset to factory defaults.
+[3]: Slot 3 - has been reset to factory defaults.
 </pre>
 
 <h4 id="syntax">Syntax</h4>
@@ -8610,6 +8643,18 @@ One or more properties were changed and will not take effect until system is res
 
 <p>Use this flag to select the corresponding controller.</p>
 
+<ul>
+<li><strong>&ndash;all</strong></li>
+</ul>
+
+<p>Use this flag to factory reset all controllers.</p>
+
+<ul>
+<li><strong>&ndash;force</strong></li>
+</ul>
+
+<p>Use this flag to override the &ldquo;are you sure?&rdquo; text when performing a factory reset to selected smart array controllers. </p>
+
 <h4 id="inputs">Inputs</h4>
 
 <p>None </p>
@@ -8618,588 +8663,381 @@ One or more properties were changed and will not take effect until system is res
 
 <p>None </p>
 
-          <h2 id="hpe-scalable-persistent-memory-commands">HPE Scalable Persistent Memory commands</h2>
+          <h2 id="persistent-memory-commands">Persistent Memory Commands</h2>
 
-<p>This section covers commands related to the configuration of Scalable Persistent Memory.</p>
+<p>This section includes commands related to the discovery and configuration of HPE Persistent Memory.</p>
 
-<aside class="warning">
-HPE Scalable Persistent Memory commands have been depreciated and removed in iLOrest version 2.4.
-</aside>
-
-<h3 id="show-scalable-persistent-memory-configuration-command">Show Scalable Persistent Memory configuration command</h3>
+<h3 id="persistent-memory-discovery-command">Persistent Memory Discovery Command</h3>
 
 <blockquote>
-<p>Example: Display the current Scalable Persistent Memory configuration.</p>
+<p>Example: Show information about the physical persistent memory modules.</p>
 </blockquote>
 
 <pre>
-iLOrest > <font color="#01a982">showscalablepmemconfig</font>
+iLOrest > <font color="#01a982">showpmm --device</font>
 
-Overall Allocated Scalable Persistent Memory
---------------------------------------------
-
-.----------------------------------------------------------.
-|||||||||||||||||||                                        |
-'----------------------------------------------------------'
-250 GiB of 786 GiB allocated (536 GiB available)
-
-Estimated total backup boot time for this configuration: 2m 18s
-
-
-Logical NVDIMMs
----------------
-
-Size        Type               Location                Operation    
---------------------------------------------------------------------
-  100 GiB   Single Processor   Processor 1, Index 1                 
-  100 GiB   Single Processor   Processor 1, Index 2                 
-   50 GiB   Single Processor   Processor 2, Index 1                 
-
-
+Location        Capacity    Status    DIMMStatus    Life    FWVersion
+PROC 1 DIMM 1   126.38 GB   OK        GoodInUse     100%    01.02.00.5360
+PROC 1 DIMM 12  126.38 GB   OK        GoodInUse     100%    01.02.00.5360
+PROC 2 DIMM 1   126.38 GB   OK        GoodInUse     100%    01.02.00.5360
+PROC 2 DIMM 12  126.38 GB   OK        GoodInUse     100%    01.02.00.5360
 
 </pre>
 
 <blockquote>
-<p>Example: Display the available Scalable Persistent Memory capacity.</p>
+<p>Example: Show current configuration of selected persistent memory modules.</p>
 </blockquote>
 
 <pre>
-iLOrest > <font color="#01a982">showscalablepmemconfig --available</font>
+iLOrest > <font color="#01a982">showpmm --config --dimm=1@12,2@12</font>
 
-Available Scalable Persistent Memory
-------------------------------------
-Available capacity to create logical NVDIMMs is constrained by the system
- hardware, including the number of backup storage devices selected.
+Location        VolatileSize    PmemSize    PmemInterleaved
+PROC 1 DIMM 12  126.38 GB       0.0 GB      N/A
+PROC 2 DIMM 12  126.38 GB       0.0 GB      N/A
 
-By Processor (for single processor logical NVDIMMs):
+</pre>
 
-Processor    Available For Scalable PMEM             
------------------------------------------------------
-  1             536 GiB (Max logical NVDIMMs created)
-  2             536 GiB 
+<blockquote>
+<p>Example: Show the persistent interleave regions in JSON format.</p>
+</blockquote>
 
-By Processor Pair (for spanned logical NVDIMMs):
+<pre>
+iLOrest > <font color="#01a982">showpmm --logical --dimm=1@12,2@12</font>
 
-Processors   Available For Scalable PMEM             
------------------------------------------------------
-  1,2           536 GiB 
+[ { 'DimmIds': '1@1, 1@12',
+    'PmemSize': { 'Units': 'GB',
+                  'Value': 252.0}},
+  { 'DimmIds': '2@1, 2@12',
+    'PmemSize': { 'Units': 'GB',
+                  'Value': 252.0}}]
 
+</pre>
+
+<blockquote>
+<p>Example: Show a summary of the persistent memory resources.</p>
+</blockquote>
+
+<pre>
+iLOrest > <font color="#01a982">showpmm --summary</font>
+
+TotalCapacity:  505.52 GB
+TotalVolatileSize:  505.52 GB
+TotalPmemSize:  0.0 GB
 
 </pre>
 
 <h4 id="syntax">Syntax</h4>
 
-<p>showscalablepmemconfig <em>[&ndash;available] [&ndash;json]</em></p>
+<p>showpmm &ndash;device | -D [&ndash;dimm=(DIMM IDs) | -I] [&ndash;json | -j]</p>
+
+<p>showpmm &ndash;config | -C [&ndash;dimm=(DIMM IDs) | -I] [&ndash;json | -j]</p>
+
+<p>showpmm &ndash;logical | -L [&ndash;json | -j]</p>
+
+<p>showpmm &ndash;summary | -M [&ndash;json | -j]</p>
 
 <h4 id="description">Description</h4>
 
-<ul>
-<li>Displays overall Scalable Persistent Memory configuration summary.</li>
-<li>Displays the logical NVDIMMs.</li>
-<li>Displays the available Scalable Persistent Memory capacity.</li>
-<li>Indicates if pending operations exist that require a reboot.</li>
-</ul>
+<p>Displays information about the installed persistent memory modules.</p>
 
 <h4 id="parameters">Parameters</h4>
 
 <ul>
-<li><strong>-a, &ndash;available</strong></li>
+<li><strong>-h, &ndash;help</strong></li>
 </ul>
 
-<p>Show the available capacity per processor or processor pair.</p>
+<p>Displays help on the usage of this command.</p>
+
+<ul>
+<li><strong>-D, &ndash;device</strong></li>
+</ul>
+
+<p>Shows a physical overview of the installed persistent memory modules.</p>
+
+<ul>
+<li><strong>-C, &ndash;config</strong></li>
+</ul>
+
+<p>Shows the current configuration of the installed persistent memory modules.</p>
+
+<ul>
+<li><strong>-L, &ndash;logical</strong></li>
+</ul>
+
+<p>Shows the persistent interleave sets (if present).</p>
+
+<ul>
+<li><strong>-M, &ndash;summary</strong></li>
+</ul>
+
+<p>Shows a summary of the installed persistent memory modules.</p>
+
+<ul>
+<li><strong>-I, &ndash;dimm</strong></li>
+</ul>
+
+<p>Optionally, use this flag to filter output by DIMM IDs (ProcessorNumber@SlotNumber). Can be used in conjunction with the <code class="prettyprint">-D | --device</code> or the <code class="prettyprint">-C | --config</code> flags.</p>
 
 <ul>
 <li><strong>-j, &ndash;json</strong></li>
 </ul>
 
-<p>Optionally include this flag to change the output to JSON format.</p>
+<p>Optionally use this flag to display output in JSON format.</p>
 
-<h3 id="enable-scalable-persistent-memory-configuration-command">Enable Scalable Persistent Memory configuration command</h3>
+<h3 id="persistent-memory-guided-configuration-command">Persistent Memory Guided Configuration Command</h3>
 
 <blockquote>
-<p>Example: Enable Scalable Persistent Memory functionality.</p>
+<p>Example: Show a list of supported guided configurations.</p>
 </blockquote>
 
 <pre>
-iLOrest > <font color="#01a982">enablescalablepmem</font>
+iLOrest > <font color="#01a982">applypmmconfig --list</font>
 
-The Scalable Persistent Memory feature has been set to: Enabled
+Available Configurations:
 
+MemoryMode
+        Configure all PMMs to 100% Memory Mode.
+PmemInterleaved
+        Configure all PMMs to 100% Persistent. Interleave the Persistent memory regions within each processor.
+PmemNotInterleaved
+        Configure all PMMs to 100% Persistent. The Persistent memory regions are not interleaved.
+
+</pre>
+
+<blockquote>
+<p>Example: Configure all installed persistent memory modules as 100% Volatile.</p>
+</blockquote>
+
+<pre>
+iLOrest > <font color="#01a982">applypmmconfig --config MemoryMode</font>
+
+
+***WARNING: Configuration changes require reboot to take effect***
+
+Operation    PmemSize    VolatileSize    DimmIds
+CREATE       0.0 GB      252.76 GB       1@1, 1@12
+CREATE       0.0 GB      252.76 GB       2@1, 2@12
 
 </pre>
 
 <h4 id="syntax">Syntax</h4>
 
-<p>enablescalablepmem <em>[&ndash;disable]</em></p>
+<p>applypmmconfig -L | &ndash;list</p>
+
+<p>applypmmconfig -C | &ndash;config [-f | &ndash;force]</p>
 
 <h4 id="description">Description</h4>
 
-<ul>
-<li>Enable or disable the Scalable Persistent Memory feature.</li>
-<li>Scalable Persistent Memory must be enabled before configuration is allowed.</li>
-</ul>
+<p>Apply a pre-defined configuration to the installed persistent memory modules.</p>
 
 <h4 id="parameters">Parameters</h4>
 
-<p>If no parameters are specified, the Scalable Persistent Memory feature will be enabled.</p>
-
 <ul>
-<li><strong>&ndash;off, &ndash;no, &ndash;disable</strong></li>
+<li><strong>-h, &ndash;help</strong></li>
 </ul>
 
-<p>Disable the Scalable Persistent Memory feature. Warning: any pending configuration changes will be lost.</p>
+<p>Displays help on the usage of this command.</p>
 
-<h3 id="show-backup-devices-command">Show Backup Devices command</h3>
+<ul>
+<li><strong>-L, &ndash;list</strong></li>
+</ul>
+
+<p>Display a list of available pre-defined configIDs along with a brief description.</p>
+
+<ul>
+<li><strong>-C, &ndash;config</strong></li>
+</ul>
+
+<p>Specify one of the pre-defined configIDs to apply to all the persistent memory modules.</p>
+
+<ul>
+<li><strong>-f, &ndash;force</strong></li>
+</ul>
+
+<p>Allow the user to force the configuration by automatically accepting any prompts.</p>
+
+<h3 id="persistent-memory-advanced-configuration-command">Persistent Memory Advanced Configuration Command</h3>
 
 <blockquote>
-<p>Example: Display the supported Scalable Persistent Memory backup devices.</p>
+<p>Example: Configure all persistent memory modules on processors 1 and 3 to 50% Volatile with no persistent interleave regions.</p>
 </blockquote>
 
 <pre>
-iLOrest > <font color="#01a982">showbackupdevices</font>
+iLOrest > <font color="#01a982">provisionpmm -m 50 -i off -p 1,3</font>
 
-Scalable Persistent Memory Backup Storage Devices
--------------------------------------------------
+***WARNING: Configuration changes require reboot to take effect***
 
-ID     Location        Model        Type       Size    Status   Life PMEM Use  Operation           
----------------------------------------------------------------------------------------------------
-2@1    Box 2 Bay 1     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%    Yes                         
-2@2    Box 2 Bay 2     MO0800KEFHP  SSD (NVMe) 800 GB  OK       100%   Yes                         
-3@3    Box 3 Bay 3     MO0800KEFHP  SSD (NVMe) 800 GB  OK       98%                                
-3@4    Box 3 Bay 4     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%                                
+Operation    PmemSize    VolatileSize    DimmIds
+CREATE       63.19 GB    63.19 GB        1@1
+CREATE       63.19 GB    63.19 GB        1@12
+CREATE       63.19 GB    63.19 GB        3@1
+CREATE       63.19 GB    63.19 GB        3@12
 
-Scalable Persistent Memory supported: 786 GiB
+</pre>
 
+<blockquote>
+<p>Example: Configure all installed persistent memory modules to 25% Volatile with persistent interleave regions.</p>
+</blockquote>
+
+<pre>
+iLOrest > <font color="#01a982">provisionpmm -m 25 -i on</font>
+
+***WARNING: Configuration changes require reboot to take effect***
+
+Operation    PmemSize    VolatileSize    DimmIds
+DELETE       126.0 GB    126.76 GB       1@1, 1@12
+DELETE       126.0 GB    126.76 GB       2@1, 2@12
+CREATE       189.57 GB   63.19 GB        1@1, 1@12
+CREATE       189.57 GB   63.19 GB        2@1, 2@12
 
 </pre>
 
 <h4 id="syntax">Syntax</h4>
 
-<p>showbackupdevices</p>
+<p>provisionpmm [-h | &ndash;help] [-m | &ndash;memory-mode=(0|%)] [-i | &ndash;pmem-interleave=(On|Off)] [-p | &ndash;proc=(processorID)] [-f | &ndash;force]</p>
 
 <h4 id="description">Description</h4>
 
-<ul>
-<li>Displays all devices that are supported for use as Scalable Persistent Memory backup storage.</li>
-<li>Indicates if a device is currently in use for Scalable Persistent Memory, is being added, or is being removed.</li>
-<li>Reports the amount of Scalable Persistent Memory that is supported by the configuration.</li>
-<li>Drives are identified by Box and Bay.</li>
-<li>Use this command to identify drives to use with the <code class="prettyprint">setbackupdevices</code> command.</li>
-</ul>
+<p>Applies user specified configuration to the persistent memory modules.</p>
 
 <h4 id="parameters">Parameters</h4>
 
-<p>None</p>
+<ul>
+<li><strong>-h, &ndash;help</strong></li>
+</ul>
 
-<h3 id="set-backup-devices-command">Set Backup Devices command</h3>
+<p>Displays help on the usage of this command.</p>
+
+<ul>
+<li><strong>-m, &ndash;memory-mode</strong></li>
+</ul>
+
+<p>Optionally allows user to specify the percentage of total capacity that should be configured as Volatile. Defaults to 0% Volatile. The remaining capacity will be configured as Persistent.</p>
+
+<ul>
+<li><strong>-i, &ndash;pmem-interleave</strong></li>
+</ul>
+
+<p>Indicates whether the persistent memory regions should be interleaved (Allowed values: &ldquo;on&rdquo;, &ldquo;off&rdquo;).</p>
+
+<ul>
+<li><strong>-p, &ndash;proc</strong></li>
+</ul>
+
+<p>Optionally allows user to specify the processors (comma separated list of ProcessorNumbers) on which the selected configuration would be applied. Defaults to all processors.</p>
+
+<ul>
+<li><strong>-f, &ndash;force</strong></li>
+</ul>
+
+<p>Allows the user to force the configuration by automatically accepting any prompts.</p>
+
+<h3 id="show-pending-configuration-command">Show Pending Configuration Command</h3>
 
 <blockquote>
-<p>Example: Set the backup devices 2@1 and 2@2</p>
+<p>Example: Show persistent memory configuration changes pending a reboot.</p>
 </blockquote>
 
 <pre>
-iLOrest > <font color="#01a982">setbackupdevices --device=2@1 --device=2@2</font>
+iLOrest > <font color="#01a982">showpmmpendingconfig</font>
 
-ID     Location        Model        Type       Size    Status   Life PMEM Use  Operation           
----------------------------------------------------------------------------------------------------
-2@1    Box 2 Bay 1     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%            Add,Initialize      
-2@2    Box 2 Bay 2     MO0800KEFHP  SSD (NVMe) 800 GB  OK       100%           Add,Initialize      
-3@3    Box 3 Bay 3     MO0800KEFHP  SSD (NVMe) 800 GB  OK       98%                                
-3@4    Box 3 Bay 4     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%                                
-
-Scalable Persistent Memory supported: 786 GiB
-
-
-*** The pending configuration operations require a restart to take effect ***
+Operation    PmemSize    VolatileSize    DimmIds
+DELETE       190.0 GB    62.76 GB        1@1, 1@12
+DELETE       190.0 GB    62.76 GB        2@1, 2@12
+CREATE       94.78 GB    31.59 GB        1@1
+CREATE       94.78 GB    31.59 GB        1@12
+CREATE       94.78 GB    31.59 GB        2@1
+CREATE       94.78 GB    31.59 GB        2@12
 
 </pre>
 
 <h4 id="syntax">Syntax</h4>
 
-<p>setbackupdevices <em>(&ndash;device=ID&hellip; | &ndash;remove-all)</em></p>
+<p>showpmmpendingconfig [-j | &ndash;json]</p>
 
 <h4 id="description">Description</h4>
 
-<ul>
-<li>Configures the specified devices for use as Scalable Persistent Memory backup storage.</li>
-<li>Backup devices are not allowed to be removed while logical NVDIMMs exist.</li>
-<li>The device IDs can be obtained from the <code class="prettyprint">showbackupdevices</code> command.</li>
-</ul>
+<p>Shows the queued tasks pending a reboot for configuring the persistent memory modules.</p>
 
 <h4 id="parameters">Parameters</h4>
 
 <ul>
-<li><strong>&ndash;device=ID, &ndash;drive=ID</strong></li>
+<li><strong>-h, &ndash;help</strong></li>
 </ul>
 
-<p>ID of the backup device to set, e.g. &lsquo;1@1&rsquo;</p>
+<p>Displays help on the usage of this command.</p>
 
 <ul>
-<li><strong>&ndash;remove-all</strong></li>
+<li><strong>-j, &ndash;json</strong></li>
 </ul>
 
-<p>Remove all currently-configured backup devices</p>
+<p>Optionally, use this flag to display output in JSON format.</p>
 
-<h3 id="create-logical-nvdimm-command">Create Logical NVDIMM command</h3>
+<h3 id="clear-pending-configuration-command">Clear Pending Configuration Command</h3>
 
 <blockquote>
-<p>Example: Create a 100 GiB logical NVDIMM on processor 1.</p>
+<p>Example: Clears all the pending persistent memory configuration tasks.</p>
 </blockquote>
 
 <pre>
-iLOrest > <font color="#01a982">createlogicalnvdimm --processor=1 --size=100</font>
+iLOrest > <font color="#01a982">clearpmmpendingconfig</font>
 
-Size        Type               Location                Operation    
---------------------------------------------------------------------
-  100 GiB   Single Processor   Processor 1, Index 1    Create       
-
-Estimated total backup boot time for this configuration: 1m 33s
-
-
-
-*** The pending configuration operations require a restart to take effect ***
-
-
-</pre>
-
-<blockquote>
-<p>Example: Create a 100 GiB spanned logical NVDIMM on processors 1 and 2.</p>
-</blockquote>
-
-<pre>
-iLOrest > <font color="#01a982">createlogicalnvdimm --processors=1,2 --size=100</font>
-
-Size        Type               Location                Operation    
---------------------------------------------------------------------
-  100 GiB   Spanned            Processors 1,2          Create       
-  100 GiB   Single Processor   Processor 1, Index 1    Create       
-
-Estimated total backup boot time for this configuration: 2m 3s
-
-
-
-*** The pending configuration operations require a restart to take effect ***
-
+Deleted Task #1948
+Deleted Task #1949
+Deleted Task #1950
+Deleted Task #1951
+Deleted Task #1952
+Deleted Task #1953
 
 </pre>
 
 <h4 id="syntax">Syntax</h4>
 
-<p>createlogicalnvdimm <em>&ndash;size=SIZE [&ndash;processor=NUMBER | &ndash;pair=PAIR]</em></p>
+<p>clearpmmpendingconfig</p>
 
 <h4 id="description">Description</h4>
 
-<ul>
-<li>Create a logical NVDIMM.</li>
-<li>If only <code class="prettyprint">--size</code> is specified, the command automatically creates a single processor or spanned logical NVDIMM based on the size requested.</li>
-<li>Two logical NVDIMMs may be created per processor.</li>
-<li>One spanned logical NVDIMM may be created for processors 1 and 2.</li>
-</ul>
+<p>Clears all the pending persistent memory configuration tasks.</p>
 
 <h4 id="parameters">Parameters</h4>
 
 <ul>
-<li><strong>&ndash;size=SIZE</strong></li>
+<li><strong>-h, &ndash;help</strong></li>
 </ul>
 
-<p>Specify the size (GiB) of the logical NVDIMM to create.</p>
+<p>Displays help on the usage of this command.</p>
 
-<ul>
-<li><strong>&ndash;proc=NUMBER, &ndash;processor=NUMBER</strong></li>
-</ul>
-
-<p>Use to create a logical NVDIMM. Specify the processor (auto, 1, 2).</p>
-
-<ul>
-<li><strong>&ndash;pair=PAIR, &ndash;processors=PAIR</strong></li>
-</ul>
-
-<p>Use to create a spanned logical NVDIMM.  Specify the pair of processors (auto or 1,2).</p>
-
-<h3 id="remove-logical-nvdimm-command">Remove Logical NVDIMM command</h3>
+<h3 id="show-recommended-configuration-command">Show Recommended Configuration Command</h3>
 
 <blockquote>
-<p>Example: Remove a logical NVDIMM on processor 1, index 1.</p>
+<p>Example: Show a list of recommended persistent memory configurations</p>
 </blockquote>
 
 <pre>
-iLOrest > <font color="#01a982">removelogicalnvdimm --processor=1 --index=1</font>
+iLOrest > <font color="#01a982">showrecommendedpmmconfig</font>
 
-Size        Type               Location                Operation    
---------------------------------------------------------------------
-  128 GiB   Single Processor   Processor 1, Index 1    Remove       
-
-
-
-*** WARNING ***
-
-The pending configuration operations require a restart to take effect.
-
-All backup storage devices will be initialized upon restart.
-Data on any existing logical NVDIMMs will be lost.
-
-The pending configuration changes can be discarded by running:
-
-     revertscalablepmemconfig
-
-*** Any data that needs to be preserved should be backed up before restarting ***
-
-</pre>
-
-<blockquote>
-<p>Example: Remove a spanned logical NVDIMM from processors 1 and 2.</p>
-</blockquote>
-
-<pre>
-iLOrest > <font color="#01a982">removelogicalnvdimm --processors=1,2</font>
-
-Size        Type               Location                Operation    
---------------------------------------------------------------------
-  100 GiB   Spanned            Processors 1,2          Remove       
-
-
-
-*** WARNING ***
-
-The pending configuration operations require a restart to take effect.
-
-All backup storage devices will be initialized upon restart.
-Data on any existing logical NVDIMMs will be lost.
-
-The pending configuration changes can be discarded by running:
-
-     revertscalablepmemconfig
-
-*** Any data that needs to be preserved should be backed up before restarting ***
+MemoryModeTotalSize    PmemTotalSize    CacheRatio
+0 GB                   505 GB           N/A
+377 GB                 128 GB           1:2.9
+505 GB                 0 GB             1:3.9
 
 </pre>
 
 <h4 id="syntax">Syntax</h4>
 
-<p>removelogicalnvdimm <em>(&ndash;processor=NUMBER &ndash;index=INDEX | &ndash;pair=PAIR)</em></p>
+<p>showrecommendedpmmconfig</p>
 
 <h4 id="description">Description</h4>
 
-<ul>
-<li>Remove an existing logical NVDIMM.</li>
-<li>This operation causes the data stored on the NVDIMM to be lost. Back up all necessary data first.</li>
-<li>Obtain information about existing logical NVDIMMs using <code class="prettyprint">showscalablepmemconfig</code>.</li>
-</ul>
+<p>Shows the recommended persistent memory configurations.</p>
 
 <h4 id="parameters">Parameters</h4>
 
 <ul>
-<li><strong>&ndash;proc=NUMBER, &ndash;processor=NUMBER</strong></li>
+<li><strong>-h, &ndash;help</strong></li>
 </ul>
 
-<p>Specify the processor number of the logical NVDIMM to remove (1, 2).</p>
-
-<ul>
-<li><strong>-i INDEX, &ndash;index=INDEX</strong></li>
-</ul>
-
-<p>Specify the index of the logical NVDIMM to remove (use with &ndash;processor).</p>
-
-<ul>
-<li><strong>&ndash;pair=PAIR, &ndash;processors=PAIR</strong></li>
-</ul>
-
-<p>Specify the pair of processors of the spanned logical NVDIMM to remove (1,2).</p>
-
-<h3 id="revert-scalable-persistent-memory-configuration-command">Revert Scalable Persistent Memory configuration command</h3>
-
-<blockquote>
-<p>Example: Remove a logical NVDIMM and revert the changes.</p>
-</blockquote>
-
-<pre>
-iLOrest > <font color="#01a982">removelogicalnvdimm --processor=1 --index=1</font>
-
-Size        Type               Location                Operation    
---------------------------------------------------------------------
-  128 GiB   Single Processor   Processor 1, Index 1    Remove       
-
-
-
-*** WARNING ***
-
-The pending configuration operations require a restart to take effect.
-
-All backup storage devices will be initialized upon restart.
-Data on any existing logical NVDIMMs will be lost.
-
-The pending configuration changes can be discarded by running:
-
-     revertscalablepmemconfig
-
-*** Any data that needs to be preserved should be backed up before restarting ***
-
-</pre>
-
-<pre>
-iLOrest > <font color="#01a982">revertscalablepmemconfig</font>
-
-Logical NVDIMMs
----------------
-
-Size        Type               Location                Operation    
---------------------------------------------------------------------
-  128 GiB   Single Processor   Processor 1, Index 1                 
-
-Estimated total backup boot time for this configuration: 1m 41s
-
-
-Scalable Persistent Memory Backup Storage Devices
--------------------------------------------------
-
-ID     Location        Model        Type       Size    Status   Life PMEM Use  Operation           
----------------------------------------------------------------------------------------------------
-2@1    Box 2 Bay 1     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%    Yes                         
-2@2    Box 2 Bay 2     MO0800KEFHP  SSD (NVMe) 800 GB  OK       100%   Yes                         
-3@3    Box 3 Bay 3     MO0800KEFHP  SSD (NVMe) 800 GB  OK       98%                                
-3@4    Box 3 Bay 4     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%                                
-
-Scalable Persistent Memory supported: 786 GiB
-Estimated total backup boot time for this configuration: 1m 41s
-
-
-
-
-</pre>
-
-<h4 id="syntax">Syntax</h4>
-
-<p>revertscalablepmemconfig</p>
-
-<h4 id="description">Description</h4>
-
-<ul>
-<li>Revert any pending Scalable Persistent Memory configuration changes so the changes are not applied during restart.</li>
-</ul>
-
-<h4 id="parameters">Parameters</h4>
-
-<p>None</p>
-
-<h3 id="replace-backup-device-command">Replace Backup Device command</h3>
-
-<blockquote>
-<p>Example: Replace a backup device (existing device 2@1 with new device 2@2).</p>
-</blockquote>
-
-<pre>
-iLOrest > <font color="#01a982">replacebackupdevice 2@1 2@2</font>
-
-ID     Location        Model        Type       Size    Status   Life PMEM Use  Operation           
----------------------------------------------------------------------------------------------------
-2@1    Box 2 Bay 1     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%            Remove,Initialize   
-2@2    Box 2 Bay 2     MO0800KEFHP  SSD (NVMe) 800 GB  OK       100%           Add,Initialize      
-3@3    Box 3 Bay 3     MO0800KEFHP  SSD (NVMe) 800 GB  OK       98%                                
-3@4    Box 3 Bay 4     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%                                
-
-Scalable Persistent Memory supported: 393 GiB
-
-
-*** The pending configuration operations require a restart to take effect ***
-
-</pre>
-
-<h4 id="syntax">Syntax</h4>
-
-<p>replacebackupdevice <em>OLD-ID NEW-ID</em></p>
-
-<h4 id="description">Description</h4>
-
-<ul>
-<li>Replace a backup storage device for Scalable Persistent Memory.</li>
-<li>Specify devices by ID from the <code class="prettyprint">showbackupdevices</code> command.</li>
-</ul>
-
-<aside class="notice">Caution: This operation initializes all backup storage devices. Data on any existing logical NVDIMMs will be lost. Back up all data first.</aside>
-
-<h4 id="parameters">Parameters</h4>
-
-<ul>
-<li><strong>OLD-ID</strong></li>
-</ul>
-
-<p>ID of the original (in-use) backup device to replace, e.g. &#39;1@1&rsquo;</p>
-
-<ul>
-<li><strong>NEW-ID</strong></li>
-</ul>
-
-<p>The new backup device to use as a replacement, e.g. &#39;2@1&rsquo;</p>
-
-<h3 id="auto-select-backup-devices-command">Auto Select Backup Devices command</h3>
-
-<blockquote>
-<p>Example: Simulate the selection of backup storage devices to support 900 GiB of Scalable Persistent Memory.</p>
-</blockquote>
-
-<pre>
-iLOrest > <font color="#01a982">autoselectbackupdevices --size=900</font>
-
-The following backup devices have been automatically selected for Scalable PMEM:
-[1] Box 2 Bay 1     (800 GB)
-[2] Box 2 Bay 2     (800 GB)
-[3] Box 3 Bay 3     (800 GB)
-
-</pre>
-
-<blockquote>
-<p>Example: Auto-select enough backup storage devices to support 1024 GiB of Scalable Persistent Memory.</p>
-</blockquote>
-
-<pre>
-iLOrest > <font color="#01a982">autoselectbackupdevices --size=1024 --confirm</font>
-
-The following backup devices have been automatically selected for Scalable PMEM:
-[1] Box 2 Bay 1     (800 GB)
-[2] Box 2 Bay 2     (800 GB)
-[3] Box 3 Bay 3     (800 GB)
-
-
-ID     Location        Model        Type       Size    Status   Life PMEM Use  Operation           
----------------------------------------------------------------------------------------------------
-2@1    Box 2 Bay 1     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%            Add,Initialize      
-2@2    Box 2 Bay 2     MO0800KEFHP  SSD (NVMe) 800 GB  OK       100%           Add,Initialize      
-3@3    Box 3 Bay 3     MO0800KEFHP  SSD (NVMe) 800 GB  OK       98%            Add,Initialize      
-3@4    Box 3 Bay 4     MO0800KEFHP  SSD (NVMe) 800 GB  OK       99%                                
-
-Scalable Persistent Memory supported: 1180 GiB
-
-
-*** The pending configuration operations require a restart to take effect ***
-
-</pre>
-
-<h4 id="syntax">Syntax</h4>
-
-<p>autoselectbackupdevices <em>&ndash;size=SIZE [&ndash;confirm]</em></p>
-
-<h4 id="description">Description</h4>
-
-<ul>
-<li>Automatically select the correct number of backup storage devices necessary for the desired amount of Scalable Persistent Memory.</li>
-<li>Only works if no logical NVDIMMs have been created and no backup devices have been configured.</li>
-</ul>
-
-<aside class="notice">Caution: using the `&ndash;confirm` flag will automatically change the device operation mode. All backup storage devices will be initialized. Back up all data first.</aside>
-
-<h4 id="parameters">Parameters</h4>
-
-<ul>
-<li><strong>-s SIZE, &ndash;size=SIZE</strong></li>
-</ul>
-
-<p>Amount (in GiB) of Scalable Persistent Memory to be supported by the new backup storage device configuration.</p>
-
-<ul>
-<li><strong>&ndash;confirm</strong></li>
-</ul>
-
-<p>Confirm the configuration of the automatically selected backup devices. If not specified, no changes will occur.</p>
+<p>Displays help on the usage of this command.</p>
 
           <h2 id="raw-commands">Raw commands</h2>
 
