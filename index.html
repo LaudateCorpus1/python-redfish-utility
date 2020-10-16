@@ -125,7 +125,7 @@
       </div>
         <ul class="toc-footer">
             <li><a href='https://www.hpe.com/'>Hewlett Packard Enterprise Development LP</a></li>
-            <li>Copyright ¬© 2020</li>
+            <li>Copyright 2020</li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -175,32 +175,35 @@
 <p>The requirements for the server, which you will manage with the tool, are as follows:</p>
 
 <ul>
-<li>Local management: Gen9 or greater server with a Windows OS or Linux OS (64‚Äìbit) installed.</li>
+<li>Local management: Gen9 or greater server with a Windows OS or Linux OS (64bit) installed.</li>
 <li>Remote management: Gen9 or greater server with or without an OS installed.</li>
 <li>iLO 4 2.10 or later.</li>
-<li>Before you run the tool on a Linux system, the <strong>/tmp</strong> folder must be configured to allow code to execute. If the <strong>/tmp</strong> folder is set to <em>no-execution</em>, the tool will not run. You can work around this by exporting an environment variable to point to another location. <code>$ export TMPDIR=/some/other/location</code> You can assign a new location to any of the following environment variables: TMPDIR, TEMP, TMP.</li>
+<li>Before you run the tool on a Linux system, the <code>/tmp</code> folder must be configured to allow code to execute. If the <code>/tmp</code> folder is set to <em>no-execution</em>, the tool will not run. You can work around this by exporting an environment variable to point to another location. <code>$ export TMPDIR=/some/other/location</code> You can assign a new location to any of the following environment variables: TMPDIR, TEMP, TMP.</li>
 </ul>
 
 <p>Note: You can download the install packages from <a href="http://www.hpe.com/info/resttool">http://www.hpe.com/info/resttool</a>.</p>
+<h3 id='updating-the-json-schemas-used-by-the-restful-interface-tool'>Updating the JSON schemas used by the RESTful Interface Tool</h3>
+<p>When using iLO 2.10 or later and the RESTful Interface Tool 1.30 or later, the JSON schemas are automatically updated. When using an earlier version of iLO or an earlier version of the RESTful Interface Tool, you must manually get the latest JSON schemas from the SPP located in the <code>\hp_restful_api</code> directory. Copy the schema files to the appropriate directory:
+- Windows
+  <code>\Program Files\Hewlett Packard Enterprise\HP RESTful Interface Tool\</code>
+- Linux
+  <code>/usr/share/hprest</code></p>
 <h3 id='installing-the-restful-interface-tool'>Installing the RESTful Interface Tool</h3>
 <p>Perform the following steps to install the tool in a Windows OS or Linux OS.</p>
-<h4 id='windows'>Windows</h4>
+
 <ol>
-<li>Download the RESTful Interface Tool (Windows MSI package) from <a href="http://www.hpe.com/info/resttool">http://www.hpe.com/info/resttool</a>.</li>
-<li>Install the package on the server you prefer to manage for local management. For remote management, install the package on a laptop or server that has access to the managed server network.</li>
-</ol>
-<h4 id='linux'>Linux</h4>
-<ol>
-<li>Download the RESTful Interface Tool (Linux RPM package) from <a href="http://www.hpe.com/info/resttool">http://www.hpe.com/info/resttool</a>.</li>
+<li>Download the RESTful Interface Tool for your operating system from <a href="http://www.hpe.com/info/resttool">http://www.hpe.com/info/resttool</a>.</li>
 <li>Install the installation package on the server you prefer to manage for local management. For remote management, install the package on a laptop or server that has access to the managed server network.</li>
+<li>(Linux only) Most operating systems have <code>/tmp</code> mounted with <code>noexec</code> by default. Before running the RESTful Interface Tool, the file systems table must be configured so that <code>/tmp</code> is mounted with <code>exec</code>:
+<code>mount -o remount,exec /tmp</code></li>
 </ol>
-<h3 id='starting-the-restful-interface-tool'>Starting the RESTful Interface Tool</h3><h4 id='windows-2'>Windows</h4>
+<h3 id='starting-the-restful-interface-tool'>Starting the RESTful Interface Tool</h3><h4 id='windows'>Windows</h4>
 <ol>
 <li>Click the <strong>Start</strong> menu.</li>
-<li>Click <strong>Hewlett Packard Enterprise</strong> ‚Üí <strong>HPE RESTful Interface Tool</strong>.</li>
+<li>Click <strong>Hewlett Packard Enterprise</strong> &gt; <strong>HPE RESTful Interface Tool</strong>.</li>
 <li>Right-click the <strong>HPE RESTful Interface Tool</strong> prompt, and then click <strong>Run as Administrator</strong>.</li>
 </ol>
-<h4 id='linux-2'>Linux</h4>
+<h4 id='linux'>Linux</h4>
 <ol>
 <li>Open a terminal window.</li>
 <li>Run the following command as an administrator to start interactive mode: <code>/usr/sbin/ilorest</code></li>
@@ -387,7 +390,7 @@ ilorest --cache-dir=server10 login ilo-server10 -u username -p password
 <blockquote>
 <p>Now that an iLOREST session is created on each iLO, you can <strong>select</strong>, <strong>set</strong>, or <strong>get</strong> information from them.</p>
 
-<p>The <strong>-R exec</strong> part of the example finds and locally executes the iLOREST executable. <strong>The -w server[1-10]</strong> part of the example replaces the string <code>%h</code> in the rest of the command with <code>1, 2, ‚Ä¶ 10</code>.</p>
+<p>The <strong>-R exec</strong> part of the example finds and locally executes the iLOREST executable. <strong>The -w server[1-10]</strong> part of the example replaces the string <code>%h</code> in the rest of the command with <code>1, 2, Ö 10</code>.</p>
 </blockquote>
 <pre class="highlight plaintext"><code>pdsh -R exec --cache-dir=server[1-10] ilorest &lt;select, list, get or set&gt; &lt;Type or property&gt;.
 </code></pre>
@@ -873,7 +876,7 @@ Options:
 <li><strong>-h, --help</strong></li>
 </ul>
 
-<p>Running the <code>help</code> command with the <strong>‚Äìh</strong> or <strong>‚Äìhelp</strong> command will display information on how to use the <code>help</code> command.</p>
+<p>Running the <code>help</code> command with the <strong>ñh</strong> or <strong>ñhelp</strong> command will display information on how to use the <code>help</code> command.</p>
 
 <ul>
 <li><strong>-c FILE, --config=FILE</strong></li>
@@ -997,7 +1000,7 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 
 <p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be /rest/v1.</p>
 
-<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isn‚Äôt the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
+<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isnít the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
 
 <ul>
 <li><strong>--biospassword=BIOSPASSWORD</strong></li>
@@ -1182,7 +1185,7 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 
 <p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be<code>/redfish/v1/</code>. (see <a href="#path-option">Path Option</a> for more information).</p>
 
-<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isn‚Äôt the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
+<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isnít the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
 <h4 id='inputs-2'>Inputs</h4>
 <p>None</p>
 <h4 id='outputs-2'>Outputs</h4>
@@ -1319,7 +1322,7 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 
 <p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be<code>/redfish/v1/</code>. (see <a href="#path-option">Path Option</a> for more information).</p>
 
-<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isn‚Äôt the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
+<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isnít the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
 <h4 id='inputs-3'>Inputs</h4>
 <p>None</p>
 <h4 id='outputs-3'>Outputs</h4>
@@ -1360,7 +1363,7 @@ BootMode=Uefi
 </pre>
 
 <blockquote>
-<p>Including the <code>-j</code>,<code>--json</code> option preserves the JSON structure of the type‚Äôs information. The full list has been truncated here for space.</p>
+<p>Including the <code>-j</code>,<code>--json</code> option preserves the JSON structure of the typeís information. The full list has been truncated here for space.</p>
 </blockquote>
 
 <pre>
@@ -1488,7 +1491,7 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 
 <p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be<code>/redfish/v1/</code>. (see <a href="#path-option">Path Option</a> for more information).</p>
 
-<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isn‚Äôt the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
+<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isnít the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
 <h4 id='inputs-4'>Inputs</h4>
 <p>None</p>
 <h4 id='outputs-4'>Outputs</h4>
@@ -1663,7 +1666,7 @@ READ-ONLY
 
 <p>Optionally use the latest schema instead of the one requested by the file.</p>
 
-<aside class="warning">This might cause errors in some data retrieval due to differences in the schema‚Äôs organizational structure between versions.</aside>
+<aside class="warning">This might cause errors in some data retrieval due to differences in the schemaís organizational structure between versions.</aside>
 
 <ul>
 <li><strong>-j, --json</strong></li>
@@ -1718,7 +1721,7 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 
 <p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be<code>/redfish/v1/</code>. (see <a href="#path-option">Path Option</a> for more information).</p>
 
-<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isn‚Äôt the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
+<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isnít the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
 <h4 id='inputs-5'>Inputs</h4>
 <p>None</p>
 <h4 id='outputs-5'>Outputs</h4>
@@ -1936,7 +1939,7 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 
 <p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be<code>/redfish/v1/</code>. (see <a href="#path-option">Path Option</a> for more information).</p>
 
-<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isn‚Äôt the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
+<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isnít the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
 <h4 id='inputs-6'>Inputs</h4>
 <p>None</p>
 <h4 id='outputs-6'>Outputs</h4>
@@ -2005,31 +2008,31 @@ AdminName=Jason E
 <p><strong>Correct</strong> syntax. This sets the <code>AdminName</code> to John.</p>
 
 <ul>
-<li><code>set ‚ÄúAdminName=John Doe‚Äù</code></li>
+<li><code>set ìAdminName=John Doeî</code></li>
 </ul>
 
 <p><strong>Correct</strong> syntax. If the property has a space in it, use quotes around the entire property/value pair. Here the <code>AdminName</code> has been set to John Doe.</p>
 
 <ul>
-<li><code>set AdminName=‚Äù‚Äù</code></li>
+<li><code>set AdminName=îî</code></li>
 </ul>
 
 <p><strong>Correct</strong> syntax. Use this syntax, only quotes with no value, to remove the <code>AdminName</code> property value.</p>
 
 <ul>
-<li><code>set AdminName=‚Äô‚Äô</code></li>
+<li><code>set AdminName=íí</code></li>
 </ul>
 
 <p><strong>Correct</strong> syntax. This is an alternate syntax that also removes the <code>AdminName</code> property and sets it to nothing. Use single quotes with nothing between them.</p>
 
 <ul>
-<li><code>set AdminName=‚Äô‚Äù‚Äù‚Äô</code></li>
+<li><code>set AdminName=íîîí</code></li>
 </ul>
 
 <p><strong>Correct</strong> syntax. This deletes the <code>AdminName</code> value.</p>
 
 <ul>
-<li><code>set AdminName=‚ÄùJohn Doe‚Äù</code></li>
+<li><code>set AdminName=îJohn Doeî</code></li>
 </ul>
 
 <p>This is <strong>incorrect</strong> syntax, and will not be correctly reflected on the server.</p>
@@ -2066,7 +2069,7 @@ AdminName=Jason E
 
 <p>Optionally use the latest schema instead of the one requested by the file.</p>
 
-<aside class="warning">This might cause errors in some data retrieval due to differences in the schema‚Äôs organizational structure between versions.</aside>
+<aside class="warning">This might cause errors in some data retrieval due to differences in the schemaís organizational structure between versions.</aside>
 
 <ul>
 <li><strong>--commit</strong></li>
@@ -2141,7 +2144,7 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 
 <p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be<code>/redfish/v1/</code>. (see <a href="#path-option">Path Option</a> for more information).</p>
 
-<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isn‚Äôt the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
+<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isnít the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
 <h4 id='inputs-7'>Inputs</h4>
 <p>None</p>
 <h4 id='outputs-7'>Outputs</h4>
@@ -2226,7 +2229,7 @@ Logging session out.
 <h4 id='syntax-9'>Syntax</h4>
 <p>save <em>[Optional Parameters]</em></p>
 <h4 id='description-9'>Description</h4>
-<p>Saves the JSON information of a selected type to a local file. Use this command along with the <code>load</code> command when you want to modify properties of a selected type through file editing. Using this command saves a local copy of your selected type‚Äôs JSON information.</p>
+<p>Saves the JSON information of a selected type to a local file. Use this command along with the <code>load</code> command when you want to modify properties of a selected type through file editing. Using this command saves a local copy of your selected typeís JSON information.</p>
 <h4 id='parameters-9'>Parameters</h4>
 <ul>
 <li><strong>-h, --help</strong></li>
@@ -2319,7 +2322,7 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 
 <p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be<code>/redfish/v1/</code>. (see <a href="#path-option">Path Option</a> for more information).</p>
 
-<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isn‚Äôt the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
+<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isnít the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
 <h4 id='inputs-8'>Inputs</h4>
 <p>None</p>
 <h4 id='outputs-8'>Outputs</h4>
@@ -2381,7 +2384,7 @@ All servers have been successfully configured.
 <h4 id='syntax-10'>Syntax</h4>
 <p>load <em>[Optional Parameters]</em></p>
 <h4 id='description-10'>Description</h4>
-<p>Loads the server configuration from a file. Run this command without parameters to use the configuration found in the file called <code>ilorest.json</code>. Otherwise, you can point this command to use any file you specify. Use this function to change the properties of a type to new values. This command uploads the new values of the type‚Äôs properties to the server.</p>
+<p>Loads the server configuration from a file. Run this command without parameters to use the configuration found in the file called <code>ilorest.json</code>. Otherwise, you can point this command to use any file you specify. Use this function to change the properties of a type to new values. This command uploads the new values of the typeís properties to the server.</p>
 
 <aside class="notice"><b>Read-only</b> properties are skipped, and non-read only properties continue to be set.</aside>
 <h4 id='parameters-10'>Parameters</h4>
@@ -2403,7 +2406,7 @@ All servers have been successfully configured.
 
 <p>Optionally use the latest schema instead of the one requested by the file.</p>
 
-<aside class="warning">This might cause errors in some data retrieval due to differences in the schema‚Äôs organizational structure between versions.</aside>
+<aside class="warning">This might cause errors in some data retrieval due to differences in the schemaís organizational structure between versions.</aside>
 
 <ul>
 <li><strong>--biospassword=BIOSPASSWORD</strong></li>
@@ -5843,10 +5846,10 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 </ul>
 
 <p>The extended verbosity option provides the following additional information for iLO HTTP and the iLO Channel Interface Driver response messages:
-* An error response message id (‚ÄúMessageId‚Äù), iLO response error message code identification.
-* An error response message description (‚ÄúDescription‚Äù), essentially a quick synopsis of the issue.
-* An error response message (‚ÄúMessage‚Äù) describing the reason for the error in greater detail. The offending properties are embedded as per the relevant error response resource.
-* An error response resolution (‚ÄúResolution‚Äù) describing steps to correct the error.</p>
+* An error response message id (ìMessageIdî), iLO response error message code identification.
+* An error response message description (ìDescriptionî), essentially a quick synopsis of the issue.
+* An error response message (ìMessageî) describing the reason for the error in greater detail. The offending properties are embedded as per the relevant error response resource.
+* An error response resolution (ìResolutionî) describing steps to correct the error.</p>
 
 <blockquote>
 <p>The following example shows extended verbosity:</p>
@@ -10288,7 +10291,7 @@ Logging session out.
 
 <p>The <code>Bios</code> type has two properties that both need to be used to change the administrator password, <code>AdminPassword</code> and <code>OldAdminPassword</code>. <code>AdminPassword</code> is the new password you want to change to, and <code>OldAdminPassword</code> is the current password you have.</p>
 
-<aside class="notice">If there is no current password, you must include <b>OldAdminPassword=‚Äù‚Äù</b>.</aside>
+<aside class="notice">If there is no current password, you must include <b>OldAdminPassword=îî</b>.</aside>
 
 <p><img src="images/BIOSPassword_1.png" title="BIOS Password Example 1" alt="BIOS Password Example 1" /></p>
 
@@ -10296,13 +10299,13 @@ Logging session out.
 
 <p><img src="images/BIOSPassword_2.png" title="BIOS Password Example 2" alt="BIOS Password Example 2" /></p>
 
-<p>In order to change the administrator password, you need to set the <code>AdminPassword</code> (the new value you want) and the <code>OldAdminPassword</code> (what the admin password was before), as well as include the <code>‚Äìbiospassword</code> flag if the system is iLO 4.</p>
+<p>In order to change the administrator password, you need to set the <code>AdminPassword</code> (the new value you want) and the <code>OldAdminPassword</code> (what the admin password was before), as well as include the <code>ñbiospassword</code> flag if the system is iLO 4.</p>
 
 <aside class="notice">The <b>biospassword</b> value is the same as the <b>OldAdminPassword</b> value.</aside>
 
 <p><img src="images/BIOSPassword_3.png" title="BIOS Password Example 3" alt="BIOS Password Example 3" /></p>
 
-<p>After you‚Äôve set the values for <code>AdminPassword</code> and <code>OldAdminPassword</code>, you need to commit your changes and reboot your server:</p>
+<p>After youíve set the values for <code>AdminPassword</code> and <code>OldAdminPassword</code>, you need to commit your changes and reboot your server:</p>
 
 <aside class="notice">To change the administrator password, <b>AdminPassword</b> and <b>OldAdminPassword</b> must be set in the same line.</aside>
 
@@ -11866,7 +11869,7 @@ ilorest.exe load -f %2
 
 <p><a href="http://www.hpe.com/support/selfrepair">www.hpe.com/support/selfrepair</a></p>
 <h2 id='remote-support'>Remote Support</h2>
-<p>Remote support is available with supported devices as part of your warranty or contractual support agreement. It provides intelligent event diagnosis, and automatic, secure submission of hardware event notifications to Hewlett Packard Enterprise, which will initiate a fast and accurate resolution based on your product‚Äôs service level. Hewlett Packard Enterprise strongly recommends that you register your device for remote support.</p>
+<p>Remote support is available with supported devices as part of your warranty or contractual support agreement. It provides intelligent event diagnosis, and automatic, secure submission of hardware event notifications to Hewlett Packard Enterprise, which will initiate a fast and accurate resolution based on your productís service level. Hewlett Packard Enterprise strongly recommends that you register your device for remote support.</p>
 
 <p>For more information and device support details, go to the following website.</p>
 
@@ -11896,6 +11899,18 @@ ilorest.exe load -f %2
 <td></td>
 <td>Directory command subcommand &quot;Kerberos&quot; optional argument &quot;--serviceaddress&quot; is not available.</td>
 <td>use save and load to modify the &quot;ServiceAddresses&quot; lists for Active Directory and/or LDAP. Raw commands can also be utilized.</td>
+</tr>
+<tr>
+<td>Directory Command subcommands JSON output unavailable</td>
+<td></td>
+<td>Directory Command unable to output JSON (&#39;-j&#39;) for &#39;Kerberos&#39;, &#39;LDAP&#39; and &#39;Test Results&#39; subcommands.</td>
+<td>Rawget or Get using JSON output flag.</td>
+</tr>
+<tr>
+<td>iLOAccounts Command JSON output unavailble</td>
+<td></td>
+<td>iLOAccounts Command unable to output JSON (&#39;-j&#39;) for iLOAccounts entries.</td>
+<td>Use Rawget or Get per Account entry in Accounts Collection (ManagerAccountCollection) per @odata.id in each Members object.</td>
 </tr>
 </tbody></table>
 
@@ -11991,7 +12006,7 @@ ilorest.exe load -f %2
 <tr>
 <td>13</td>
 <td>UI_CLI_COMMAND_NOT_FOUND_EXCEPTION (see COMMAND_NOT_ENABLED_ERROR)</td>
-<td>An error occurred when the user tries to invoke a command that doesn‚Äôt exist.</td>
+<td>An error occurred when the user tries to invoke a command that doesnít exist.</td>
 <td>Some commands may not be available on certain platforms. If the error is not clear in scriptable mode, try &#39;ilorest&#39; in interactive mode to view disabled commands (just below the logo section).</td>
 </tr>
 <tr>
@@ -12232,7 +12247,7 @@ ilorest.exe load -f %2
 <td>65</td>
 <td>RIS_SCHEMA_PARSE_ERROR</td>
 <td>An error occurred parsing the type schema.</td>
-<td>Try running with the ‚Äú--latestschema flag‚Äù. Report this issue for further review.</td>
+<td>Try running with the ì--latestschema flagî. Report this issue for further review.</td>
 </tr>
 <tr>
 <td>70</td>
