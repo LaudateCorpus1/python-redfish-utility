@@ -4,7 +4,7 @@
   <head>
   <script type="text/javascript">
     WEB_SOCKET_SWF_LOCATION = "/__rack/WebSocketMain.swf";
-
+    
   </script>
   <script type="text/javascript" src="/__rack/swfobject.js"></script>
   <script type="text/javascript" src="/__rack/web_socket.js"></script>
@@ -18,7 +18,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>RESTful Interface Tool 3.1.0 User Guide</title>
+    <title>RESTful Interface Tool 3.1.1 User Guide</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -125,15 +125,15 @@
       </div>
         <ul class="toc-footer">
             <li><a href='https://www.hpe.com/'>Hewlett Packard Enterprise Development LP</a></li>
-            <li>Copyright 2020</li>
+            <li>Copyright &copy; 2020</li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-
+        
           <h1 id='overview'>Overview</h1>
-<p>The RESTful Interface Tool (iLOREST) is a command-line interface that allows you to manage Hewlett Packard Enterprise products that take advantage of RESTful APIs. For this release of the tool, you can manage HPE Gen9 servers running iLO 4 version 2.10 and later and Gen10 servers running iLO 5 version 1.20 and later through iLO RESTful APIs. You can install the tool on your computer for remote use or you can install the tool locally on a server with a Windows OS or Linux OS. In addition to using the tool manually to execute individual commands, you can create scripts to automate tasks.</p>
+<p>The RESTful Interface Tool (iLOREST) is a command-line interface that allows you to manage Hewlett Packard Enterprise products that take advantage of RESTful APIs. For this release of the tool, you can manage HPE Gen9 servers running iLO 4 2.10 or later through iLO RESTful APIs. You can install the tool on your computer for remote use or you can install the tool locally on a server with a Windows OS or Linux OS. In addition to using the tool manually to execute individual commands, you can create scripts to automate tasks.</p>
 
 <p>iLOREST can display and set parameters for the following:</p>
 
@@ -144,7 +144,22 @@
 <li><strong>Smart Array support</strong></li>
 </ul>
 
-          <h1 id='change-log'>Change Log</h1><h2 id='changes-in-v3-1-0'>Changes in v3.1.0.</h2>
+          <h1 id='change-log'>Change Log</h1><h2 id='changes-in-v3-1-1'>Changes in v3.1.1.</h2>
+<ul>
+<li>Provided an option to input <code>session_key</code> for the <code>REDfishClient</code> class.</li>
+<li>The <code>iloaccounts</code> command now provides the output in JSON format.<br></li>
+<li>The <code>createlogicaldrive quickdrive</code> command now successfully runs.</li>
+<li>BIOS and the poweron passwords can now be set without any password.</li>
+<li>Fixed in this release:
+
+<ul>
+<li>AHS data failing to download sometimes.</li>
+<li>An issue with downloading AHS when iLOREST is running locally on a server.</li>
+<li>The privilege modification of an iLO user account that was incorrectly applied on another user.<br></li>
+<li>The body of the <code>onebuttonerase</code> command, so that it could POST successfully.<br></li>
+</ul></li>
+</ul>
+<h2 id='changes-in-v3-1-0'>Changes in v3.1.0.</h2>
 <ul>
 <li>Argument Parsing utilized for command line help functionality
 
@@ -175,35 +190,32 @@
 <p>The requirements for the server, which you will manage with the tool, are as follows:</p>
 
 <ul>
-<li>Local management: Gen9 or greater server with a Windows OS or Linux OS (64bit) installed.</li>
+<li>Local management: Gen9 or greater server with a Windows OS or Linux OS (64‚Äìbit) installed.</li>
 <li>Remote management: Gen9 or greater server with or without an OS installed.</li>
 <li>iLO 4 2.10 or later.</li>
-<li>Before you run the tool on a Linux system, the <code>/tmp</code> folder must be configured to allow code to execute. If the <code>/tmp</code> folder is set to <em>no-execution</em>, the tool will not run. You can work around this by exporting an environment variable to point to another location. <code>$ export TMPDIR=/some/other/location</code> You can assign a new location to any of the following environment variables: TMPDIR, TEMP, TMP.</li>
+<li>Before you run the tool on a Linux system, the <strong>/tmp</strong> folder must be configured to allow code to execute. If the <strong>/tmp</strong> folder is set to <em>no-execution</em>, the tool will not run. You can work around this by exporting an environment variable to point to another location. <code>$ export TMPDIR=/some/other/location</code> You can assign a new location to any of the following environment variables: TMPDIR, TEMP, TMP.</li>
 </ul>
 
-<p>Note: You can download the install packages from <a href="http://www.hpe.com/info/resttool">http://www.hpe.com/info/resttool</a>.</p>
-<h3 id='updating-the-json-schemas-used-by-the-restful-interface-tool'>Updating the JSON schemas used by the RESTful Interface Tool</h3>
-<p>When using iLO 2.10 or later and the RESTful Interface Tool 1.30 or later, the JSON schemas are automatically updated. When using an earlier version of iLO or an earlier version of the RESTful Interface Tool, you must manually get the latest JSON schemas from the SPP located in the <code>\hp_restful_api</code> directory. Copy the schema files to the appropriate directory:
-- Windows
-  <code>\Program Files\Hewlett Packard Enterprise\HP RESTful Interface Tool\</code>
-- Linux
-  <code>/usr/share/hprest</code></p>
-<h3 id='installing-the-restful-interface-tool'>Installing the RESTful Interface Tool</h3>
+<p>Note: You can download the install packages from <a href="https://www.hpe.com/info/resttool">https://www.hpe.com/info/resttool</a>.</p>
+<h2 id='installing-the-restful-interface-tool'>Installing the RESTful Interface Tool</h2>
 <p>Perform the following steps to install the tool in a Windows OS or Linux OS.</p>
-
+<h3 id='windows'>Windows</h3>
 <ol>
-<li>Download the RESTful Interface Tool for your operating system from <a href="http://www.hpe.com/info/resttool">http://www.hpe.com/info/resttool</a>.</li>
-<li>Install the installation package on the server you prefer to manage for local management. For remote management, install the package on a laptop or server that has access to the managed server network.</li>
-<li>(Linux only) Most operating systems have <code>/tmp</code> mounted with <code>noexec</code> by default. Before running the RESTful Interface Tool, the file systems table must be configured so that <code>/tmp</code> is mounted with <code>exec</code>:
-<code>mount -o remount,exec /tmp</code></li>
+<li>Download the RESTful Interface Tool (Windows MSI package) from <a href="https://www.hpe.com/info/resttool">https://www.hpe.com/info/resttool</a>.</li>
+<li>Install the package on the server you prefer to manage for local management. For remote management, install the package on a laptop or server that has access to the managed server network.</li>
 </ol>
-<h3 id='starting-the-restful-interface-tool'>Starting the RESTful Interface Tool</h3><h4 id='windows'>Windows</h4>
+<h3 id='linux'>Linux</h3>
+<ol>
+<li>Download the RESTful Interface Tool (Linux RPM package) from <a href="https://www.hpe.com/info/resttool">https://www.hpe.com/info/resttool</a>.</li>
+<li>Install the installation package on the server you prefer to manage for local management. For remote management, install the package on a laptop or server that has access to the managed server network.</li>
+</ol>
+<h2 id='starting-the-restful-interface-tool'>Starting the RESTful Interface Tool</h2><h3 id='windows-2'>Windows</h3>
 <ol>
 <li>Click the <strong>Start</strong> menu.</li>
-<li>Click <strong>Hewlett Packard Enterprise</strong> &gt; <strong>HPE RESTful Interface Tool</strong>.</li>
+<li>Click <strong>Hewlett Packard Enterprise</strong> ‚Üí <strong>HPE RESTful Interface Tool</strong>.</li>
 <li>Right-click the <strong>HPE RESTful Interface Tool</strong> prompt, and then click <strong>Run as Administrator</strong>.</li>
 </ol>
-<h4 id='linux'>Linux</h4>
+<h3 id='linux-2'>Linux</h3>
 <ol>
 <li>Open a terminal window.</li>
 <li>Run the following command as an administrator to start interactive mode: <code>/usr/sbin/ilorest</code></li>
@@ -362,37 +374,37 @@ ilorest.exe load -f %2
 <blockquote>
 <p>Run the following command to start an iLOREST session in 10 different iLO servers:</p>
 </blockquote>
-<pre class="highlight plaintext"><code>pdsh -R exec -w server[1-10] ilorest --cache-dir=%h login ilo-%h -u username -p password.
+<pre class="highlight plaintext"><code>pdsh -R exec -w server[1-10] ilorest --cache-dir %h login ilo-%h -u username -p password.
 </code></pre>
 <blockquote>
 <p>When you run the example command, PDSH issues the following 10 commands in batch and background mode. For each command, iLOREST saves the data in a different location. For example, for server1, the data is cached in directory server1, for server2, the data is cached in directory server2.</p>
 </blockquote>
-<pre class="highlight plaintext"><code>ilorest --cache-dir=server1 login ilo-server1 -u username -p password
+<pre class="highlight plaintext"><code>ilorest --cache-dir server1 login ilo-server1 -u username -p password
 
-ilorest --cache-dir=server2 login ilo-server2 -u username -p password
+ilorest --cache-dir server2 login ilo-server2 -u username -p password
 
-ilorest --cache-dir=server3 login ilo-server3 -u username -p password
+ilorest --cache-dir server3 login ilo-server3 -u username -p password
 
-ilorest --cache-dir=server4 login ilo-server4 -u username -p password
+ilorest --cache-dir server4 login ilo-server4 -u username -p password
 
-ilorest --cache-dir=server5 login ilo-server5 -u username -p password
+ilorest --cache-dir server5 login ilo-server5 -u username -p password
 
-ilorest --cache-dir=server6 login ilo-server6 -u username -p password
+ilorest --cache-dir server6 login ilo-server6 -u username -p password
 
-ilorest --cache-dir=server7 login ilo-server7 -u username -p password
+ilorest --cache-dir server7 login ilo-server7 -u username -p password
 
-ilorest --cache-dir=server8 login ilo-server8 -u username -p password
+ilorest --cache-dir server8 login ilo-server8 -u username -p password
 
-ilorest --cache-dir=server9 login ilo-server9 -u username -p password
+ilorest --cache-dir server9 login ilo-server9 -u username -p password
 
-ilorest --cache-dir=server10 login ilo-server10 -u username -p password
+ilorest --cache-dir server10 login ilo-server10 -u username -p password
 </code></pre>
 <blockquote>
 <p>Now that an iLOREST session is created on each iLO, you can <strong>select</strong>, <strong>set</strong>, or <strong>get</strong> information from them.</p>
 
-<p>The <strong>-R exec</strong> part of the example finds and locally executes the iLOREST executable. <strong>The -w server[1-10]</strong> part of the example replaces the string <code>%h</code> in the rest of the command with <code>1, 2, Ö 10</code>.</p>
+<p>The <strong>-R exec</strong> part of the example finds and locally executes the iLOREST executable. <strong>The -w server[1-10]</strong> part of the example replaces the string <code>%h</code> in the rest of the command with <code>1, 2, ‚Ä¶ 10</code>.</p>
 </blockquote>
-<pre class="highlight plaintext"><code>pdsh -R exec --cache-dir=server[1-10] ilorest &lt;select, list, get or set&gt; &lt;Type or property&gt;.
+<pre class="highlight plaintext"><code>pdsh -R exec --cache-dir server[1-10] ilorest &lt;select, list, get or set&gt; &lt;Type or property&gt;.
 </code></pre>
 <p>iLOREST uses a caching method to locally save servers&#39; data. To send iLOREST commands to many different systems at once remotely, you will need to specify a different cache directory for each of them. The following example uses <code>PDSH</code>, but any method of parallel scripting will work as long as you are specifying different cache directories.</p>
 
@@ -402,7 +414,7 @@ ilorest --cache-dir=server10 login ilo-server10 -u username -p password
 <p>Windows default configuration file</p>
 </blockquote>
 <pre class="highlight plaintext"><code>[ilorest]
-#iLOrest reads the following environment variables, and applies them at runtime.
+#iLOrest reads the following environment variables, and applies them at runtime.  
 #Note that they can be overridden by command line switches.
 
 #####          Log Settings          #####
@@ -459,7 +471,7 @@ ilorest --cache-dir=server10 login ilo-server10 -u username -p password
 <p>Linux default configuration file</p>
 </blockquote>
 <pre class="highlight plaintext"><code>[iLOrest]
-#iLOrest reads the following environment variables, and applies them at runtime.
+#iLOrest reads the following environment variables, and applies them at runtime.  
 #Note that they can be overridden by command line switches.
 
 #####          Log Settings          #####
@@ -522,7 +534,7 @@ ilorest --cache-dir=server10 login ilo-server10 -u username -p password
 </ul>
 
           <h2 id='higher-security-modes'>Higher Security Modes</h2>
-<p>This section describes how to set higher security modes and how to use the RESTful Interface Tool in these modes. For more information about the higher security modes in iLO 5, see the <a href="https://hewlettpackard.github.io/ilo-rest-api-docs/ilo5/#securitystate" target="_blank">Security State topic in the iLO 5 API documentation</a>.
+<p>This section describes how to set higher security modes and how to use the RESTful Interface Tool in these modes.
 <aside class="notice">These security settings are only available in HPE Gen10 servers.</aside></p>
 <h3 id='setting-ilo-higher-security-modes'>Setting iLO Higher Security Modes</h3>
 <blockquote>
@@ -549,7 +561,6 @@ If you do not pass the proper credentials in local mode, you receive a similar e
 
 <p>For users running from source that would like FIPS support, please see <a href="https://developer.hpe.com/blog/creating-a-python-version-that-enforces-fips">this link</a> for information on including this feature.</p>
 
-          <h1 id='commands-for-the-restful-interface-tool'>Commands for the RESTful Interface Tool</h1>
           <h2 id='global-options'>Global Options</h2>
 <p>This section lists all global options available.</p>
 
@@ -601,7 +612,7 @@ If you do not pass the proper credentials in local mode, you receive a similar e
 
 <p><strong>--latestschema</strong></p>
 
-<p>Optionally use the latest schema instead of the one requested by the file. </p>
+<p>Optionally use the latest schema instead of the one requested by the file.</p>
 
 <aside class="notice">
 Might cause errors in some data retrieval due to difference in schema versions.
@@ -865,7 +876,7 @@ Options:
 <p>Displays command-line syntax and help menus for individual commands. Use this command if you want to know more about a command or need help using a command. Alternatively, you can use the <code>help</code> command without specifying a particular command if you wish to see all the available commands and options.</p>
 <h4 id='parameters'>Parameters</h4>
 <ul>
-<li>Command </li>
+<li>Command</li>
 </ul>
 
 <p>Supplying a command to help will display the help message corresponding to the given command, as well as the options relating to that particular command.</p>
@@ -876,7 +887,7 @@ Options:
 <li><strong>-h, --help</strong></li>
 </ul>
 
-<p>Running the <code>help</code> command with the <strong>ñh</strong> or <strong>ñhelp</strong> command will display information on how to use the <code>help</code> command.</p>
+<p>Running the <code>help</code> command with the <strong>‚Äìh</strong> or <strong>‚Äìhelp</strong> command will display information on how to use the <code>help</code> command.</p>
 
 <ul>
 <li><strong>-c FILE, --config=FILE</strong></li>
@@ -897,7 +908,7 @@ Options:
 <blockquote>
 <p>Login example commands:</p>
 
-<p>To login remotely, supply the URL, username, and password for the server. </p>
+<p>To login remotely, supply the URL, username, and password for the server.</p>
 </blockquote>
 
 <pre>
@@ -1000,7 +1011,7 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 
 <p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be /rest/v1.</p>
 
-<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isnít the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
+<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isn't the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
 
 <ul>
 <li><strong>--biospassword=BIOSPASSWORD</strong></li>
@@ -1185,7 +1196,7 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 
 <p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be<code>/redfish/v1/</code>. (see <a href="#path-option">Path Option</a> for more information).</p>
 
-<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isnít the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
+<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isn't the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
 <h4 id='inputs-2'>Inputs</h4>
 <p>None</p>
 <h4 id='outputs-2'>Outputs</h4>
@@ -1322,7 +1333,7 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 
 <p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be<code>/redfish/v1/</code>. (see <a href="#path-option">Path Option</a> for more information).</p>
 
-<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isnít the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
+<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isn't the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
 <h4 id='inputs-3'>Inputs</h4>
 <p>None</p>
 <h4 id='outputs-3'>Outputs</h4>
@@ -1363,7 +1374,7 @@ BootMode=Uefi
 </pre>
 
 <blockquote>
-<p>Including the <code>-j</code>,<code>--json</code> option preserves the JSON structure of the typeís information. The full list has been truncated here for space.</p>
+<p>Including the <code>-j</code>,<code>--json</code> option preserves the JSON structure of the type&#39;s information. The full list has been truncated here for space.</p>
 </blockquote>
 
 <pre>
@@ -1491,7 +1502,7 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 
 <p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be<code>/redfish/v1/</code>. (see <a href="#path-option">Path Option</a> for more information).</p>
 
-<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isnít the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
+<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isn't the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
 <h4 id='inputs-4'>Inputs</h4>
 <p>None</p>
 <h4 id='outputs-4'>Outputs</h4>
@@ -1666,7 +1677,7 @@ READ-ONLY
 
 <p>Optionally use the latest schema instead of the one requested by the file.</p>
 
-<aside class="warning">This might cause errors in some data retrieval due to differences in the schemaís organizational structure between versions.</aside>
+<aside class="warning">This might cause errors in some data retrieval due to differences in the schema's organizational structure between versions.</aside>
 
 <ul>
 <li><strong>-j, --json</strong></li>
@@ -1721,7 +1732,7 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 
 <p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be<code>/redfish/v1/</code>. (see <a href="#path-option">Path Option</a> for more information).</p>
 
-<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isnít the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
+<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isn't the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
 <h4 id='inputs-5'>Inputs</h4>
 <p>None</p>
 <h4 id='outputs-5'>Outputs</h4>
@@ -1939,7 +1950,7 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 
 <p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be<code>/redfish/v1/</code>. (see <a href="#path-option">Path Option</a> for more information).</p>
 
-<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isnít the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
+<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isn't the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
 <h4 id='inputs-6'>Inputs</h4>
 <p>None</p>
 <h4 id='outputs-6'>Outputs</h4>
@@ -2008,31 +2019,31 @@ AdminName=Jason E
 <p><strong>Correct</strong> syntax. This sets the <code>AdminName</code> to John.</p>
 
 <ul>
-<li><code>set ìAdminName=John Doeî</code></li>
+<li><code>set &quot;AdminName=John Doe&quot;</code></li>
 </ul>
 
 <p><strong>Correct</strong> syntax. If the property has a space in it, use quotes around the entire property/value pair. Here the <code>AdminName</code> has been set to John Doe.</p>
 
 <ul>
-<li><code>set AdminName=îî</code></li>
+<li><code>set AdminName=&quot;&quot;</code></li>
 </ul>
 
 <p><strong>Correct</strong> syntax. Use this syntax, only quotes with no value, to remove the <code>AdminName</code> property value.</p>
 
 <ul>
-<li><code>set AdminName=íí</code></li>
+<li><code>set AdminName=&#39;&#39;</code></li>
 </ul>
 
 <p><strong>Correct</strong> syntax. This is an alternate syntax that also removes the <code>AdminName</code> property and sets it to nothing. Use single quotes with nothing between them.</p>
 
 <ul>
-<li><code>set AdminName=íîîí</code></li>
+<li><code>set AdminName=&#39;&quot;&quot;&#39;</code></li>
 </ul>
 
 <p><strong>Correct</strong> syntax. This deletes the <code>AdminName</code> value.</p>
 
 <ul>
-<li><code>set AdminName=îJohn Doeî</code></li>
+<li><code>set AdminName=&quot;John Doe&quot;</code></li>
 </ul>
 
 <p>This is <strong>incorrect</strong> syntax, and will not be correctly reflected on the server.</p>
@@ -2069,7 +2080,7 @@ AdminName=Jason E
 
 <p>Optionally use the latest schema instead of the one requested by the file.</p>
 
-<aside class="warning">This might cause errors in some data retrieval due to differences in the schemaís organizational structure between versions.</aside>
+<aside class="warning">This might cause errors in some data retrieval due to differences in the schema's organizational structure between versions.</aside>
 
 <ul>
 <li><strong>--commit</strong></li>
@@ -2144,7 +2155,7 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 
 <p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be<code>/redfish/v1/</code>. (see <a href="#path-option">Path Option</a> for more information).</p>
 
-<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isnít the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
+<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isn't the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
 <h4 id='inputs-7'>Inputs</h4>
 <p>None</p>
 <h4 id='outputs-7'>Outputs</h4>
@@ -2153,7 +2164,7 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 <blockquote>
 <p>Save example commands:</p>
 
-<p>Here, the server is logged into, Bios is selected, and the corresponding JSON file is saved to a local directory as the file ilorest.json. The ilorest.json file holds all the information regarding the selected type. Here, the save function was performed on the Bios type, so the <code>ilorest.json</code> file that was saved holds the information about <code>Bios.</code> The file holding that information looks like the following. </p>
+<p>Here, the server is logged into, Bios is selected, and the corresponding JSON file is saved to a local directory as the file ilorest.json. The ilorest.json file holds all the information regarding the selected type. Here, the save function was performed on the Bios type, so the <code>ilorest.json</code> file that was saved holds the information about <code>Bios.</code> The file holding that information looks like the following.</p>
 </blockquote>
 
 <pre>
@@ -2216,7 +2227,7 @@ Configuration saved to: ilorest.json
 </pre>
 
 <blockquote>
-<p>This command simultaneously logs in to the server at the provided URL (--url) with the provided username (-u) and password (-p), selects the <code>Bios.</code> type, saves the JSON response to a file called <code>BiosInfo.json</code> in a local directory, and then logs out. </p>
+<p>This command simultaneously logs in to the server at the provided URL (--url) with the provided username (-u) and password (-p), selects the <code>Bios.</code> type, saves the JSON response to a file called <code>BiosInfo.json</code> in a local directory, and then logs out.</p>
 </blockquote>
 
 <pre>
@@ -2229,7 +2240,7 @@ Logging session out.
 <h4 id='syntax-9'>Syntax</h4>
 <p>save <em>[Optional Parameters]</em></p>
 <h4 id='description-9'>Description</h4>
-<p>Saves the JSON information of a selected type to a local file. Use this command along with the <code>load</code> command when you want to modify properties of a selected type through file editing. Using this command saves a local copy of your selected typeís JSON information.</p>
+<p>Saves the JSON information of a selected type to a local file. Use this command along with the <code>load</code> command when you want to modify properties of a selected type through file editing. Using this command saves a local copy of your selected type&#39;s JSON information.</p>
 <h4 id='parameters-9'>Parameters</h4>
 <ul>
 <li><strong>-h, --help</strong></li>
@@ -2322,13 +2333,13 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 
 <p>Optionally set a starting point for data collection. If you do not specify a starting point, the default path will be<code>/redfish/v1/</code>. (see <a href="#path-option">Path Option</a> for more information).</p>
 
-<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isnít the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
+<aside class="notice">The <b>path</b> flag can only be specified at the time of login, so if you are already logged into the server, the <b>path</b> flag will not change the path. If you are entering a command that isn't the <b>login</b> command, but includes your login information, you can still specify the path flag there.</aside>
 <h4 id='inputs-8'>Inputs</h4>
 <p>None</p>
 <h4 id='outputs-8'>Outputs</h4>
 <p>JSON file</p>
 
-<p>Save a selected type to a file in JSON format. You can edit the values in the file, and then use the <code>load</code> command to upload the changes to the server. </p>
+<p>Save a selected type to a file in JSON format. You can edit the values in the file, and then use the <code>load</code> command to upload the changes to the server.</p>
 <h3 id='load-command'>Load command</h3>
 <blockquote>
 <p>Load example commands:</p>
@@ -2384,7 +2395,7 @@ All servers have been successfully configured.
 <h4 id='syntax-10'>Syntax</h4>
 <p>load <em>[Optional Parameters]</em></p>
 <h4 id='description-10'>Description</h4>
-<p>Loads the server configuration from a file. Run this command without parameters to use the configuration found in the file called <code>ilorest.json</code>. Otherwise, you can point this command to use any file you specify. Use this function to change the properties of a type to new values. This command uploads the new values of the typeís properties to the server.</p>
+<p>Loads the server configuration from a file. Run this command without parameters to use the configuration found in the file called <code>ilorest.json</code>. Otherwise, you can point this command to use any file you specify. Use this function to change the properties of a type to new values. This command uploads the new values of the type&#39;s properties to the server.</p>
 
 <aside class="notice"><b>Read-only</b> properties are skipped, and non-read only properties continue to be set.</aside>
 <h4 id='parameters-10'>Parameters</h4>
@@ -2406,7 +2417,7 @@ All servers have been successfully configured.
 
 <p>Optionally use the latest schema instead of the one requested by the file.</p>
 
-<aside class="warning">This might cause errors in some data retrieval due to differences in the schemaís organizational structure between versions.</aside>
+<aside class="warning">This might cause errors in some data retrieval due to differences in the schema's organizational structure between versions.</aside>
 
 <ul>
 <li><strong>--biospassword=BIOSPASSWORD</strong></li>
@@ -2672,129 +2683,6 @@ Bye for now
 <p>None</p>
 <h4 id='outputs-13'>Outputs</h4>
 <p>None</p>
-
-          <h2 id='filtering-and-other-advanced-options'>Filtering and Other Advanced Options</h2>
-<p>This section covers some of the advanced features and options available with the RESTful Interface Tool (iLOREST).</p>
-<h3 id='filter-option'>Filter Option</h3>
-<blockquote>
-<p>Selecting the <code>EthernetInterface.</code> type reveals many instances. To return a single instance we can filter by a property value. In this case we are filtering by <code>@odata.id</code>.</p>
-</blockquote>
-
-<pre>
-iLOrest > select EthernetInterface.
-iLOrest > list @odata.id
-
-@odata.id=/redfish/v1/Systems/1/EthernetInterfaces/2/
-
-@odata.id=/redfish/v1/Systems/1/EthernetInterfaces/1/
-
-@odata.id=/redfish/v1/Managers/1/EthernetInterfaces/1/
-
-@odata.id=/redfish/v1/Systems/1/EthernetInterfaces/3/
-
-@odata.id=/redfish/v1/Managers/1/EthernetInterfaces/2/
-
-@odata.id=/redfish/v1/Systems/1/EthernetInterfaces/4/
-
-iLOrest > list Id <font color="#01a982">--filter "@odata.id=/redfish/v1/Managers/1/EthernetInterfaces/1/"</font>
-Id=1
-</pre>
-
-<blockquote>
-<p>By default filter will attempt to match the property and value case insensitively, but exactly. If no matches are found iLOrest will return an error.</p>
-</blockquote>
-
-<pre>
-iLOrest > list Id <font color="#01a982">--filter "@Odata.id=/redfish/v1/Managers/1/"</font>
-Unable to locate instance for 'ethernetinterface.' and filter '@Odata.id=/redfish/v1/Managers/1/'
-</pre>
-
-<blockquote>
-<p>Partial string matching is supported with the <code>*</code> character.</p>
-</blockquote>
-
-<pre>
-iLOrest > list @odata.id Id <font color="#01a982">--filter "@Odata.id=/redfish/v1/Managers/1/*"</font>
-
-@odata.id=/redfish/v1/Managers/1/EthernetInterfaces/1/
-Id=1
-
-@odata.id=/redfish/v1/Managers/1/EthernetInterfaces/2/
-Id=2
-</pre>
-
-<blockquote>
-<p>Filter is also useful for setting properties to specific instances.</p>
-</blockquote>
-
-<pre>
-iLOrest > <font color="#01a982">set FullDuplex=True --filter "@odata.id=/redfish/v1/Managers/1/EthernetInterfaces/2/"</font>
-iLOrest > status
-Current changes found:
-EthernetInterface.v1_4_1(/redfish/v1/Managers/1/EthernetInterfaces/2/) (Currently selected)
-        FullDuplex=True
-</pre>
-<h4 id='syntax'>Syntax</h4>
-<p>--filter [FILTER_PROPERTY=FILTER_VALUE]</p>
-<h4 id='description'>Description</h4>
-<p>If there is more than one instance of a type on the system, when you select it, the <code>filter</code> option can be used to narrow down the results. With this narrowed result, you can set specific instance properties, list specific instance properties, or get specific instance properties.</p>
-
-<aside class="notice"> The filter option can be used in the get, list, and set commands.</aside>
-<h3 id='path-option'>Path Option</h3>
-<blockquote>
-<p>To start type collection from a specific path include the <code>--path</code> option followed by the path to start from. This can limit or add new types depending on the path specified.</p>
-</blockquote>
-
-<pre>
-iLOrest > login xx.xx.xx.xx -u username -p password <font color="#01a982">--path /redfish/v1/systems/1/bios/</font>
-Discovering data......Done
-iLOrest > types
-Type options:
-#Bios.v1_0_0.Bios
-#HpeBaseConfigs.v2_0_0.HpeBaseConfigs
-#HpeBiosMapping.v2_0_0.HpeBiosMapping
-#HpeScalablePmem.v1_0_0.HpeScalablePmem
-#HpeServerBootSettings.v2_0_0.HpeServerBootSettings
-#HpeTlsConfig.v1_0_0.HpeTlsConfig
-#HpeiSCSISoftwareInitiator.v2_0_0.HpeiSCSISoftwareInitiator
-
-iLOrest > login xx.xx.xx.xx -u username -p password
-Discovering data...Done
-iLOrest > types
-Type options:
-AccountService.v1_3_0
-Bios.v1_0_0
-CertificateCollection
-Chassis.v1_6_0
-ChassisCollection
-ComputerSystem.v1_4_0
-ComputerSystemCollection
-EthernetInterface.v1_4_1
-EthernetInterfaceCollection
-EventDestinationCollection
-EventService.v1_0_8
-HostInterface.v1_1_1
-HostInterfaceCollection
-HpeBaseConfigs.v2_0_0
-HpeBaseNetworkAdapter.v2_0_0
-HpeBaseNetworkAdapterCollection
-HpeBiosMapping.v2_0_0
-HpeCertAuth.v1_1_0
-HpeCertificate.v1_0_0
-HpeCertificateCollection
-HpeComponent.v1_0_1
-HpeComponentCollection
-HpeComponentInstallSet.v1_0_3
-HpeComponentInstallSetCollection
-HpeComponentUpdateTaskQueueCollection
-HpeDirectoryTest.v1_0_0
-HpeESKM.v2_0_0
-...
-</pre>
-<h4 id='syntax-2'>Syntax</h4>
-<p>--path [URI]</p>
-<h4 id='description-2'>Description</h4>
-<p>The path option can set a different URI as the starting point for type discovery. The default path is <code>/redfish/v1/</code>. This option is useful if you wish to view specific types, which are not available by default or if you wish to lower the time it takes to login. It is not recommended to use this flag on systems with a resource directory.</p>
 
           <h2 id='bios-commands'>BIOS commands</h2>
 <p>This section details usage and examples of RESTful Interface Tool commands related to configuring BIOS settings. These commands do things such as view and change the boot order, reset the BIOS configuration to the default settings, and configure iSCSI settings.</p>
@@ -5846,10 +5734,10 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 </ul>
 
 <p>The extended verbosity option provides the following additional information for iLO HTTP and the iLO Channel Interface Driver response messages:
-* An error response message id (ìMessageIdî), iLO response error message code identification.
-* An error response message description (ìDescriptionî), essentially a quick synopsis of the issue.
-* An error response message (ìMessageî) describing the reason for the error in greater detail. The offending properties are embedded as per the relevant error response resource.
-* An error response resolution (ìResolutionî) describing steps to correct the error.</p>
+* An error response message id (&quot;MessageId&quot;), iLO response error message code identification.
+* An error response message description (&quot;Description&quot;), essentially a quick synopsis of the issue.
+* An error response message (&quot;Message&quot;) describing the reason for the error in greater detail. The offending properties are embedded as per the relevant error response resource.
+* An error response resolution (&quot;Resolution&quot;) describing steps to correct the error.</p>
 
 <blockquote>
 <p>The following example shows extended verbosity:</p>
@@ -6514,7 +6402,7 @@ Oem=
           EventNumber=2057
           @odata.context=/redfish/v1/$metadata#HpeLogEntry.HpeLogEntry
           RecommendedAction=Update the Innovation Engine Firmware.
-          LearnMoreLink=http://www.hpe.com/support/class0x0032code0x0413-gen10
+          LearnMoreLink=https://www.hpe.com/support/class0x0032code0x0413-gen10
           Repaired=False
           Class=50
           Categories=Security
@@ -6541,7 +6429,7 @@ Oem=
           EventNumber=2057
           @odata.context=/redfish/v1/$metadata#HpeLogEntry.HpeLogEntry
           RecommendedAction=Update the Innovation Engine Firmware.
-          LearnMoreLink=http://www.hpe.com/support/class0x0032code0x0413-gen10
+          LearnMoreLink=https://www.hpe.com/support/class0x0032code0x0413-gen10
           Repaired=True
           Class=50
           Categories=Security
@@ -6913,7 +6801,7 @@ iLOrest > virtualmedia
 Available Virtual Media Options:
 [1] Media Types Available: Floppy USBStick  Image Inserted: None
 [2] Media Types Available: CD DVD  Image Inserted: http://xx.xx.xx.xx/path/to/vm.iso
-</pre>
+</pre>  
 
 <blockquote>
 <p>To remove an inserted media specify the type of virtual media by Id number and include the <code>--remove</code> option.</p>
@@ -7021,7 +6909,7 @@ Deleted b5a00edc
 </pre>
 
 <blockquote>
-<p>To delete all firmware on the iLO repository run the command and include the <code>--all</code> option.</p>
+<p>To delete all firmware on the iLO repository run the command and include the <code>--all</code> option. </p>
 </blockquote>
 
 <pre>
@@ -7079,7 +6967,7 @@ You cannot delete firmware that is part of a task from the task queue or an inst
 <li><strong>--https</strong></li>
 </ul>
 
-<p>Use the provided CA bundle or SSL certificate with your login to connect
+<p>Use the provided CA bundle or SSL certificate with your login to connect 
 securely to the system in remote mode. This flag has no effect in local mode.</p>
 <h4 id='inputs'>Inputs</h4>
 <p>None</p>
@@ -7162,7 +7050,7 @@ Download complete
 <h4 id='inputs-2'>Inputs</h4>
 <p>None</p>
 <h4 id='outputs-2'>Outputs</h4>
-<p>None</p>
+<p>None </p>
 <h3 id='flashfwpkg-command'>Flashfwpkg command</h3>
 <aside class="notice">
 Some firmware can be flashed directly without a reboot, may require a reboot to take effect, or may only be staged for flash on reboot. The command will inform users when a firmware update will take place.
@@ -7226,7 +7114,7 @@ Logging session out.
 <li><strong>--ignorechecks</strong></li>
 </ul>
 
-<p>Include this flag to ignore all checks to the taskqueue before attempting to process the .fwpkg file.</p>
+<p>Include this flag to ignore all checks to the taskqueue before attempting to process the .fwpkg file. </p>
 <h4 id='login-parameters-2'>Login Parameters</h4>
 <p>The following parameters can be included to login to a server in the same line as the command is run.</p>
 
@@ -7252,7 +7140,7 @@ Logging session out.
 <li><strong>--https</strong></li>
 </ul>
 
-<p>Use the provided CA bundle or SSL certificate with your login to connect
+<p>Use the provided CA bundle or SSL certificate with your login to connect 
 securely to the system in remote mode. This flag has no effect in local mode.</p>
 <h4 id='inputs-3'>Inputs</h4>
 <p>None</p>
@@ -7355,7 +7243,7 @@ The operation completed successfully.
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 <blockquote>
-<p>Or a list of sequences.</p>
+<p>Or a list of sequences. </p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
         </span><span class="p">{</span><span class="w">
@@ -7459,12 +7347,12 @@ The operation completed successfully.
 <li><strong>--https</strong></li>
 </ul>
 
-<p>Use the provided CA bundle or SSL certificate with your login to connect
+<p>Use the provided CA bundle or SSL certificate with your login to connect 
 securely to the system in remote mode. This flag has no effect in local mode.</p>
 <h4 id='inputs-4'>Inputs</h4>
 <p>None</p>
 <h4 id='outputs-4'>Outputs</h4>
-<p>None</p>
+<p>None </p>
 <h3 id='listcomp-command'>Listcomp command</h3>
 <blockquote>
 <p>Listcomp example commands:</p>
@@ -7531,10 +7419,10 @@ SizeBytes: 33556520
 <li><strong>--https</strong></li>
 </ul>
 
-<p>Use the provided CA bundle or SSL certificate with your login to connect
+<p>Use the provided CA bundle or SSL certificate with your login to connect 
 securely to the system in remote mode. This flag has no effect in local mode.</p>
 <h4 id='inputs-5'>Inputs</h4>
-<p>None</p>
+<p>None </p>
 <h4 id='outputs-5'>Outputs</h4>
 <p>None</p>
 <h3 id='maintenancewindow-command'>Maintenancewindow command</h3>
@@ -7571,7 +7459,7 @@ iLOrest > maintenancewindow add 2019-11-21T00:00:00 <font color="#01a982">--expi
 </pre>
 
 <blockquote>
-<p>To delete a maintenance window run the command with the <code>delete</code> keyword followed by the name of the maintenance window you wish to delete.</p>
+<p>To delete a maintenance window run the command with the <code>delete</code> keyword followed by the name of the maintenance window you wish to delete. </p>
 </blockquote>
 
 <pre>
@@ -7638,7 +7526,7 @@ The operation completed successfully.
 <li><strong>--https</strong></li>
 </ul>
 
-<p>Use the provided CA bundle or SSL certificate with your login to connect
+<p>Use the provided CA bundle or SSL certificate with your login to connect 
 securely to the system in remote mode. This flag has no effect in local mode.</p>
 <h4 id='inputs-6'>Inputs</h4>
 <p>None</p>
@@ -7756,7 +7644,7 @@ installset saved to myinstallset.json
 <h4 id='syntax-7'>Syntax</h4>
 <p>makeinstallset <em>[Optional Parameters]</em></p>
 <h4 id='description-7'>Description</h4>
-<p>Run to make installsets for iLO.
+<p>Run to make installsets for iLO. 
 If not logged into the server, the command will provide basic guidance on making an installset.
 If logged into the server, the command will provide guidance based on the current components on the system.
 <aside class="notice">When using this command on a logged in sever, for best results, upload the components before running this command.</aside></p>
@@ -7892,12 +7780,12 @@ The operation completed successfully.
 <li><strong>--https</strong></li>
 </ul>
 
-<p>Use the provided CA bundle or SSL certificate with your login to connect
+<p>Use the provided CA bundle or SSL certificate with your login to connect 
 securely to the system in remote mode. This flag has no effect in local mode.</p>
 <h4 id='inputs-8'>Inputs</h4>
-<p>None</p>
+<p>None </p>
 <h4 id='outputs-8'>Outputs</h4>
-<p>None</p>
+<p>None </p>
 <h3 id='uploadcomp-command'>Uploadcomp command</h3>
 <blockquote>
 <p>Uploadcomp example commands:</p>
@@ -7915,7 +7803,7 @@ Waiting for iLO UpdateService to finish processing the component
 
 <blockquote>
 <p>By default the firmware is uploaded to the iLO Repository. For firmware iLO is capable of flashing you can instead directly flash it.
-To do this you need to include the <code>--update_repository</code>  flag to not include the firmware in the iLO repository and the <code>--update_target</code>
+To do this you need to include the <code>--update_repository</code>  flag to not include the firmware in the iLO repository and the <code>--update_target</code> 
 flag to trigger iLO to flash.</p>
 </blockquote>
 
@@ -7929,13 +7817,7 @@ Waiting for iLO UpdateService to finish processing the component
 <h4 id='syntax-9'>Syntax</h4>
 <p>uploadcomp <em>[Optional Parameters]</em></p>
 <h4 id='description-9'>Description</h4>
-<p>Command to upload firmware on to iLO repository.
-<aside class="notice">
-The </b>uploadcomp</b> command requires iLO firmware version v1.48(a) or later. Earlier iLO Firmware versions will fail with a return code 103.<br>
-iLO firmware version v1.48(a) or later is required because the <b>uploadcomp</b> command depends on the Bunny Hop feature found in that version of the iLO firmware.<br>
-Before updating the iLO firmware, see <a href="https://support.hpe.com/hpesc/public/docDisplay?docId=emr_na-a00068199en_us" target="_blank">the customer advisory regarding iLO firmware upgrades</a>.
-To download the latest iLO Firmware, see the <a href="https://support.hpe.com/hpsc/swd/public/detail?swItemId=MTX_912b35cf18cd4b7ea530732822" target="_blank">Drivers &amp; Software page for the Online ROM Flash Firmware Package - HPE iLO 5</a>
-</aside></p>
+<p>Command to upload firmware on to iLO repository.</p>
 <h4 id='parameters-9'>Parameters</h4>
 <ul>
 <li><strong>-h, --help</strong></li>
@@ -8015,12 +7897,12 @@ To download the latest iLO Firmware, see the <a href="https://support.hpe.com/hp
 <li><strong>--https</strong></li>
 </ul>
 
-<p>Use the provided CA bundle or SSL certificate with your login to connect
+<p>Use the provided CA bundle or SSL certificate with your login to connect 
 securely to the system in remote mode. This flag has no effect in local mode.</p>
 <h4 id='inputs-9'>Inputs</h4>
-<p>None</p>
+<p>None </p>
 <h4 id='outputs-9'>Outputs</h4>
-<p>None</p>
+<p>None </p>
 
           <h2 id='smart-arrary-commands'>Smart Arrary Commands</h2>
 <p>The Smart Array commands are designed for use with HPE Gen10 servers.</p>
@@ -9767,6 +9649,129 @@ securely to the system in remote mode. This flag has no effect in local mode.</p
 <h4 id='outputs-6'>Outputs</h4>
 <p>None</p>
 
+          <h2 id='filtering-and-other-advanced-options'>Filtering and Other Advanced Options</h2>
+<p>This section covers some of the advanced features and options available with the RESTful Interface Tool (iLOREST).</p>
+<h3 id='filter-option'>Filter Option</h3>
+<blockquote>
+<p>Selecting the <code>EthernetInterface.</code> type reveals many instances. To return a single instance we can filter by a property value. In this case we are filtering by <code>@odata.id</code>.</p>
+</blockquote>
+
+<pre>
+iLOrest > select EthernetInterface.
+iLOrest > list @odata.id
+
+@odata.id=/redfish/v1/Systems/1/EthernetInterfaces/2/
+
+@odata.id=/redfish/v1/Systems/1/EthernetInterfaces/1/
+
+@odata.id=/redfish/v1/Managers/1/EthernetInterfaces/1/
+
+@odata.id=/redfish/v1/Systems/1/EthernetInterfaces/3/
+
+@odata.id=/redfish/v1/Managers/1/EthernetInterfaces/2/
+
+@odata.id=/redfish/v1/Systems/1/EthernetInterfaces/4/
+
+iLOrest > list Id <font color="#01a982">--filter "@odata.id=/redfish/v1/Managers/1/EthernetInterfaces/1/"</font>
+Id=1
+</pre>
+
+<blockquote>
+<p>By default filter will attempt to match the property and value case insensitively, but exactly. If no matches are found iLOrest will return an error.</p>
+</blockquote>
+
+<pre>
+iLOrest > list Id <font color="#01a982">--filter "@Odata.id=/redfish/v1/Managers/1/"</font>
+Unable to locate instance for 'ethernetinterface.' and filter '@Odata.id=/redfish/v1/Managers/1/'
+</pre>
+
+<blockquote>
+<p>Partial string matching is supported with the <code>*</code> character.</p>
+</blockquote>
+
+<pre>
+iLOrest > list @odata.id Id <font color="#01a982">--filter "@Odata.id=/redfish/v1/Managers/1/*"</font>
+
+@odata.id=/redfish/v1/Managers/1/EthernetInterfaces/1/
+Id=1
+
+@odata.id=/redfish/v1/Managers/1/EthernetInterfaces/2/
+Id=2
+</pre>
+
+<blockquote>
+<p>Filter is also useful for setting properties to specific instances.</p>
+</blockquote>
+
+<pre>
+iLOrest > <font color="#01a982">set FullDuplex=True --filter "@odata.id=/redfish/v1/Managers/1/EthernetInterfaces/2/"</font>
+iLOrest > status
+Current changes found:
+EthernetInterface.v1_4_1(/redfish/v1/Managers/1/EthernetInterfaces/2/) (Currently selected)
+        FullDuplex=True
+</pre>
+<h4 id='syntax'>Syntax</h4>
+<p>--filter [FILTER_PROPERTY=FILTER_VALUE]</p>
+<h4 id='description'>Description</h4>
+<p>If there is more than one instance of a type on the system, when you select it, the <code>filter</code> option can be used to narrow down the results. With this narrowed result, you can set specific instance properties, list specific instance properties, or get specific instance properties.</p>
+
+<aside class="notice"> The filter option can be used in the get, list, and set commands.</aside>
+<h3 id='path-option'>Path Option</h3>
+<blockquote>
+<p>To start type collection from a specific path include the <code>--path</code> option followed by the path to start from. This can limit or add new types depending on the path specified.</p>
+</blockquote>
+
+<pre>
+iLOrest > login xx.xx.xx.xx -u username -p password <font color="#01a982">--path /redfish/v1/systems/1/bios/</font>
+Discovering data......Done
+iLOrest > types
+Type options:
+#Bios.v1_0_0.Bios
+#HpeBaseConfigs.v2_0_0.HpeBaseConfigs
+#HpeBiosMapping.v2_0_0.HpeBiosMapping
+#HpeScalablePmem.v1_0_0.HpeScalablePmem
+#HpeServerBootSettings.v2_0_0.HpeServerBootSettings
+#HpeTlsConfig.v1_0_0.HpeTlsConfig
+#HpeiSCSISoftwareInitiator.v2_0_0.HpeiSCSISoftwareInitiator
+
+iLOrest > login xx.xx.xx.xx -u username -p password
+Discovering data...Done
+iLOrest > types
+Type options:
+AccountService.v1_3_0
+Bios.v1_0_0
+CertificateCollection
+Chassis.v1_6_0
+ChassisCollection
+ComputerSystem.v1_4_0
+ComputerSystemCollection
+EthernetInterface.v1_4_1
+EthernetInterfaceCollection
+EventDestinationCollection
+EventService.v1_0_8
+HostInterface.v1_1_1
+HostInterfaceCollection
+HpeBaseConfigs.v2_0_0
+HpeBaseNetworkAdapter.v2_0_0
+HpeBaseNetworkAdapterCollection
+HpeBiosMapping.v2_0_0
+HpeCertAuth.v1_1_0
+HpeCertificate.v1_0_0
+HpeCertificateCollection
+HpeComponent.v1_0_1
+HpeComponentCollection
+HpeComponentInstallSet.v1_0_3
+HpeComponentInstallSetCollection
+HpeComponentUpdateTaskQueueCollection
+HpeDirectoryTest.v1_0_0
+HpeESKM.v2_0_0
+...
+</pre>
+<h4 id='syntax-2'>Syntax</h4>
+<p>--path [URI]</p>
+<h4 id='description-2'>Description</h4>
+<p>The path option can set a different URI as the starting point for type discovery. The default path is <code>/redfish/v1/</code>. This option is useful if you wish to view specific types, which are not available by default or if you wish to lower the time it takes to login. It is not recommended to use this flag on systems with a resource directory.</p>
+
           <h1 id='use-case-examples-and-macro-commands'>Use Case Examples and Macro Commands</h1>
 <p>This section outlines ready to use example commands, as well as some general use scenarios for obtaining and configuring iLO 4 (iLO 4 2.00+) and iLO 5 systems through Redfish. Legacy modes are supported for older HPRest iLO 4 systems.</p>
 <h2 id='quick-reference-table-available-scripts-for-linux-and-windows'>Quick Reference Table: Available scripts for Linux and Windows</h2>
@@ -10291,7 +10296,7 @@ Logging session out.
 
 <p>The <code>Bios</code> type has two properties that both need to be used to change the administrator password, <code>AdminPassword</code> and <code>OldAdminPassword</code>. <code>AdminPassword</code> is the new password you want to change to, and <code>OldAdminPassword</code> is the current password you have.</p>
 
-<aside class="notice">If there is no current password, you must include <b>OldAdminPassword=îî</b>.</aside>
+<aside class="notice">If there is no current password, you must include <b>OldAdminPassword=‚Äù‚Äù</b>.</aside>
 
 <p><img src="images/BIOSPassword_1.png" title="BIOS Password Example 1" alt="BIOS Password Example 1" /></p>
 
@@ -10299,13 +10304,13 @@ Logging session out.
 
 <p><img src="images/BIOSPassword_2.png" title="BIOS Password Example 2" alt="BIOS Password Example 2" /></p>
 
-<p>In order to change the administrator password, you need to set the <code>AdminPassword</code> (the new value you want) and the <code>OldAdminPassword</code> (what the admin password was before), as well as include the <code>ñbiospassword</code> flag if the system is iLO 4.</p>
+<p>In order to change the administrator password, you need to set the <code>AdminPassword</code> (the new value you want) and the <code>OldAdminPassword</code> (what the admin password was before), as well as include the <code>‚Äìbiospassword</code> flag if the system is iLO 4.</p>
 
 <aside class="notice">The <b>biospassword</b> value is the same as the <b>OldAdminPassword</b> value.</aside>
 
 <p><img src="images/BIOSPassword_3.png" title="BIOS Password Example 3" alt="BIOS Password Example 3" /></p>
 
-<p>After youíve set the values for <code>AdminPassword</code> and <code>OldAdminPassword</code>, you need to commit your changes and reboot your server:</p>
+<p>After you&#39;ve set the values for <code>AdminPassword</code> and <code>OldAdminPassword</code>, you need to commit your changes and reboot your server:</p>
 
 <aside class="notice">To change the administrator password, <b>AdminPassword</b> and <b>OldAdminPassword</b> must be set in the same line.</aside>
 
@@ -11715,13 +11720,13 @@ ilorest.exe load -f %2
 <li>For live assistance, go to the <strong>Contact Hewlett Packard Enterprise Worldwide</strong> website.</li>
 </ul>
 
-<p><a href="http://www.hpe.com/assistance">http://www.hpe.com/assistance</a></p>
+<p><a href="https://www.hpe.com/assistance">https://www.hpe.com/assistance</a></p>
 
 <ul>
 <li>To access documentation and support services, go to the <strong>Hewlett Packard Enterprise Support Center</strong> website.</li>
 </ul>
 
-<p><a href="http://www.hpe.com/support/hpesc">http://www.hpe.com/support/hpesc</a></p>
+<p><a href="https://www.hpe.com/support/hpesc">https://www.hpe.com/support/hpesc</a></p>
 <h3 id='information-to-collect'>Information to collect</h3>
 <ul>
 <li><p>Technical support registration number (if applicable)</p></li>
@@ -11731,149 +11736,61 @@ ilorest.exe load -f %2
 <li><p>Error messages</p></li>
 <li><p>Product-specific reports and logs</p></li>
 <li><p>Add-on products or components</p></li>
-<li><p>Third-party products or components</p></li>
-</ul>
-<h2 id='accessing-updates'>Accessing updates</h2>
-<ul>
-<li><p>Some software products provide a mechanism for accessing software updates through the product interface. Review your product documentation to identify the recommended software update method.</p></li>
-<li><p>To download product updates, go to either of the following:</p>
-
-<ul>
-<li>Hewlett Packard Enterprise Support Center <strong>Get connected with updates</strong> page: <a href="http://www.hpe.com/support/e-updates">http://www.hpe.com/support/e-updates</a></li>
-<li>Software Depot website: <a href="http://www.hpe.com/support/softwaredepot">http://www.hpe.com/support/softwaredepot</a></li>
-</ul></li>
-<li><p>To view and update your entitlements and to link your contracts and warranties with your profile, go to the Hewlett Packard Enterprise Support Center <strong>More Information on the Access to Support Materials</strong> page. <a href="http://www.hpe.com/support/AccessToSupportMaterials">http://www.hpe.com/support/AccessToSupportMaterials</a></p></li>
 </ul>
 
-<aside class="notice">Access to some updates might require product entitlement when accessed through the <b>Hewlett Packard Enterprise Support Center</b>. You must have an HPE Passport set up with relevant entitlements.</aside>
-<h2 id='websites-and-documents'>Websites and documents</h2><h3 id='tutorial-videos'>Tutorial Videos</h3>
-<p><a href="https://www.youtube.com/watch?v=CGl8DsYTdQo">Creating iLO REST Extensions</a></p>
-
-<p><a href="https://www.youtube.com/watch?v=xfEN95pNNfY">An Introduction to the RESTful Interface Tool</a></p>
-
-<p><a href="https://www.youtube.com/watch?v=WPz2FP8bXYU">Benefits of RESTful Interface Tool vs. CONREP</a></p>
-<h3 id='websites'>Websites</h3>
-<table><thead>
-<tr>
-<th>Website</th>
-<th>Link</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Hewlett Packard Enterprise Information Library</td>
-<td><a href="[http://www.hpe.com/info/enterprise/docs">www.hpe.com/info/enterprise/docs</a></td>
-</tr>
-<tr>
-<td>Hewlett Packard Enterprise Support Center</td>
-<td><a href="http://www.hpe.com/support/hpesc">www.hpe.com/support/hpesc</a></td>
-</tr>
-<tr>
-<td>Contact Hewlett Packard Enterprise Worldwide</td>
-<td><a href="http://www.hpe.com/assistance">www.hpe.com/assistance</a></td>
-</tr>
-<tr>
-<td>Subscription Service/Support Alerts</td>
-<td><a href="http://www.hpe.com/support/e-updates">www.hpe.com/support/e-updates</a></td>
-</tr>
-<tr>
-<td>Software Depot</td>
-<td><a href="http://www.hpe.com/support/softwaredepot">www.hpe.com/support/softwaredepot</a></td>
-</tr>
-<tr>
-<td>Customer Self Repair</td>
-<td><a href="http://www.hpe.com/support/selfrepair">www.hpe.com/support/selfrepair</a></td>
-</tr>
-<tr>
-<td>Insight Remote Support</td>
-<td><a href="http://www.hpe.com/info/insightremotesupport/docs">www.hpe.com/info/insightremotesupport/docs</a></td>
-</tr>
-<tr>
-<td>Serviceguard Solutions for HP-UX</td>
-<td><a href="http://www.hpe.com/info/hpux-serviceguard-docs">www.hpe.com/info/hpux-serviceguard-docs</a></td>
-</tr>
-<tr>
-<td>Single Point of Connectivity Knowledge (SPOCK) Storage compatibility matrix</td>
-<td><a href="http://www.hpe.com/storage/spock">www.hpe.com/storage/spock</a></td>
-</tr>
-<tr>
-<td>Storage white papers and analyst reports</td>
-<td><a href="http://www.hpe.com/storage/whitepapers">www.hpe.com/storage/whitepapers</a></td>
-</tr>
-<tr>
-<td>iLO RESTful API</td>
-<td><a href="http://www.hpe.com/info/restfulapi">www.hpe.com/info/restfulapi</a></td>
-</tr>
-<tr>
-<td>HPE ProLiant Gen9 Server Management</td>
-<td><a href="http://www.hpe.com/servers/proliantgen9/docs">www.hpe.com/servers/proliantgen9/docs</a></td>
-</tr>
-<tr>
-<td>HPE Intelligent Provisioning</td>
-<td><a href="http://www.hpe.com/info/intelligentprovisioning/docs">www.hpe.com/info/intelligentprovisioning/docs</a></td>
-</tr>
-<tr>
-<td>UEFI System Utilities</td>
-<td><a href="http://www.hpe.com/info/ProLiantUEFI/docs">www.hpe.com/info/ProLiantUEFI/docs</a></td>
-</tr>
-<tr>
-<td>SUM</td>
-<td><a href="http://www.hpe.com/info/hpsum">www.hpe.com/info/hpsum</a></td>
-</tr>
-<tr>
-<td>Service Pack for ProLiant (SPP)</td>
-<td><a href="http://www.hpe.com/servers/spp">www.hpe.com/servers/spp</a></td>
-</tr>
-<tr>
-<td>HPE iLO 4</td>
-<td><a href="http://www.hpe.com/info/ilo/docs">www.hpe.com/info/ilo/docs</a></td>
-</tr>
-<tr>
-<td>HPE iLO University videos</td>
-<td><a href="http://www.hpe.com/info/ilo/videos">www.hpe.com/info/ilo/videos</a></td>
-</tr>
-<tr>
-<td>HPE Systems Insight Manager</td>
-<td><a href="http://www.hpe.com/info/hpsim">www.hpe.com/info/hpsim</a></td>
-</tr>
-<tr>
-<td>U.S. Authorized Resellers</td>
-<td><a href="http://www.hpe.com/support/service_locator">www.hpe.com/support/service_locator</a></td>
-</tr>
-</tbody></table>
+<p>https://sml-csr.ext.hpe.com/
+Website | Link
+--------|-------
+Hewlett Packard Enterprise Information Library  | <a href="[https://www.hpe.com/info/enterprise/docs">www.hpe.com/info/enterprise/docs</a>
+Hewlett Packard Enterprise Support Center       | <a href="https://www.hpe.com/support/hpesc">www.hpe.com/support/hpesc</a>
+Contact Hewlett Packard Enterprise Worldwide    | <a href="https://www.hpe.com/support/assistance">www.hpe.com/support/assistance</a>
+Subscription Service/Support Alerts             | <a href="https://www.hpe.com/support/e-updates">www.hpe.com/support/e-updates</a>
+Software Depot                                  | <a href="https://www.hpe.com/support/softwaredepot">www.hpe.com/support/softwaredepot</a>
+Customer Self Repair                            | <a href="https://sml-csr.ext.hpe.com/">sml-csr.ext.hpe.com</a>
+Insight Remote Support                          | <a href="https://www.hpe.com/info/insightremotesupport/docs">www.hpe.com/info/insightremotesupport/docs</a>
+Serviceguard Solutions for HP-UX                | <a href="https://www.hpe.com/info/hpux-serviceguard-docs">www.hpe.com/info/hpux-serviceguard-docs</a>
+Single Point of Connectivity Knowledge (SPOCK) Storage compatibility matrix | <a href="https://www.hpe.com/storage/spock">www.hpe.com/storage/spock</a>
+Storage white papers and analyst reports        | <a href="https://www.hpe.com/storage/whitepapers">www.hpe.com/storage/whitepapers</a>
+iLO RESTful API                                 | <a href="https://www.hpe.com/info/restfulapi">www.hpe.com/info/restfulapi</a>
+HPE OneView documentation               | <a href="https://www.hpe.com/docs/oneview">www.hpe.com/docs/oneview</a>
+HPE Intelligent Provisioning                    | <a href="https://www.hpe.com/info/intelligentprovisioning/docs">www.hpe.com/info/intelligentprovisioning/docs</a>
+UEFI System Utilities                           | <a href="https://www.hpe.com/info/ProLiantUEFI/docs">www.hpe.com/info/ProLiantUEFI/docs</a>
+Smart Update Manager                                | <a href="https://www.hpe.com/info/hpsum">www.hpe.com/info/hpsum</a>
+Service Pack for ProLiant (SPP)                 | <a href="https://www.hpe.com/servers/spp">www.hpe.com/servers/spp</a>
+HPE iLO 5                                       | <a href="https://www.hpe.com/support/ilo-docs">www.hpe.com/info/ilo/docs</a>
+HPE iLO 4                                       | <a href="https://www.hpe.com/info/ilo/docs">www.hpe.com/info/ilo/docs</a>
+HPE iLO University videos                       | <a href="https://www.hpe.com/info/ilo/videos">www.hpe.com/info/ilo/videos</a>
+HPE Systems Insight Manager                     | <a href="https://www.hpe.com/info/hpsim">www.hpe.com/info/hpsim</a>
+U.S. Authorized Resellers                       | <a href="https://www.hpe.com/support/service_locator">www.hpe.com/support/service_locator</a></p>
 <h3 id='documents'>Documents</h3>
 <ul>
-<li><p><a href="https://support.hpe.com/hpsc/doc/public/display?docId=a00061427en_us">Transition to the RESTful Interface Tool (iLORest)</a></p></li>
-<li><p><a href="http://h22208.www2.hpe.com/eginfolib/servers/docs/HPRestfultool/iLo4/data_model_reference.html">iLO RESTful API Data Model Reference (iLO 4)</a></p></li>
-<li><p><a href="http://h20564.www2.hpe.com/hpsc/doc/public/display?docId=c03334058">HPE iLO 4 Scripting and Command Line Guide</a></p></li>
-<li><p><a href="http://h20565.www2.hpe.com/hpsc/doc/public/display?docId=emr_na-c03334036&amp;lang=en-us&amp;cc=us">HPE iLO 4 Release Notes</a></p></li>
-<li><p><a href="http://h20564.www2.hpe.com/hpsc/doc/public/display?docId=c00191707">HPE ROM-Based Setup Utility User Guide</a></p></li>
-<li><p><a href="http://www.hp.com/ctg/Manual/c04398276.pdf">HPE UEFI System Utilities User Guide</a></p></li>
-<li><p><a href="http://www.hp.com/ctg/Manual/c04419967.pdf">HPE Intelligent Provisioning User Guide for HPE ProLiant Gen9 Servers</a></p></li>
-<li><p><a href="http://h10032.www1.hp.com/ctg/Manual/c04409570.pdf">Scripting Toolkit for Linux User Guide</a></p></li>
-<li><p><a href="http://h10032.www1.hp.com/ctg/Manual/c04083436">Scripting Toolkit for Windows User Guide</a></p></li>
-<li><p><a href="ftp://ftp.hp.com/pub/c-products/servers/management/smartstart/FWUsersGuide9.00.pdf">Smart Update Firmware DVD User Guide</a></p></li>
-<li><p><a href="http://h20564.www2.hpe.com/hpsc/doc/public/display?docId=c05059565">Smart Update Manager User Guide</a></p></li>
-<li><p><a href="http://h20564.www2.hpe.com/hpsc/doc/public/display?docId=c03190790">Service Pack for ProLiant User Guide</a></p></li>
-<li><p><a href="http://h20628.www2.hp.com/km-ext/kmcsdirect/emr_na-c04764043-2.pdf">HPE Systems Insight Manager User Guide</a></p></li>
-<li><p><a href="http://h20628.www2.hpe.com/km-ext/kmcsdirect/emr_na-c00705292-47.pdf">HPE BladeSystem Onboard Administrator User Guide</a></p></li>
-<li><p><a href="http://www.hp.com/ctg/Manual/c04444029.pdf">HPE ProLiant Gen9 Troubleshooting Guide, Volume I: Troubleshooting</a></p></li>
-<li><p><a href="http://h20564.www2.hpe.com/hpsc/doc/public/display?docId=c04844076">HPE Insight Remote Support Installation and Configuration Guide</a></p></li>
-<li><p><a href="http://h20564.www2.hpe.com/hpsc/doc/public/display?docId=c04844085">HPE Insight Remote Support Monitored Devices Configuration Guide</a></p></li>
-<li><p><a href="http://h20564.www2.hpe.com/hpsc/doc/public/display?docId=c03508827">HPE Insight Remote Support and Insight Online Setup Guide for HPE ProLiant Servers and HPE BladeSystem c-Class Enclosures</a></p></li>
-<li><p><a href="http://h20564.www2.hpe.com/hpsc/doc/public/display?docId=c04149067">HPE iLO Federation User Guide</a></p></li>
+<li><a href="https://support.hpe.com/hpsc/doc/public/display?docId=a00061427en_us">Transition to the RESTful Interface Tool (iLORest)</a></li>
+<li><a href="https://h22208.www2.hpe.com/eginfolib/servers/docs/HPRestfultool/iLo4/data_model_reference.html">iLO RESTful API Data Model Reference (iLO 4)</a></li>
+<li><a href="https://www.hpe.com/support/ilo5-cli-gde-en">HPE iLO 5 Scripting and Command Line Guide</a></li>
+<li><a href="https://www.hpe.com/support/ilo4-cli-gde-en">HPE iLO 4 Scripting and Command Line Guide</a></li>
+<li><a href="https://h20565.www2.hpe.com/hpsc/doc/public/display?docId=emr_na-c03334036&amp;lang=en-us&amp;cc=us">HPE iLO 4 Release Notes</a></li>
+<li><a href="https://h20564.www2.hpe.com/hpsc/doc/public/display?docId=c00191707">HPE ROM-Based Setup Utility User Guide</a></li>
+<li><a href="https://support.hpe.com/hpesc/public/docDisplay?docId=a00016407en_us">HPE UEFI System Utilities User Guide</a></li>
+<li><a href="https://support.hpe.com/hpesc/public/docDisplay?docId=c04419967">HPE Intelligent Provisioning User Guide for HPE ProLiant Gen9 Servers</a></li>
+<li><a href="https://support.hpe.com/hpesc/public/docDisplay?docLocale=en_US&amp;docId=emr_na-a00047893en_us">Scripting Toolkit for Linux User Guide</a></li>
+<li><a href="https://support.hpe.com/hpesc/public/docDisplay?docId=a00017070en_us">Scripting Toolkit for Windows User Guide</a></li>
+<li><a href="https://h20564.www2.hpe.com/hpsc/doc/public/display?docId=c05059565">Smart Update Manager User Guide</a></li>
+<li><a href="https://h20564.www2.hpe.com/hpsc/doc/public/display?docId=c03190790">Service Pack for ProLiant User Guide</a></li>
+<li><a href="https://www.hpe.com/support/BladeSystem_Onboard_Administrator_UG_en">HPE BladeSystem Onboard Administrator User Guide</a></li>
+<li><a href="https://h20564.www2.hpe.com/hpsc/doc/public/display?docId=c04149067">HPE iLO Federation User Guide</a></li>
 </ul>
 <h2 id='customer-self-repair'>Customer self-repair</h2>
 <p><strong>Hewlett Packard Enterprise customer self repair</strong> (CSR) programs allow you to repair your product. If a CSR part needs to be replaced, it will be shipped directly to you so that you can install it at your convenience. Some parts do not qualify for CSR. Your Hewlett Packard Enterprise authorized service provider will determine whether a repair can be accomplished by CSR.</p>
 
 <p>For more information about CSR, contact your local service provider or go to the CSR website.</p>
 
-<p><a href="http://www.hpe.com/support/selfrepair">www.hpe.com/support/selfrepair</a></p>
+<p><a href="https://sml-csr.ext.hpe.com/">sml-csr.ext.hpe.com</a></p>
 <h2 id='remote-support'>Remote Support</h2>
-<p>Remote support is available with supported devices as part of your warranty or contractual support agreement. It provides intelligent event diagnosis, and automatic, secure submission of hardware event notifications to Hewlett Packard Enterprise, which will initiate a fast and accurate resolution based on your productís service level. Hewlett Packard Enterprise strongly recommends that you register your device for remote support.</p>
+<p>Remote support is available with supported devices as part of your warranty or contractual support agreement. It provides intelligent event diagnosis, and automatic, secure submission of hardware event notifications to Hewlett Packard Enterprise, which will initiate a fast and accurate resolution based on your product&apos;s service level. Hewlett Packard Enterprise strongly recommends that you register your device for remote support.</p>
 
 <p>For more information and device support details, go to the following website.</p>
 
-<p><a href="http://www.hpe.com/info/insightremotesupport/docs">www.hpe.com/info/insightremotesupport/docs</a></p>
+<p><a href="https://www.hpe.com/info/insightremotesupport/docs">www.hpe.com/info/insightremotesupport/docs</a></p>
 <h2 id='documentation-feedback'>Documentation feedback</h2>
 <p>Hewlett Packard Enterprise is committed to providing documentation that meets your needs. To help us improve the documentation, send any errors, suggestions, or comments to <strong>Documentation Feedback</strong>, <a href="mailto:docsfeedback@hpe.com">docsfeedback@hpe.com</a>. When submitting your feedback, include the document title, part number, edition, and publication date located on the front cover of the document. For online help content, include the product name, product version, help edition, and publication date located on the legal notices page.</p>
 
@@ -12006,7 +11923,7 @@ ilorest.exe load -f %2
 <tr>
 <td>13</td>
 <td>UI_CLI_COMMAND_NOT_FOUND_EXCEPTION (see COMMAND_NOT_ENABLED_ERROR)</td>
-<td>An error occurred when the user tries to invoke a command that doesnít exist.</td>
+<td>An error occurred when the user tries to invoke a command that doesn&#39;t exist.</td>
 <td>Some commands may not be available on certain platforms. If the error is not clear in scriptable mode, try &#39;ilorest&#39; in interactive mode to view disabled commands (just below the logo section).</td>
 </tr>
 <tr>
@@ -12247,7 +12164,7 @@ ilorest.exe load -f %2
 <td>65</td>
 <td>RIS_SCHEMA_PARSE_ERROR</td>
 <td>An error occurred parsing the type schema.</td>
-<td>Try running with the ì--latestschema flagî. Report this issue for further review.</td>
+<td>Try running with the &quot;--latestschema flag&quot;. Report this issue for further review.</td>
 </tr>
 <tr>
 <td>70</td>
