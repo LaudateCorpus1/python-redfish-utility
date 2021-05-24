@@ -18,7 +18,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>RESTful Interface Tool 3.1.0 User Guide</title>
+    <title>RESTful Interface Tool 3.2.1 User Guide</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -125,7 +125,7 @@
       </div>
         <ul class="toc-footer">
             <li><a href='https://www.hpe.com/'>Hewlett Packard Enterprise Development LP</a></li>
-            <li>Copyright &copy; 2020</li>
+            <li>Copyright &copy; 2021</li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -3718,7 +3718,7 @@ Please make sure the order of passwords is maintained. The passwords are extract
 </blockquote>
 
 <pre>
-iLOrest > <font color="#01a982">setpassword newpassword ""</font>
+iLOrest > <font color="#01a982">setpassword --newpassword newpassword --currentpassword None</font>
 setpassword --newpassword newpass1 --currentpassword
 The operation completed successfully.
 </pre>
@@ -3729,7 +3729,7 @@ The operation completed successfully.
 
 <pre>
 iLOrest > <font color="#01a982">setpassword "" oldpassword</font>
-setpassword --newpassword "" --currentpassword newpass1
+setpassword --newpassword None --currentpassword newpass1
 The operation completed successfully.
 </pre>
 
@@ -3738,7 +3738,7 @@ The operation completed successfully.
 </blockquote>
 
 <pre>
-iLOrest > setpassword newpassword "" <font color="#01a982">--poweron</font>
+iLOrest > setpassword –-newpassword newpassword --currentpassword None <font color="#01a982">--poweron</font>
 The operation completed successfully.
 </pre>
 <h4 id='syntax-6'>Syntax</h4>
