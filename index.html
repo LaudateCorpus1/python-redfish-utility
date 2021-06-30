@@ -6,7 +6,6 @@
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>RESTful Interface Tool 3.2.2 User Guide</title>
-
     <style media="screen">
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -2793,7 +2792,7 @@ ilorest --cache-dir=server10 login ilo-server10 -u username -p password
 <p>Windows default configuration file</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>[ilorest]
-#iLOrest reads the following environment variables, and applies them at runtime.  
+#iLOrest reads the following environment variables, and applies them at runtime.
 #Note that they can be overridden by command line switches.
 
 #####          Log Settings          #####
@@ -2850,7 +2849,7 @@ ilorest --cache-dir=server10 login ilo-server10 -u username -p password
 <p>Linux default configuration file</p>
 </blockquote>
 <div class="highlight"><pre class="highlight plaintext"><code>[iLOrest]
-#iLOrest reads the following environment variables, and applies them at runtime.  
+#iLOrest reads the following environment variables, and applies them at runtime.
 #Note that they can be overridden by command line switches.
 
 #####          Log Settings          #####
@@ -2912,7 +2911,7 @@ ilorest --cache-dir=server10 login ilo-server10 -u username -p password
 <li>Linux OS: <code>/etc/ilorest/Redfish.conf</code></li>
 </ul>
 <h2 id='higher-security-modes'>Higher Security Modes</h2>
-<p>This section describes how to set higher security modes and how to use the RESTful Interface Tool in these modes. For more information about the higher security modes in iLO 5, see the <a href="https://hewlettpackard.github.io/ilo-rest-api-docs/ilo5/#securitystate" target="_blank">Security State topic in the iLO 5 API documentation</a>. 
+<p>This section describes how to set higher security modes and how to use the RESTful Interface Tool in these modes. For more information about the higher security modes in iLO 5, see the <a href="https://hewlettpackard.github.io/ilo-rest-api-docs/ilo5/#securitystate" target="_blank">Security State topic in the iLO 5 API documentation</a>.
 <aside class="notice">These security settings are only available in HPE Gen10 servers.</aside></p>
 <h3 id='setting-ilo-higher-security-modes'>Setting iLO Higher Security Modes</h3>
 <blockquote>
@@ -3215,7 +3214,7 @@ LOGIN OPTIONS:
   --path PATH           Optionally set a starting point for data collection during login.
                         If you do not specify a starting point, the default path will be /redfish/v1/.
                         Note: The path flag can only be specified at the time of login.
-                        Warning: Only for advanced users, and generally not needed for normal operations.  
+                        Warning: Only for advanced users, and generally not needed for normal operations.
   --logout              Logout after the completion of the command.
 </pre>
 <h4 id='syntax'>Syntax</h4>
@@ -5741,6 +5740,7 @@ Please make sure the order of passwords is maintained. The passwords are extract
 <blockquote>
 <p>Setpassword example commands:</p>
 
+
 <p>To set a new password, include the new password and the current password. When setting a bios or power on password with no previous password set, <code>OLD_PASSWORD</code> must be set to <code>None</code> signifying no password.</p>
 </blockquote>
 
@@ -5752,10 +5752,11 @@ The operation completed successfully.
 </pre>
 
 <blockquote>
-<p>When setting a bios or power on password back to nothing, <code>NEW_PASSWORD</code> must be set to <code>&quot;&quot;</code>.</p>
+<p>When setting a bios or power on password back to nothing, <code>NEWPASSWORD</code> must be set to <code>None</code>.</p>
 </blockquote>
 
 <pre>
+
 iLOrest > <span style="color: #01a982; ">setpassword --newpassword None --currentpassword oldpassword</span>
 
 setpassword --newpassword None --currentpassword newpass1
@@ -5768,6 +5769,7 @@ The operation completed successfully.
 
 <pre>
 iLOrest > setpassword --newpassword newpassword --currentpassword None <span style="color: #01a982; ">--poweron</span>
+
 The operation completed successfully.
 </pre>
 <h4 id='syntax-6'>Syntax</h4>
@@ -5858,7 +5860,7 @@ Logging session out.
 <h4 id='description'>Description</h4>
 <p>Backup and restore iLO to a server using a <strong>.bak</strong> file.</p>
 
-<aside class="notice">Use this command to only restore the machine from which the backup file was created. 
+<aside class="notice">Use this command to only restore the machine from which the backup file was created.
 To apply one configuration in multiple systems, refer to the <a href="#serverclone-command">serverclone command</a>.
 
 This command is available only in remote mode.
@@ -8265,6 +8267,7 @@ The contents of type: '#HpeiLOFederationGroup.v2_0_0.HpeiLOFederationGroup' shou
 }
 </pre>
 <h4 id='syntax-20'>Syntax</h4>
+
 <p>serverclone [save/load] [OPTIONS]</p>
 <h4 id='description-19'>Description</h4>
 <p>Creates a JSON formatted clone file (named ilorest_clone.json) of a system&#39;s iLO and bios configuration by default. You have the option to include Smart Storage Array configurations, as well as Single Sign-On and TLS certificates.
@@ -8897,7 +8900,7 @@ iLOrest > virtualmedia
 Available Virtual Media Options:
 [1] Media Types Available: Floppy USBStick  Image Inserted: None
 [2] Media Types Available: CD DVD  Image Inserted: https://xx.xx.xx.xx/path/to/vm.iso
-</pre>  
+</pre>
 
 <blockquote>
 <p>To remove an inserted media specify the type of virtual media by Id number and include the <code>--remove</code> option.</p>
