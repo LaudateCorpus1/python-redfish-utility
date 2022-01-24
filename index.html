@@ -312,6 +312,9 @@
             <a href="#change-log" class="toc-h1 toc-link" data-title="Change Log">Change Log</a>
               <ul class="toc-list-h2">
                   <li>
+                    <a href="#version-3-5-0" class="toc-h2 toc-link" data-title="Version 3.5.0">Version 3.5.0</a>
+                  </li>
+                  <li>
                     <a href="#version-3-3-0" class="toc-h2 toc-link" data-title="Version 3.3.0">Version 3.3.0</a>
                   </li>
                   <li>
@@ -486,6 +489,9 @@
                           </li>
                           <li>
                             <a href="#clearrestapistate-command" class="toc-h3 toc-link" data-title="Clearrestapistate Command">Clearrestapistate Command</a>
+                          </li>
+                          <li>
+                            <a href="#computeopsmanager-command" class="toc-h3 toc-link" data-title="Computeopsmanager Command">Computeopsmanager Command</a>
                           </li>
                           <li>
                             <a href="#directory-command" class="toc-h3 toc-link" data-title="Directory Command">Directory Command</a>
@@ -1027,7 +1033,25 @@ you can create scripts to automate tasks.</p>
 <li><strong>HPE iLO Repository</strong></li>
 <li><strong>Smart Array support</strong></li>
 </ul>
-<h1 id='change-log'>Change Log</h1><h2 id='version-3-3-0'>Version 3.3.0</h2>
+<h1 id='change-log'>Change Log</h1><h2 id='version-3-5-0'>Version 3.5.0</h2>
+<p><strong>Fixes:</strong>   </p>
+
+<ul>
+<li>Fixed issues serverclone command w.r.t automatic cloning of password.<br></li>
+<li>Fixed incorrect json outputs for installset and serverinfo commands to help in automation scripts.<br></li>
+<li>Fixed issues in ipprofiles command to aid in Intelligent Provisioning Job execution.<br></li>
+<li>Fixed issues in iscsiconfig --list command.<br></li>
+<li>Fixed an issue in directory show command to correctly show iLO Object Distinguished Name.<br></li>
+<li>Fixed an issue in securitystatus command with credentials security.<br></li>
+</ul>
+
+<p><strong>Feature Enhancements:</strong>   </p>
+
+<ul>
+<li>Added support to manage Compute Ops Manager which abstracts and orchestrates infrastructure and compute workflows.<br></li>
+<li>Added support to enable/disable enhanced download capability to ethernet command.<br></li>
+</ul>
+<h2 id='version-3-3-0'>Version 3.3.0</h2>
 <p><strong>Fixes:</strong></p>
 
 <ul>
@@ -4984,6 +5008,124 @@ Pending iLO configuration settings are stored in volatile memory. If clearrestap
 <p class="fake_header">Output</p>
 
 <p>None</p>
+<h3 id='computeopsmanager-command'>Computeopsmanager Command</h3>
+<blockquote>
+<p>To enable your servers to be discovered, monitored and managed through Compute Ops Manager.</p>
+</blockquote>
+
+<pre>
+iLOrest > <span style="color: #01a982; ">computeopsmanager connect --activationkey keyvalue</span>
+Connecting computeopsmanager...
+computeopsmanager connection is successful
+</pre>
+
+<blockquote>
+<p>To disconnect from Compute Ops Manager</p>
+</blockquote>
+
+<pre>
+iLOrest > <span style="color: #01a982; ">computeopsmanager disconnect</span>
+The operation completed successfully.
+</pre>
+
+<blockquote>
+<p>To check the status of Compute Ops Manager</p>
+</blockquote>
+
+<pre>
+iLOrest > <span style="color: #01a982; ">computeopsmanager status</span>
+------------------------------------------------
+Compute Ops Manager Status
+------------------------------------------------
+Compute Ops Manager Status : NotEnabled
+</pre>
+
+<p class="fake_header">Syntax</p>
+
+<p>computeopsmanager [connect/disconnect/status] [OPTIONS]</p>
+
+<p class="fake_header">Description</p>
+
+<p>This command will enable your servers to be discovered, monitored and managed through Compute Ops Manager .</p>
+
+<p class="fake_header">Parameters</p>
+
+<ul>
+<li><strong>connect</strong></li>
+</ul>
+
+<p>Use this to connect.</p>
+
+<ul>
+<li><strong>disconnect</strong></li>
+</ul>
+
+<p>Use this to disconnect.</p>
+
+<ul>
+<li><strong>status</strong></li>
+</ul>
+
+<p>Use this to check the status of connection.</p>
+
+<ul>
+<li><strong>-h, --help</strong></li>
+</ul>
+
+<p>Including the help flag will display help for the command.</p>
+
+<ul>
+<li><strong>--proxy PROXY_SERVER or --proxy None</strong></li>
+</ul>
+
+<p>Use this to use web-proxy if needed for connecting.</p>
+
+<ul>
+<li><strong>--activationkey=ACTIVATION_KEY</strong></li>
+</ul>
+
+<p>Use this while connecting and providing activation key.</p>
+
+<ul>
+<li><strong>-j, --json</strong></li>
+</ul>
+
+<p>Use this command to change the displayed output to JSON format. Preserving the JSON data structure makes the information easier to parse.</p>
+
+<p class="fake_header">Login Parameters</p>
+
+<p>The following parameters can be included to login to a server in the same line as the command is run.</p>
+
+<p>-
+<strong>--url=URL</strong></p>
+
+<p>If you are not logged in yet, use the provided iLO URL along with the user and password flags to login to the server in the same command.</p>
+
+<ul>
+<li><strong>-u User, --user=USER</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the password and URL flags to login to a server in the same command.</p>
+
+<ul>
+<li><strong>-p Password, --password=PASSWORD</strong></li>
+</ul>
+
+<p>If you are not logged in yet, use this flag along with the user and URL flags to login. Use the provided iLO password corresponding to the username you gave to login.</p>
+
+<ul>
+<li><strong>--logout</strong></li>
+</ul>
+
+<p>Optionally include the logout flag to log out of the server after this command is completed. Using this flag when not logged in will have no effect.</p>
+
+<p class="fake_header">Input</p>
+
+<p>None</p>
+
+<p class="fake_header">Output</p>
+
+<p>None</p>
 <h3 id='directory-command'>Directory Command</h3>
 <blockquote>
 <p>To view current LDAP or kerberos settings run the command with the <code>ldap</code> or <code>kerberos</code> arguments.</p>
@@ -5592,6 +5734,10 @@ Optionally specify a JSON file to store or load ethernet configuration data.</p>
 Enable virtual network interface of management network.</p></li>
 <li><p><strong>--disable_vnic</strong><br>
 Disable virtual network interface of management network.</p></li>
+<li><p><strong>--enable_enhanced_downloads</strong><br>
+Enable enhanced download performance in the iLO.</p></li>
+<li><p><strong>--disable_enhanced_downloads</strong><br>
+Disable enhanced download performance in the iLO.</p></li>
 <li><p><strong>--proxy http://proxy.company.net:8080</strong><br>
 Configure Proxy Settings. Provide a proxy server and port</p></li>
 <li><p><strong>--proxy None</strong><br>
@@ -9322,7 +9468,7 @@ The operation completed successfully.
 <p>Optionally include this flag to change the displayed output to JSON format. Preserving the JSON data structure makes the information easier to parse.</p>
 
 <ul>
-<li><strong>-description=DESCRIPTION</strong></li>
+<li><strong>--description=DESCRIPTION</strong></li>
 </ul>
 
 <p>Optionally include this flag to add a description to the maintenance window created by you.</p>
